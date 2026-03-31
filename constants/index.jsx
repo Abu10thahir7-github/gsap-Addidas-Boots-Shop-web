@@ -1,5 +1,5 @@
 export const navbarLinks = [
-  { title: "Cocktail", id: "cocktail" },
+  { title: "F50", id: "f50" },
   { title: "Home", id: "home" },
   { title: "About", id: "about" },
   { title: "Contact", id: "contact" },

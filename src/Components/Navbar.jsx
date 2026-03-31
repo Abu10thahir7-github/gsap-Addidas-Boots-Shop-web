@@ -3,7 +3,8 @@ import React from 'react'
 import { navbarLinks } from '../../constants'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-
+import Image from 'next/image'
+import logo from '@/../public/assets/logo.png'
 const Navbar = () => {
   useGSAP(()=>{
     const navTween = gsap.timeline({
@@ -22,9 +23,11 @@ const Navbar = () => {
     <nav className='bg-black'>
     <div className='flex flex-row  w-[80%] m-auto justify-between
      p-4 '>
-      <a href="#home" className='flex items-center
+      <a href="#home" className='font-bebas flex items-center
        gap-2 text-2xl font-bold text-white'>
-        Velvet Mojito
+        Addidas
+        <Image src={logo}   className='object-contain w-[30px] h-[40px]' alt="logo" />
+
        </a>
     <ul  className='flex flex-row gap-6 text-white'>
       {navbarLinks.map((link) => (
