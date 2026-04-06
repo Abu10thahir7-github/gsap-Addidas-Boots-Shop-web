@@ -1,24 +1,30 @@
 'use client';
-import React, { useRef } from 'react';
-import Image from 'next/image';
-
-import HeroLeft from '@/../public/assets/hero-left.png';
-import HeroRight from '@/../public/assets/hero-right.png';
 import { useGSAP } from '@gsap/react';
-import { ScrollTrigger, SplitText } from 'gsap/all';
 import gsap from 'gsap';
+import { ScrollTrigger, SplitText } from 'gsap/all';
+import { useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import Image from 'next/image';
+import HeroLeft from '../../public/assets/hero-left.png';
+import HeroRight from '../../public/assets/hero-right.png';
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText); // ✅ register both
 
 const Hero = () => {
+  const videoRef = useRef();
 
-   const videoRef = useRef();
-   const isMobile = useMediaQuery({maxWidth:767})
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
   useGSAP(() => {
-    const heroSplit = new SplitText('.title', { type: 'chars, words' });
-    const paragraphSplit = new SplitText('.subtitle', { type: 'lines' });
+    const heroSplit = new SplitText('.title', {
+      type: 'chars, words',
+    });
 
+    const paragraphSplit = new SplitText('.subtitle', {
+      type: 'lines',
+    });
+
+    // Apply text-gradient class once before animating
     heroSplit.chars.forEach(char => char.classList.add('text-gradient'));
 
     gsap.from(heroSplit.chars, {
@@ -27,12 +33,13 @@ const Hero = () => {
       ease: 'expo.out',
       stagger: 0.06,
     });
+
     gsap.from(paragraphSplit.lines, {
       opacity: 0,
       yPercent: 100,
       duration: 1.8,
       ease: 'expo.out',
-      stagger: 0.6,
+      stagger: 0.06,
       delay: 1,
     });
 
@@ -45,21 +52,35 @@ const Hero = () => {
           scrub: true,
         },
       })
-      .to('.hero-left-boot', { x: 200 }, 0)
-      .to('.hero-right-boot', { x: -200 }, 0);
+      .to('.hero-left-boot', { y: 200, x: 100 }, 0)
+      .to('.hero-right-boot', { y: -200, x: -200 }, 0)
+      .to('.arrow', { y: 100 }, 0);
 
+    const startValue = isMobile ? 'top 50%' : 'center 60%';
+    const endValue = isMobile ? '120% top' : 'bottom top';
 
-      const startValue = isMobile ? 'top 50%': 'center 60%'
-      const endValue = isMobile ? '120% top ': 'bottom top'
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: 'video',
+        start: startValue,
+        end: endValue,
+        scrub: true,
+        pin: true,
+      },
+    });
+
+    videoRef.current.onloadedmetadata = () => {
+      tl.to(videoRef.current, {
+        currentTime: videoRef.current.duration,
+      });
+    };
   }, []);
+
   return (
     <>
-      <section id="hero" className="relative w-full h-screen">
-        <h1 className="font-bebas title text-center text-8xl font-bold text-white pt-2">
-          Addidas F50
-        </h1>
+      <section id="hero" className="noisy  ">
+        <h1 className="title">Addidas</h1>
 
-        {/* Left Image */}
         <Image
           src={HeroLeft}
           className="absolute w-[350px] h-auto left-[-122px] bottom-[272px] hero-left-boot"
@@ -67,8 +88,6 @@ const Hero = () => {
           height={500}
           alt="hero-left"
         />
-
-        {/* Right Image */}
         <Image
           src={HeroRight}
           className="absolute w-[350px] h-auto right-[-122px] bottom-[102px] hero-right-boot"
@@ -76,23 +95,34 @@ const Hero = () => {
           height={500}
           alt="hero-right"
         />
-        <div>
-          <p className="subtitle absolute top-1/2  ml-9 font-medium text-gray-500 text-2xl">
-            BORN FOR SPEED. <br /> BUILT FOR GLORY.
-          </p>
-          <p className=" subtitle mr-9 text-end font-medium text-gray-500 text-2xl">
-            Feel Nothing. <br /> Beat Everyone.
-          </p>
+
+        {/* ✅ Add the "body" class here */}
+        <div className="body container mx-auto absolute left-1/2 -translate-x-1/2 lg:bottom-20 top-auto md:top-[30vh] flex justify-between items-end px-5">
+          <div className="content">
+            <div className="space-y-5 hidden md:block">
+              <p></p>
+              <p className="subtitle">
+                BORN FOR SPEED <br /> BUILT FOR GLORY
+              </p>
+            </div>
+
+            <div className="view-cocktails">
+              <a href="#cocktails">View Boots</a>
+            </div>
+          </div>
         </div>
       </section>
-      <div className="video absolute inset-0">
+
+      {/* ✅ Wrapper fills the full viewport */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
         <video
           ref={videoRef}
-          src="/video/animation-video.mp4"
           muted
           playsInline
           preload="auto"
-        ></video>
+          src="/assets/video/output.mp4"
+          className="w-full h-full object-cover"
+        />
       </div>
     </>
   );

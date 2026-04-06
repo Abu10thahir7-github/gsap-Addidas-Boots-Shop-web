@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         bebas: ["var(--font-bebas-neue)"], // 👈 Paste here
+        'modern-negra': ['var(--font-modern-negra)', 'sans-serif'],
       },
     },
   },

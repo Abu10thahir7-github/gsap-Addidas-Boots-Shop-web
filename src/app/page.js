@@ -3,6 +3,7 @@ import { ScrollTrigger, SplitText } from "gsap/all";
 import gsap from "gsap";
 import Navbar from "@/Components/Navbar";
 import Hero from "@/Components/Hero";
+import BootSection from "@/Components/BootSection";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
-      <div className="h-screen bg-black"  />
+      <BootSection/>
 
 
     </main>
