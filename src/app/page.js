@@ -6,6 +6,7 @@ import Hero from "@/Components/Hero";
 import BootSection from "@/Components/BootSection";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 export default function Home() {
   return (
     <main>
