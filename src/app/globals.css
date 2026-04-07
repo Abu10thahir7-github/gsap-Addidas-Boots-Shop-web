@@ -45,10 +45,9 @@ body {
 .font-bebas {
   font-family: var(--font-bebas-neue) !important ;
 }
-.noisy {
-  @apply absolute inset-0 size-full   bg-cover bg-center;
-}
-
+/* .noisy {
+  @apply absolute inset-0 size-full bg-[url('/assets/noise.png')] bg-cover bg-center z-10;
+} */
 #hero {
   @apply relative z-10 min-h-dvh w-full border border-transparent;
 
@@ -71,7 +70,7 @@ body {
       @apply flex lg:flex-row flex-col w-full gap-10 justify-between items-center lg:items-end mx-auto;
 
       p:nth-of-type(2) {
-        @apply font-modern-negra text-6xl  max-w-xl;
+        @apply  text-6xl  max-w-xl;
       }
 
       p:last-of-type {
@@ -85,9 +84,7 @@ body {
           @apply text-left;
         }
 
-        a {
-          @apply font-semibold opacity-80 2xl:text-start text-center;
-        }
+        
       }
     }
   }
@@ -98,4 +95,28 @@ video {
   height: 100%;
   object-fit: cover; /* fills the box, crops if needed */
   object-position: center;
+}
+
+.top-grid {
+  @apply grid grid-cols-1 xl:grid-cols-12 gap-5 mb-5 md:px-0 px-5;
+
+  > div {
+    @apply rounded-3xl overflow-hidden h-72 relative;
+  }
+
+  img {
+    @apply object-cover w-full h-full;
+  }
+}
+
+.bottom-grid {
+  @apply grid grid-cols-1 md:grid-cols-12 gap-5 md:px-0 px-5;
+
+  > div {
+    @apply rounded-3xl overflow-hidden h-72 relative;
+  }
+
+  img {
+    @apply object-cover w-full h-full;
+  }
 }

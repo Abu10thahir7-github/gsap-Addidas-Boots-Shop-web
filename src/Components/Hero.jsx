@@ -78,7 +78,7 @@ const Hero = () => {
 
   return (
     <>
-      <section id="hero" className="noisy  ">
+      <section id="hero" className="  ">
         <h1 className="title">Addidas</h1>
 
         <Image
@@ -101,13 +101,13 @@ const Hero = () => {
           <div className="content">
             <div className="space-y-5 hidden md:block">
               <p></p>
-              <p className="subtitle">
-                BORN FOR SPEED <br /> BUILT FOR GLORY
+              <p className="subtitle font-bebas">
+                BORN FOR <span className="text-[#FF2D00]">SPEED</span> <br /> <span className="text-[#FF2D00]">BUILT</span>  FOR GLORY
               </p>
             </div>
 
-            <div className="view-cocktails">
-              <a href="#cocktails">View Boots</a>
+            <div className="view-cocktails ">
+              <a href="#boots" className='font-light tracking-widest font-bebas'>View Boots</a>
             </div>
           </div>
         </div>

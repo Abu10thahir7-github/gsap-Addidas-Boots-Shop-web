@@ -4,6 +4,8 @@ import gsap from "gsap";
 import Navbar from "@/Components/Navbar";
 import Hero from "@/Components/Hero";
 import BootSection from "@/Components/BootSection";
+import About from "@/Components/About";
+import Art from "@/Components/Art";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -13,6 +15,8 @@ export default function Home() {
       <Navbar />
       <Hero />
       <BootSection/>
+      <About />
+      <Art />
 
 
     </main>

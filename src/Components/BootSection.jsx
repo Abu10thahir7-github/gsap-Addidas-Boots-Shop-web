@@ -1,5 +1,8 @@
 'use client';
 
+import { useGSAP } from "@gsap/react";
+import gsap, { ScrollTrigger, SplitText } from "gsap/all";
+
 const boots = [
   { id: 1, name: 'F50 Elite FG', desc: 'Ultralight speed boot for fast attackers', price: '$260' },
   { id: 2, name: 'Messi F50 Elite FG', desc: 'F50 with Messi signature edition', price: '$270' },
@@ -37,14 +40,14 @@ const boots = [
     price: '$150',
   },
 ];
-
+gsap.registerPlugin(ScrollTrigger, SplitText);
 const leftBoots = boots.slice(0, 5);
 const rightBoots = boots.slice(5, 10);
 
 const BootCard = ({ boot, reverse = false }) => (
 
   <div
-    className={`group flex items-center gap-5 py-6 border-b border-white/10
+    className={`group flex   items-center gap-5 py-6 border-b border-white/10
     hover:border-white/30 transition-all duration-300 cursor-pointer
     ${reverse ? 'flex-row-reverse text-right' : 'flex-row text-left'}`}
   >
@@ -57,9 +60,9 @@ const BootCard = ({ boot, reverse = false }) => (
     </span>
 
     {/* Info */}
-    <div className="flex-1 min-w-0">
+    <div className="flex-1 info-name-des min-w-0">
       <h3
-        className="text-white  font-semibold text-base leading-tight tracking-wide
+        className="text-white  font-medium text-xl font-bebas tracking-widest leading-tight
         group-hover:text-yellow-400 transition-colors duration-300 truncate"
       >
         {boot.name}
@@ -69,7 +72,7 @@ const BootCard = ({ boot, reverse = false }) => (
 
     {/* Price */}
     <span
-      className="shrink-0 text-yellow-400 font-black text-lg tracking-tight
+      className="shrink-0 info-price font-bebas text-yellow-400 font-medium text-xl tracking-tight
       group-hover:scale-110 transition-transform duration-300 origin-center"
     >
       {boot.price}
@@ -78,14 +81,46 @@ const BootCard = ({ boot, reverse = false }) => (
 );
 
 const BootsSection = () => {
-   
+ useGSAP(()=>{
+   const titleSplit = SplitText.create('#boots h2', {
+     type: 'words',
+   });
+
+   const scrollTimeline = gsap.timeline({
+    scrollTrigger:{
+      trigger:'#boots',
+      start:'top center',
+    }
+   })
+
+   scrollTimeline
+      .from(titleSplit.words, {
+        opacity:0,
+        xPercent: 100,
+        duration: 0.5,
+        ease: 'expo.out',
+        stagger: 0.06,
+      })
+      .from('.info-name-des', {
+        opacity: 0,
+        duration: 1,
+        ease: 'power1.inOut',
+        stagger: 0.09,
+      })
+      .from('.info-price', {
+        opacity: 0,
+        duration: 1,
+        ease: 'power1.inOut',
+        stagger: 0.04,
+      });
+ })
   return (
-    <section className="relative w-full min-h-screen bg-transparent overflow-hidden py-24 px-6">
+    <section id="boots" className="relative w-full min-h-screen bg-transparent overflow-hidden py-24 px-6">
       {/* Background decorative text */}
       <span
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
         text-[20vw] font-black text-white/[0.03] select-none pointer-events-none
-        whitespace-nowrap font-modern-negra z-0"
+        whitespace-nowrap font-bebas z-0"
       >
         ADIDAS
       </span>
@@ -96,10 +131,9 @@ const BootsSection = () => {
           Collection
         </p>
         <h2
-          className="text-white text-5xl md:text-7xl font-black leading-none tracking-tight
-           bebas"
+          className="font-modern-negra text-[clamp(3rem,8vw,6rem)] leading-none tracking-widest text-white uppercase"
         >
-          Soccer Boots
+          Soccer  <span className="text-[#FF2D00]">Boots </span>
         </h2>
         <div className="w-16 h-[2px] bg-yellow-400 mx-auto mt-6" />
       </div>
@@ -127,13 +161,6 @@ const BootsSection = () => {
         </div>
       </div>
 
-      {/* Bottom label */}
-      <p
-        className="relative z-10 text-center text-white/20 text-xs tracking-widest
-        uppercase mt-16"
-      >
-        Prices in USD · April 2026
-      </p>
     </section>
   );
 };
