@@ -4,7 +4,7 @@ import { navbarLinks } from '../../constants'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import Image from 'next/image'
-import logo from '@/../public/assets/logo.png'
+import logo from '@/../public/assets/images/logo.png'
 const Navbar = () => {
   useGSAP(()=>{
     const navTween = gsap.timeline({

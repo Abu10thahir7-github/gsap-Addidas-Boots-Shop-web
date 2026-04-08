@@ -1,13 +1,13 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import image1 from '../../public/assets/Adidas F50 ads.jpg';
-import image2 from '../../public/assets/adidas Predator Poster.jpg';
-import image3 from '../../public/assets/adidas Roteiro.jpg';
-import image4 from '../../public/assets/adidas Sparkfusion.jpg';
-import image5 from '../../public/assets/Football Professional.jpg';
-import image6 from '../../public/assets/Ice Cold.jpg';
-import image7 from '../../public/assets/Predetor.webp';
+import image1 from '../../public/assets/images/Adidas F50 ads.jpg';
+import image2 from '../../public/assets/images/adidas Predator Poster.jpg';
+import image3 from '../../public/assets/images/adidas Roteiro.jpg';
+import image4 from '../../public/assets/images/adidas Sparkfusion.jpg';
+import image5 from '../../public/assets/images/Football Professional.jpg';
+import image6 from '../../public/assets/images/Ice Cold.jpg';
+import image7 from '../../public/assets/images/Predetor.jpg';
 import { useGSAP } from '@gsap/react';
 import gsap, { ScrollTrigger, SplitText } from 'gsap/all';
 

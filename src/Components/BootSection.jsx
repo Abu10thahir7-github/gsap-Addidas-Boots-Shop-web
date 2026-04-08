@@ -1,7 +1,7 @@
 'use client';
 
-import { useGSAP } from "@gsap/react";
-import gsap, { ScrollTrigger, SplitText } from "gsap/all";
+import { useGSAP } from '@gsap/react';
+import gsap, { ScrollTrigger, SplitText } from 'gsap/all';
 
 const boots = [
   { id: 1, name: 'F50 Elite FG', desc: 'Ultralight speed boot for fast attackers', price: '$260' },
@@ -45,7 +45,6 @@ const leftBoots = boots.slice(0, 5);
 const rightBoots = boots.slice(5, 10);
 
 const BootCard = ({ boot, reverse = false }) => (
-
   <div
     className={`group flex   items-center gap-5 py-6 border-b border-white/10
     hover:border-white/30 transition-all duration-300 cursor-pointer
@@ -72,7 +71,7 @@ const BootCard = ({ boot, reverse = false }) => (
 
     {/* Price */}
     <span
-      className="shrink-0 info-price font-bebas text-yellow-400 font-medium text-xl tracking-tight
+      className="shrink-0  info-price font-bebas text-yellow-400 font-medium text-xl tracking-tight
       group-hover:scale-110 transition-transform duration-300 origin-center"
     >
       {boot.price}
@@ -81,21 +80,21 @@ const BootCard = ({ boot, reverse = false }) => (
 );
 
 const BootsSection = () => {
- useGSAP(()=>{
-   const titleSplit = SplitText.create('#boots h2', {
-     type: 'words',
-   });
+  useGSAP(() => {
+    const titleSplit = SplitText.create('#boots h2', {
+      type: 'words',
+    });
 
-   const scrollTimeline = gsap.timeline({
-    scrollTrigger:{
-      trigger:'#boots',
-      start:'top center',
-    }
-   })
+    const scrollTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#boots',
+        start: 'top center',
+      },
+    });
 
-   scrollTimeline
+    scrollTimeline
       .from(titleSplit.words, {
-        opacity:0,
+        opacity: 0,
         xPercent: 100,
         duration: 0.5,
         ease: 'expo.out',
@@ -103,19 +102,22 @@ const BootsSection = () => {
       })
       .from('.info-name-des', {
         opacity: 0,
-        duration: 1,
+        duration: 0.8,
         ease: 'power1.inOut',
-        stagger: 0.09,
+        stagger: 0.05,
       })
       .from('.info-price', {
         opacity: 0,
-        duration: 1,
+        duration: 0.8,
         ease: 'power1.inOut',
-        stagger: 0.04,
+        stagger: 0.05,
       });
- })
+  });
   return (
-    <section id="boots" className="relative w-full min-h-screen bg-transparent overflow-hidden py-24 px-6">
+    <section
+      id="boots"
+      className="relative w-full min-h-screen bg-transparent overflow-hidden py-24 px-6"
+    >
       {/* Background decorative text */}
       <span
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
@@ -130,10 +132,8 @@ const BootsSection = () => {
         <p className="text-yellow-400 text-xs tracking-[0.4em] uppercase font-semibold mb-3">
           Collection
         </p>
-        <h2
-          className="font-modern-negra text-[clamp(3rem,8vw,6rem)] leading-none tracking-widest text-white uppercase"
-        >
-          Soccer  <span className="text-[#FF2D00]">Boots </span>
+        <h2 className="font-modern-negra text-[clamp(3rem,8vw,6rem)] leading-none tracking-widest text-white uppercase">
+          Soccer <span className="text-[#FF2D00]">Boots </span>
         </h2>
         <div className="w-16 h-[2px] bg-yellow-400 mx-auto mt-6" />
       </div>
@@ -160,7 +160,6 @@ const BootsSection = () => {
           ))}
         </div>
       </div>
-
     </section>
   );
 };

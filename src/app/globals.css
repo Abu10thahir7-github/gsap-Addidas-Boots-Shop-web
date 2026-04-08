@@ -23,7 +23,13 @@
     --foreground: #ededed;
   }
 }
-
+.scrollbar-none {
+  -ms-overflow-style: none;   /* IE / Edge */
+  scrollbar-width: none;       /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;               /* Chrome / Safari */
+}
 html,
 body {
   width: 100%;
@@ -40,14 +46,20 @@ body {
   background-clip: text;
   color: transparent;
 }
+.masked-img {
+  mask-image: url('/assets/images/ball-kick-bg-remove.png');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 50%;
+}
 /* globals.css */
 
 .font-bebas {
   font-family: var(--font-bebas-neue) !important ;
 }
-/* .noisy {
-  @apply absolute inset-0 size-full bg-[url('/assets/noise.png')] bg-cover bg-center z-10;
-} */
+.noisy {
+  @apply absolute inset-0 size-full bg-[url('/assets/images/noise.png')] bg-cover bg-center z-10;
+}
 #hero {
   @apply relative z-10 min-h-dvh w-full border border-transparent;
 
@@ -70,7 +82,7 @@ body {
       @apply flex lg:flex-row flex-col w-full gap-10 justify-between items-center lg:items-end mx-auto;
 
       p:nth-of-type(2) {
-        @apply  text-6xl  max-w-xl;
+        @apply text-6xl  max-w-xl;
       }
 
       p:last-of-type {
@@ -83,8 +95,6 @@ body {
         p {
           @apply text-left;
         }
-
-        
       }
     }
   }
@@ -120,3 +130,70 @@ video {
     @apply object-cover w-full h-full;
   }
 }
+    #menu {
+        @apply relative w-full md:mt-40 mt-0 2xl:px-0 px-5 py-20 ;
+
+        #m-left-leaf {
+            @apply object-contain absolute -bottom-20 left-0 md:w-fit w-1/3;
+        }
+
+        #m-right-leaf {
+            @apply object-contain absolute -top-40 right-0 md:w-fit w-1/4;
+        }
+
+        .cocktail-tabs {
+            @apply grid md:grid-cols-4 grid-cols-2 md:gap-20 gap-10 sm:mb-32 mb-20 relative z-10 md:max-w-6xl md:mx-auto;
+
+            button {
+                @apply md:text-3xl text-xl pb-2 cursor-pointer    border-b-1 transition-colors font-modern-negra;
+            }
+        }
+
+        .content {
+            @apply flex flex-col justify-between items-center container mx-auto relative;
+
+            .arrows {
+                @apply flex items-center justify-between w-full absolute;
+
+                button {
+                    @apply text-white   cursor-pointer transition-colors max-w-36;
+
+                    span {
+                        @apply text-3xl font-modern-negra leading-none hidden md:block;
+                    }
+                }
+            }
+        }
+
+        .cocktail {
+            @apply flex-center mt-10;
+
+            img {
+                @apply object-contain h-[60vh];
+            }
+        }
+
+        .recipe {
+            @apply flex max-md:flex-col gap-10 md:items-center justify-between w-full lg:absolute bottom-0;
+
+            .info {
+                @apply space-y-4 lg:translate-y-20;
+
+                #title {
+                    @apply font-modern-negra md:text-6xl text-3xl  max-w-40;
+                }
+            }
+
+            .details {
+                @apply space-y-5 md:max-w-md text-left;
+
+                h2 {
+                    @apply md:text-5xl text-3xl font-serif;
+                }
+
+                p {
+                    @apply md:text-lg pe-5;
+                }
+            }
+        }
+    }

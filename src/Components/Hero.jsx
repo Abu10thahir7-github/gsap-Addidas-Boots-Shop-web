@@ -5,8 +5,8 @@ import { ScrollTrigger, SplitText } from 'gsap/all';
 import { useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Image from 'next/image';
-import HeroLeft from '../../public/assets/hero-left.png';
-import HeroRight from '../../public/assets/hero-right.png';
+import HeroLeft from '../../public/assets/images/hero-left.png';
+import HeroRight from '../../public/assets/images/hero-right.png';
 
 gsap.registerPlugin(ScrollTrigger, SplitText); // ✅ register both
 
