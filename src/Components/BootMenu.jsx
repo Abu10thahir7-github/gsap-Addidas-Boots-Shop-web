@@ -20,6 +20,7 @@ useGSAP(() => {
   if (titleSplitRef.current) titleSplitRef.current.revert();
   if (descSplitRef.current)  descSplitRef.current.revert();
 
+
   gsap.fromTo('.boot-img',
     { opacity: 0, xPercent: -8, scale: 0.96 },
     { opacity: 1, xPercent: 0, scale: 1, duration: 0.7, ease: 'power3.out' }
@@ -53,6 +54,7 @@ useGSAP(() => {
     { scaleX: 0 },
     { scaleX: 1, duration: 0.8, ease: 'power4.out', transformOrigin: 'left' }
   );
+
 
 }, [currentIndex]);
   const totalBoots = AllBoots.length;
@@ -116,7 +118,7 @@ useGSAP(() => {
       {/* ── Named tabs ───────────────────────────────────── */}
      <nav className="relative z-10 max-w-7xl mx-auto mb-10 overflow-x-auto scrollbar-none
   [-webkit-overflow-scrolling:touch]">  {/* ✅ scroll on parent, iOS momentum */}
-  <div className="flex gap-6 md:gap-10 min-w-max px-1 pb-1">
+  <div className="flex Bootbutton gap-6 md:gap-10 min-w-max px-1 pb-1">
     {/* ✅ min-w-max stays on child so it overflows the parent */}
     {AllBoots.map((boot, index) => {
       const isActive = index === currentIndex;
@@ -232,7 +234,7 @@ useGSAP(() => {
           {/* Price + CTA */}
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/20 text-[9px] tracking-[0.3em] uppercase mb-1">Price</p>
+              <p className="text-white/20 text-[9px]  tracking-[0.3em] uppercase mb-1">Price</p>
               <p className="font-bebas text-3xl text-white tracking-wider">
                 {currentBoot.price || '$280'}
               </p>

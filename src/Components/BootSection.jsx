@@ -132,7 +132,7 @@ const BootsSection = () => {
         <p className="text-yellow-400 text-xs tracking-[0.4em] uppercase font-semibold mb-3">
           Collection
         </p>
-        <h2 className="font-modern-negra text-[clamp(3rem,8vw,6rem)] leading-none tracking-widest text-white uppercase">
+        <h2 className="font-bebas text-[clamp(3rem,8vw,6rem)] leading-none tracking-widest text-white uppercase">
           Soccer <span className="text-[#FF2D00]">Boots </span>
         </h2>
         <div className="w-16 h-[2px] bg-yellow-400 mx-auto mt-6" />

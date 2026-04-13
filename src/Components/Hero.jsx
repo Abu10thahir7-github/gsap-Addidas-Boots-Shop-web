@@ -52,8 +52,8 @@ const Hero = () => {
           scrub: true,
         },
       })
-      .to('.hero-left-boot', { y: 200, x: 100 }, 0)
-      .to('.hero-right-boot', { y: -200, x: -200 }, 0)
+      .to('.hero-left-boot', { y: 700, x: 200, rotate: -30 }, 0)
+      .to('.hero-right-boot', { y: -200, x: -200, rotate: -50 }, 0)
       .to('.arrow', { y: 100 }, 0);
 
     const startValue = isMobile ? 'top 50%' : 'center 60%';
@@ -83,14 +83,14 @@ const Hero = () => {
 
         <Image
           src={HeroLeft}
-          className="absolute w-[350px] h-auto left-[-122px] bottom-[272px] hero-left-boot"
+          className="absolute w-[250px] md:w-[350px]  h-auto left-[-122px] bottom-[272px] hero-left-boot"
           width={1000}
           height={500}
           alt="hero-left"
         />
         <Image
           src={HeroRight}
-          className="absolute w-[350px] h-auto right-[-122px] bottom-[102px] hero-right-boot"
+          className="absolute w-[250px] md:w-[350px] h-auto right-[-122px] bottom-[102px] hero-right-boot"
           width={1000}
           height={500}
           alt="hero-right"
@@ -102,12 +102,15 @@ const Hero = () => {
             <div className="space-y-5 hidden md:block">
               <p></p>
               <p className="subtitle font-bebas">
-                BORN FOR <span className="text-[#FF2D00]">SPEED</span> <br /> <span className="text-[#FF2D00]">BUILT</span>  FOR GLORY
+                BORN FOR <span className="text-[#FF2D00]">SPEED</span> <br />{' '}
+                <span className="text-[#FF2D00]">BUILT</span> FOR GLORY
               </p>
             </div>
 
             <div className="view-cocktails ">
-              <a href="#boots" className='font-light tracking-widest font-bebas'>View Boots</a>
+              <a href="#boots" className="font-light tracking-widest font-bebas">
+                View Boots
+              </a>
             </div>
           </div>
         </div>

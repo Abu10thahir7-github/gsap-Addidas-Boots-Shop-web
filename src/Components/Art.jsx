@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import React, { useRef } from 'react';
-import UnderImge from '../../public/assets/images/Adidas Predator Precision LIMITED COLLECTION.jpg';
+import UnderImge from '../../public/assets/images/ARTbgImage.webp';
 import gsap from 'gsap';
 import { useMediaQuery } from 'react-responsive';
 import { useGSAP } from '@gsap/react';
@@ -109,7 +109,7 @@ const Art = () => {
           position: 'relative',
           zIndex: 2,
           padding: '5rem 2rem',
-          height: '100dvh',
+
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -126,7 +126,7 @@ const Art = () => {
             style={{ background: 'linear-gradient(to right, #d4a01740, transparent)' }}
           />
           <span className="font-bebas text-[10px] tracking-[0.5em] text-white/20 uppercase">
-            2025
+            2026
           </span>
         </div>
 
@@ -158,7 +158,7 @@ const Art = () => {
           {/* Right stats block */}
           <div className="flex gap-8 md:gap-12 md:pb-4">
             {[
-              { value: '2025', label: 'Season' },
+              { value: '2026', label: 'Season' },
               { value: '04', label: 'Chapter' },
               { value: 'FG/AG', label: 'Surface' },
             ].map(({ value, label }) => (
@@ -232,37 +232,24 @@ const Art = () => {
             <div className="w-10 h-px bg-[#d4a017] opacity-50" />
           </div>
 
-          {/* Reveal heading */}
-          <h3
-            className="font-bebas uppercase tracking-[0.12em] text-white"
-            style={{ fontSize: 'clamp(1.6rem, 4vw, 3.2rem)', lineHeight: 1 }}
-          >
-            Made with{' '}
-            <span style={{ WebkitTextStroke: '1px #d4a017', color: 'transparent' }}>Craft</span>,
-            Poured with <span className="text-[#FF2D00]">Passion</span>
-          </h3>
 
-          {/* Body */}
-          <p className="font-poppins text-sm text-white/40 max-w-sm leading-relaxed tracking-wide">
-            This isn't just a boot. It's a carefully crafted moment — where precision engineering
-            meets the art of the beautiful game.
-          </p>
+
+
 
           {/* CTA */}
           <div className="mt-2 flex items-center gap-6">
             <button
-              className="group flex items-center gap-2 border border-[#d4a017]/40
-              hover:border-[#d4a017] px-6 py-2 rounded-full transition-all duration-300"
+              className="border border-white/20 backdrop-blur-sm bg-white/5 text-white/80 text-[10px] tracking-[0.4em] uppercase px-4 py-2 rounded-full"
             >
               <span
-                className="font-bebas text-xs tracking-[0.4em] uppercase text-[#d4a017]/70
-                group-hover:text-[#d4a017] transition-colors"
+                className="font-bebas text-lg tracking-[0.4em] uppercase text-[#fff]
+                group-hover:text-[#FF2D00] transition-colors"
               >
                 Explore Collection
               </span>
               <span
-                className="text-[#d4a017]/50 text-xs group-hover:translate-x-1
-                group-hover:text-[#d4a017] transition-all"
+                className="text-[#fff]/50 text-lg group-hover:translate-x-1
+                group-hover:text-[#FF2D00] transition-all"
               >
                 →
               </span>
@@ -270,16 +257,16 @@ const Art = () => {
 
             <button className="group flex items-center gap-2">
               <span
-                className="font-bebas text-xs tracking-[0.4em] uppercase text-white/25
+                className="font-bebas text-lg tracking-[0.4em] uppercase text-[#FF2D00]
                 group-hover:text-white/50 transition-colors"
               >
                 Watch Film
               </span>
               <div
-                className="w-5 h-5 rounded-full border border-white/20 flex items-center
+                className="w-5 h-5 rounded-full border border-[#FF2D00]  flex items-center
                 justify-center group-hover:border-white/40 transition-colors"
               >
-                <span className="text-white/30 text-[8px]">▶</span>
+                <span className="text-[#FF2D00] group-hover:border-white/40 text-[8px]">▶</span>
               </div>
             </button>
           </div>

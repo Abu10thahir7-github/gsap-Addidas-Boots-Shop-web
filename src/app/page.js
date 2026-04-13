@@ -7,7 +7,7 @@ import BootSection from '@/Components/BootSection';
 import About from '@/Components/About';
 import Art from '@/Components/Art';
 import BootMenu from '@/Components/BootMenu';
- 
+
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -15,6 +15,8 @@ export default function Home() {
   return (
     <main>
       <Navbar />
+
+      <div className='h-screen'></div>
       <Hero />
       <BootSection />
       <About />

@@ -43,7 +43,7 @@ const About = () => {
     <section id="about" className="mx-auto max-w-6xl px-5 md:px-0">
       {/* Section Heading */}
       <div className="mb-8 flex items-end justify-between">
-        <h2 className="font-modern-negra text-[clamp(3rem,8vw,6rem)] leading-none tracking-widest text-white uppercase">
+        <h2 className="font-bebas text-[clamp(3rem,8vw,6rem)] leading-none tracking-widest text-white uppercase">
           The <span className="text-[#FF2D00]">Legacy</span>
         </h2>
         <p className="hidden md:block text-white/40 text-xs tracking-[0.3em] uppercase pb-3">
