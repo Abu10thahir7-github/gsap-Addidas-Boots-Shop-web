@@ -7,7 +7,7 @@ import BootSection from '@/Components/BootSection';
 import About from '@/Components/About';
 import Art from '@/Components/Art';
 import BootMenu from '@/Components/BootMenu';
-
+import Reviews from '@/Components/Reviews';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -16,13 +16,13 @@ export default function Home() {
     <main>
       <Navbar />
 
-      <div className='h-screen'></div>
+      <div className="h-screen"></div>
       <Hero />
       <BootSection />
       <About />
       <Art />
-      {/* <Sample2/> */}
-      < BootMenu />
+      <BootMenu />
+      <Reviews />
     </main>
   );
 }

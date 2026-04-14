@@ -91,7 +91,7 @@ body {
   @apply relative z-10 min-h-dvh w-full border border-transparent;
 
   h1 {
-    @apply md:mt-32 mt-40 text-8xl md:text-[20vw] leading-none text-center font-outward uppercase;
+    @apply md:mt-32 mt-40 text-8xl md:text-[25rem] leading-none tracking-widest text-center font-outward uppercase;
   }
 
   .left-leaf {
