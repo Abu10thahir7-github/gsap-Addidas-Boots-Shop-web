@@ -270,7 +270,7 @@ const MarqueeRow = ({ items, direction = 1, activeId, onCardClick }) => {
 const Reviews = () => {
   const sectionRef = useRef(null);
   const [activeId, setActiveId] = useState(null);
-
+ const reviews = document.querySelector('#reviews');
   const handleCardClick = (id) => {
     setActiveId(prev => prev === id ? null : id);
   };
@@ -280,7 +280,7 @@ const Reviews = () => {
     const titleSplit = new SplitText('.reviews-title', { type: 'chars' });
     gsap.from(titleSplit.chars, {
       scrollTrigger: {
-        trigger: '#reviews',
+        trigger: 'reviews',
         start: 'top 80%',
       },
       yPercent: 100,
@@ -291,12 +291,12 @@ const Reviews = () => {
     });
 
     gsap.from('.reviews-meta', {
-      scrollTrigger: { trigger: '#reviews', start: 'top 75%' },
+      scrollTrigger: { trigger: 'reviews', start: 'top 75%' },
       y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.3,
     });
 
     gsap.from('.rating-block', {
-      scrollTrigger: { trigger: '#reviews', start: 'top 70%' },
+      scrollTrigger: { trigger: 'reviews', start: 'top 70%' },
       scale: 0.85, opacity: 0, duration: 0.9, stagger: 0.12, ease: 'back.out(1.8)', delay: 0.2,
     });
 

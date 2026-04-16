@@ -11,7 +11,6 @@ import image7 from '../../public/assets/images/Predetor.jpg';
 import { useGSAP } from '@gsap/react';
 import gsap, { ScrollTrigger, SplitText } from 'gsap/all';
 
-
 gsap.registerPlugin(ScrollTrigger, SplitText); // ✅ register both
 const About = () => {
   useGSAP(() => {
@@ -52,7 +51,7 @@ const About = () => {
       </div>
 
       {/* Top Grid */}
-      <div className="topGrid grid grid-cols-1 xl:grid-cols-12 gap-4 mb-4">
+      <div className="topGrid grid  md:grid-cols-1 xl:grid-cols-12 gap-4 mb-4">
         {/* Card 1 */}
         <div className="md:col-span-3 rounded-3xl overflow-hidden h-72 relative group">
           <div className="noisy z-10" />
@@ -135,7 +134,7 @@ const About = () => {
       </div>
 
       {/* Bottom Grid */}
-      <div className="bottomGrid grid grid-cols-1 xl:grid-cols-12 gap-4">
+      <div className="bottomGrid grid grid-cols-2 md:grid-cols-1 xl:grid-cols-12 gap-4">
         {/* Card 4 — Video */}
         <div className="md:col-span-3 rounded-3xl overflow-hidden h-72 relative group">
           <div className="noisy z-10" />

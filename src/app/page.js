@@ -8,6 +8,8 @@ import About from '@/Components/About';
 import Art from '@/Components/Art';
 import BootMenu from '@/Components/BootMenu';
 import Reviews from '@/Components/Reviews';
+import Stores from '@/Components/StoreLocation';
+import Footer from '@/Components/Footer';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -15,14 +17,14 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-
-      <div className="h-screen"></div>
       <Hero />
       <BootSection />
       <About />
       <Art />
       <BootMenu />
       <Reviews />
+      <Stores />
+      <Footer />
     </main>
   );
 }

@@ -171,14 +171,14 @@ const Art = () => {
             ))}
           </div>
         </div>
- {[
-            'top-0 left-0 border-t border-l',
-            'top-0 right-0 border-t border-r',
-            'bottom-0 left-0 border-b border-l',
-            'bottom-0 right-0 border-b border-r',
-          ].map((pos, i) => (
-            <div key={i} className={`will-fade absolute ${pos} w-6 h-6 border-[#d4a017]/30 z-20`} />
-          ))}
+        {[
+          'top-0 left-0 border-t border-l',
+          'top-0 right-0 border-t border-r',
+          'bottom-0 left-0 border-b border-l',
+          'bottom-0 right-0 border-b border-r',
+        ].map((pos, i) => (
+          <div key={i} className={`will-fade absolute ${pos} w-6 h-6 border-[#d4a017]/30 z-20`} />
+        ))}
         {/* Masked Image */}
         <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
           <div
@@ -198,6 +198,7 @@ const Art = () => {
               src={UnderImge}
               alt="F50 Boot Art"
               fill
+              sizes="100%"
               className="masked-img"
               style={{ objectFit: 'cover' }}
             />
@@ -232,15 +233,9 @@ const Art = () => {
             <div className="w-10 h-px bg-[#d4a017] opacity-50" />
           </div>
 
-
-
-
-
           {/* CTA */}
           <div className="mt-2 flex items-center gap-6">
-            <button
-              className="border border-white/20 backdrop-blur-sm bg-white/5 text-white/80 text-[10px] tracking-[0.4em] uppercase px-4 py-2 rounded-full"
-            >
+            <button className="border border-white/20 backdrop-blur-sm bg-white/5 text-white/80 text-[10px] tracking-[0.4em] uppercase px-4 py-2 rounded-full">
               <span
                 className="font-bebas text-lg tracking-[0.4em] uppercase text-[#fff]
                 group-hover:text-[#FF2D00] transition-colors"

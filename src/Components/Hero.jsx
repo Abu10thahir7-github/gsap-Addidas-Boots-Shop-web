@@ -43,20 +43,76 @@ const Hero = () => {
       delay: 1,
     });
 
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: '#hero',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      })
-      .to('.hero-left-boot', { y: 700, x: 200, rotate: -30 }, 0)
-      .to('.hero-right-boot', { y: -200, x: -200, rotate: -50 }, 0)
-      .to('.arrow', { y: 100 }, 0);
+    // ✅ RESPONSIVE ANIMATION
+    const mm = gsap.matchMedia();
 
-    const startValue = isMobile ? 'top 50%' : 'center 60%';
+    mm.add('(max-width: 767px)', () => {
+      // 📱 MOBILE
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: '#hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        })
+        .to(
+          '.hero-left-boot',
+          {
+            y: 670,
+            x: 100,
+            rotate: -30,
+            ease: 'power4.inOut',
+          },
+          0,
+        )
+        .to(
+          '.hero-right-boot',
+          {
+            y: 650,
+            x: -100,
+            rotate: 50,
+            ease: 'power4.inOut',
+          },
+          0,
+        )
+    });
+
+    mm.add('(min-width: 768px)', () => {
+      // 💻 DESKTOP
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: '#hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        })
+        .to(
+          '.hero-left-boot',
+          {
+            y: 700,
+            x: 200,
+            rotate: -30,
+            ease: 'power4.inOut',
+          },
+          0,
+        )
+        .to(
+          '.hero-right-boot',
+          {
+            y: 590,
+            x: -200,
+            rotate: 50,
+            ease: 'power4.inOut',
+          },
+          0,
+        )
+    });
+
+    const startValue = isMobile ? 'top 90%' : 'center 60%';
     const endValue = isMobile ? '120% top' : 'bottom top';
 
     let tl = gsap.timeline({
@@ -79,38 +135,30 @@ const Hero = () => {
   return (
     <>
       <section id="hero" className="  ">
-        <h1 className="title">Addidas</h1>
-
         <Image
           src={HeroLeft}
-          className="absolute w-[250px] md:w-[350px]  h-auto left-[-122px] bottom-[272px] hero-left-boot"
+          className="absolute w-[170px] md:w-[350px]  h-auto left-[-100px] md:left-[-122px] md:bottom-[272px] hero-left-boot"
           width={1000}
           height={500}
           alt="hero-left"
         />
         <Image
           src={HeroRight}
-          className="absolute w-[250px] md:w-[350px] h-auto right-[-122px] bottom-[102px] hero-right-boot"
+          className="absolute w-[170px] md:w-[350px] h-auto right-[-100px] md:right-[-122px] md:bottom-[102px] hero-right-boot"
           width={1000}
           height={500}
           alt="hero-right"
         />
 
-        {/* ✅ Add the "body" class here */}
-        <div className="body container mx-auto absolute left-1/2 -translate-x-1/2 lg:bottom-20 top-auto md:top-[30vh] flex justify-between items-end px-5">
-          <div className="content">
-            <div className="space-y-5 hidden md:block">
+        <div className="body  mx-auto max-w-6xl">
+          <div className="content  ">
+            <h1 className="title">Addidas</h1>
+            <div className="space-y-5 ">
               <p></p>
-              <p className="subtitle font-bebas">
+              <p className="subtitle font-bebas text-3xl md:text-5xl text-center">
                 BORN FOR <span className="text-[#FF2D00]">SPEED</span> <br />{' '}
                 <span className="text-[#FF2D00]">BUILT</span> FOR GLORY
               </p>
-            </div>
-
-            <div className="view-cocktails ">
-              <a href="#boots" className="font-light tracking-widest font-bebas">
-                View Boots
-              </a>
             </div>
           </div>
         </div>
