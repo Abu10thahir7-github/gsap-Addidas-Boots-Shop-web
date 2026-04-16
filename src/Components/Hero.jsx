@@ -141,6 +141,7 @@ const Hero = () => {
           width={1000}
           height={500}
           alt="hero-left"
+          priority
         />
         <Image
           src={HeroRight}
@@ -148,11 +149,12 @@ const Hero = () => {
           width={1000}
           height={500}
           alt="hero-right"
+          priority
         />
 
         <div className="body  mx-auto max-w-6xl">
           <div className="content  ">
-            <h1 className="title">Addidas</h1>
+            <h1 className="title font-bebas">Addidas</h1>
             <div className="space-y-5 ">
               <p></p>
               <p className="subtitle font-bebas text-3xl md:text-5xl text-center">
@@ -174,6 +176,7 @@ const Hero = () => {
           src="/assets/video/output.mp4"
           className="w-full h-full object-cover"
         />
+         <div className="absolute inset-0 bg-black/70 z-10"></div>
       </div>
     </>
   );

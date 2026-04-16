@@ -32,7 +32,7 @@ const stores = [
     id: 1,
     city: 'London',
     country: 'UK',
-    flag: '🇬🇧',
+    flag: 'gb',
     region: 'Europe',
     address: '415 Oxford Street, London W1C 2AX',
     phone: '+44 20 7499 1234',
@@ -47,7 +47,7 @@ const stores = [
     id: 2,
     city: 'Mumbai',
     country: 'India',
-    flag: '🇮🇳',
+    flag: 'in',
     region: 'Asia',
     address: 'Mumbai Store Address',
     phone: '+91 98765 43210',
@@ -62,7 +62,7 @@ const stores = [
     id: 3,
     city: 'Tokyo',
     country: 'Japan',
-    flag: '🇯🇵',
+    flag: 'jp',
     region: 'Asia',
     address: 'Tokyo Address',
     phone: '+81 3 3497 0011',
@@ -77,7 +77,7 @@ const stores = [
     id: 4,
     city: 'New York',
     country: 'USA',
-    flag: '🇺🇸',
+    flag: 'us',
     region: 'Americas',
     address: '565 Fifth Avenue, New York, NY',
     phone: '+1 212 239 2700',
@@ -92,7 +92,7 @@ const stores = [
     id: 5,
     city: 'Dubai',
     country: 'UAE',
-    flag: '🇦🇪',
+    flag: 'ae',
     region: 'Middle East',
     address: 'Dubai Mall',
     phone: '+971 4 339 8888',
@@ -107,7 +107,7 @@ const stores = [
     id: 6,
     city: 'São Paulo',
     country: 'Brazil',
-    flag: '🇧🇷',
+    flag: 'br',
     region: 'Americas',
     address: 'Av. Paulista',
     phone: '+55 11 3064 4444',
@@ -187,7 +187,7 @@ const MapDots = ({ stores, activeId, onSelect }) => {
       {stores.map(store => {
         const isActive = activeId === store.id;
 
-  const isOpen = isStoreOpenNow(store.hours, store.timezone);
+        const isOpen = isStoreOpenNow(store.hours, store.timezone);
         return (
           <g key={store.id} onClick={() => onSelect(store.id)} style={{ cursor: 'pointer' }}>
             {/* Pulse ring */}
@@ -286,7 +286,7 @@ const Stores = () => {
       // Title entrance
       const split = new SplitText('.stores-title', { type: 'chars' });
       gsap.from(split.chars, {
-        scrollTrigger: { trigger: '#stores', start: 'top 80%' },
+        scrollTrigger: { trigger: '#stores', start: 'top 50%' },
         yPercent: 110,
         opacity: 0,
         stagger: 0.03,
@@ -295,31 +295,31 @@ const Stores = () => {
       });
 
       gsap.from('.stores-meta', {
-        scrollTrigger: { trigger: '#stores', start: 'top 75%' },
+        scrollTrigger: { trigger: '#stores', start: 'top 55%' },
         y: 24,
         opacity: 0,
         stagger: 0.1,
         duration: 0.7,
         ease: 'power3.out',
-        delay: 0.2,
+        delay: 0.5,
       });
 
       gsap.from('.map-panel', {
-        scrollTrigger: { trigger: '#stores', start: 'top 70%' },
+        scrollTrigger: { trigger: '#stores', start: 'top 50%' },
         x: 60,
         opacity: 0,
         duration: 1,
         ease: 'power3.out',
-        delay: 0.1,
+        delay: 0.5,
       });
 
       gsap.from('.list-panel', {
-        scrollTrigger: { trigger: '#stores', start: 'top 70%' },
+        scrollTrigger: { trigger: '#stores', start: 'top 50%' },
         x: -60,
         opacity: 0,
         duration: 1,
         ease: 'power3.out',
-        delay: 0.1,
+        delay: 0.5,
       });
     },
     { scope: sectionRef },
@@ -502,7 +502,11 @@ const Stores = () => {
 
                         <div>
                           <div className="flex items-center gap-2 mb-0.5">
-                            <span className="text-sm">{store.flag}</span>
+                            <img
+                              src={`https://flagcdn.com/${store.flag}.svg`}
+                              alt={store.country}
+                              className="w-5 h-4 object-cover"
+                            />
                             <span
                               className="font-bebas text-xl leading-none tracking-wider"
                               style={{ color: isActive ? '#fff' : 'rgba(255,255,255,0.6)' }}
@@ -627,8 +631,7 @@ const Stores = () => {
               <div className="absolute top-5 left-6 z-10 flex items-center gap-2">
                 <div className="w-1 h-1 rounded-full bg-[#FF2D00]" />
                 <span className="font-bebas text-[12px] tracking-[0.5em] uppercase text-white/25">
-                  Worldwide Store Network ·{' '}
-                  <span className="text-[#FF2D00]">Real-Time</span>
+                  Worldwide Store Network · <span className="text-[#FF2D00]">Real-Time</span>
                 </span>
               </div>
 
@@ -662,7 +665,11 @@ const Stores = () => {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <span className="text-lg">{activeStore.flag}</span>
+                      <img
+                        src={`https://flagcdn.com/${activeStore.flag}.svg`}
+                        alt={activeStore.country}
+                        className="w-5 h-4 object-cover"
+                      />
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="font-bebas text-2xl text-white leading-none tracking-wider">

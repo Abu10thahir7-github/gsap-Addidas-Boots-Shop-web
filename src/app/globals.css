@@ -91,10 +91,10 @@ body {
   @apply absolute inset-0 size-full bg-[url('/assets/images/noise.png')] bg-cover bg-center z-10;
 }
 #hero {
-  @apply relative z-10  w-full border border-transparent;
+  @apply relative z-20  w-full border border-transparent;
 
   h1 {
-    @apply md:mt-32 mt-40 text-[13rem] md:text-[25rem]  tracking-wide text-center font-outward uppercase;
+    @apply md:mt-32 mt-40 text-[6rem] md:text-[20rem]  tracking-wide text-center   uppercase;
   }
 
   .left-leaf {
@@ -218,4 +218,7 @@ video {
       }
     }
   }
+}
+button {
+  -webkit-tap-highlight-color: transparent;
 }

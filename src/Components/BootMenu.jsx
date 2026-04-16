@@ -14,7 +14,29 @@ const Menu = () => {
 
   const titleSplitRef = useRef(null);
   const descSplitRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
+  const handleTouchStart = e => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = e => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const distance = touchStartX.current - touchEndX.current;
+
+    // sensitivity threshold (adjust if needed)
+    if (distance > 50) {
+      // swipe left → next
+      goToSlide(currentIndex + 1);
+    } else if (distance < -50) {
+      // swipe right → prev
+      goToSlide(currentIndex - 1);
+    }
+  };
   useGSAP(() => {
     // ✅ Revert previous instances via ref, not static method
     if (titleSplitRef.current) titleSplitRef.current.revert();
@@ -22,8 +44,8 @@ const Menu = () => {
 
     gsap.fromTo(
       '.boot-img',
-      { opacity: 0, xPercent: -8, scale: 0.96 },
-      { opacity: 1, xPercent: 0, scale: 1, duration: 0.7, ease: 'power3.out' },
+      { opacity: 0, xPercent: 10, scale: 0.95 },
+      { opacity: 1, xPercent: 0, scale: 1, duration: 0.6, ease: 'power3.out' },
     );
 
     gsap.fromTo(
@@ -67,11 +89,14 @@ const Menu = () => {
   const currentBoot = getBootAt(0);
   const prevBoot = getBootAt(-1);
   const nextBoot = getBootAt(1);
-  console.log(currentBoot);
+
   return (
     <section
       id="menu"
       className="relative w-full min-h-screen bg-black overflow-hidden py-16 px-5 md:px-12"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {/* ── Noise overlay ─────────────────────────────────── */}
       <div className="noisy absolute inset-0 opacity-20 pointer-events-none z-0" />
@@ -204,7 +229,16 @@ const Menu = () => {
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-72 h-72 rounded-full bg-[#FF2D00]/5 blur-3xl" />
           </div>
-
+          <button
+            onClick={() => goToSlide(currentIndex - 1)}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20
+      w-10 h-10 rounded-full bg-black/40 backdrop-blur-md
+      border border-white/20 flex items-center justify-center
+      text-white text-lg active:scale-90 transition
+      lg:hidden"
+          >
+            ←
+          </button>
           <img
             key={currentIndex}
             src={currentBoot.image}
@@ -212,6 +246,16 @@ const Menu = () => {
             className="boot-img relative z-10 h-[55vh] w-auto object-contain
               drop-shadow-[0_0_60px_rgba(255,45,0,0.15)]"
           />
+          <button
+            onClick={() => goToSlide(currentIndex + 1)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20
+      w-10 h-10 rounded-full bg-black/40 backdrop-blur-md
+      border border-white/20 flex items-center justify-center
+      text-white text-lg active:scale-90 transition
+      lg:hidden"
+          >
+            →
+          </button>
         </div>
 
         {/* RIGHT — details ─────────────────────────────── */}
