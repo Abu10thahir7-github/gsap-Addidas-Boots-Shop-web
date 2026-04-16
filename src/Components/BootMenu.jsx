@@ -12,51 +12,54 @@ const Menu = () => {
   const contentRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
 
- const titleSplitRef = useRef(null);
-const descSplitRef  = useRef(null);
+  const titleSplitRef = useRef(null);
+  const descSplitRef = useRef(null);
 
-useGSAP(() => {
-  // ✅ Revert previous instances via ref, not static method
-  if (titleSplitRef.current) titleSplitRef.current.revert();
-  if (descSplitRef.current)  descSplitRef.current.revert();
+  useGSAP(() => {
+    // ✅ Revert previous instances via ref, not static method
+    if (titleSplitRef.current) titleSplitRef.current.revert();
+    if (descSplitRef.current) descSplitRef.current.revert();
 
+    gsap.fromTo(
+      '.boot-img',
+      { opacity: 0, xPercent: -8, scale: 0.96 },
+      { opacity: 1, xPercent: 0, scale: 1, duration: 0.7, ease: 'power3.out' },
+    );
 
-  gsap.fromTo('.boot-img',
-    { opacity: 0, xPercent: -8, scale: 0.96 },
-    { opacity: 1, xPercent: 0, scale: 1, duration: 0.7, ease: 'power3.out' }
-  );
+    gsap.fromTo(
+      '.boot-counter',
+      { yPercent: 60, opacity: 0 },
+      { yPercent: 0, opacity: 1, duration: 0.5, ease: 'expo.out' },
+    );
 
-  gsap.fromTo('.boot-counter',
-    { yPercent: 60, opacity: 0 },
-    { yPercent: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }
-  );
+    // ✅ Save instance to ref
+    titleSplitRef.current = new SplitText('.boot-title', { type: 'chars' });
+    gsap.fromTo(
+      titleSplitRef.current.chars,
+      { yPercent: 110, opacity: 0 },
+      { yPercent: 0, opacity: 1, duration: 0.6, ease: 'expo.out', stagger: 0.025, delay: 0.1 },
+    );
 
-  // ✅ Save instance to ref
-  titleSplitRef.current = new SplitText('.boot-title', { type: 'chars' });
-  gsap.fromTo(titleSplitRef.current.chars,
-    { yPercent: 110, opacity: 0 },
-    { yPercent: 0, opacity: 1, duration: 0.6, ease: 'expo.out', stagger: 0.025, delay: 0.1 }
-  );
+    // ✅ Save instance to ref
+    descSplitRef.current = new SplitText('.boot-desc', { type: 'lines' });
+    gsap.fromTo(
+      descSplitRef.current.lines,
+      { yPercent: 100, opacity: 0 },
+      { yPercent: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out', delay: 0.3 },
+    );
 
-  // ✅ Save instance to ref
-  descSplitRef.current = new SplitText('.boot-desc', { type: 'lines' });
-  gsap.fromTo(descSplitRef.current.lines,
-    { yPercent: 100, opacity: 0 },
-    { yPercent: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out', delay: 0.3 }
-  );
+    gsap.fromTo(
+      '.boot-tag',
+      { scale: 0.8, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.4, stagger: 0.06, delay: 0.5, ease: 'back.out(2)' },
+    );
 
-  gsap.fromTo('.boot-tag',
-    { scale: 0.8, opacity: 0 },
-    { scale: 1, opacity: 1, duration: 0.4, stagger: 0.06, delay: 0.5, ease: 'back.out(2)' }
-  );
-
-  gsap.fromTo('.accent-line',
-    { scaleX: 0 },
-    { scaleX: 1, duration: 0.8, ease: 'power4.out', transformOrigin: 'left' }
-  );
-
-
-}, [currentIndex]);
+    gsap.fromTo(
+      '.accent-line',
+      { scaleX: 0 },
+      { scaleX: 1, duration: 0.8, ease: 'power4.out', transformOrigin: 'left' },
+    );
+  }, [currentIndex]);
   const totalBoots = AllBoots.length;
   const goToSlide = index => setCurrentIndex((index + totalBoots) % totalBoots);
   const getBootAt = offset => AllBoots[(currentIndex + offset + totalBoots) % totalBoots];
@@ -116,29 +119,33 @@ useGSAP(() => {
       </div>
 
       {/* ── Named tabs ───────────────────────────────────── */}
-     <nav className="relative z-10 max-w-7xl mx-auto mb-10 overflow-x-auto scrollbar-none
-  [-webkit-overflow-scrolling:touch]">  {/* ✅ scroll on parent, iOS momentum */}
-  <div className="flex Bootbutton gap-6 md:gap-10 min-w-max px-1 pb-1">
-    {/* ✅ min-w-max stays on child so it overflows the parent */}
-    {AllBoots.map((boot, index) => {
-      const isActive = index === currentIndex;
-      return (
-        <button
-          key={boot.id}
-          onClick={() => goToSlide(index)}
-          className={`relative pb-2 text-xs md:text-sm tracking-[0.2em] uppercase
+      <nav
+        className="relative z-10 max-w-7xl mx-auto mb-10 overflow-x-auto scrollbar-none
+  [-webkit-overflow-scrolling:touch]"
+      >
+        {' '}
+        {/* ✅ scroll on parent, iOS momentum */}
+        <div className="flex Bootbutton gap-6 md:gap-10 min-w-max px-1 pb-1">
+          {/* ✅ min-w-max stays on child so it overflows the parent */}
+          {AllBoots.map((boot, index) => {
+            const isActive = index === currentIndex;
+            return (
+              <button
+                key={boot.id}
+                onClick={() => goToSlide(index)}
+                className={`relative pb-2 text-xs md:text-sm tracking-[0.2em] uppercase
             transition-all duration-300 font-bebas whitespace-nowrap flex-shrink-0
             ${isActive ? 'text-white' : 'text-white/30 hover:text-white/60'}`}
-        >
-          {boot.name}
-          {isActive && (
-            <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#FF2D00]" />
-          )}
-        </button>
-      );
-    })}
-  </div>
-</nav>
+              >
+                {boot.name}
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#FF2D00]" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </nav>
 
       {/* ── Main content ─────────────────────────────────── */}
       <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[65vh]">
@@ -221,7 +228,7 @@ useGSAP(() => {
                 {currentBoot.title}
               </h2>
             </div>
-{/* Red rule */}
+            {/* Red rule */}
             <div className="accent-line mt-4 mb-5 h-[1px] bg-[#FF2D00] origin-left" />
             {/* Description */}
             <div className="overflow-hidden" key={`desc-${currentIndex}`}>
