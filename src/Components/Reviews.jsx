@@ -270,7 +270,7 @@ const MarqueeRow = ({ items, direction = 1, activeId, onCardClick }) => {
 const Reviews = () => {
   const sectionRef = useRef(null);
   const [activeId, setActiveId] = useState(null);
- const reviews = document.querySelector('#reviews');
+ 
   const handleCardClick = (id) => {
     setActiveId(prev => prev === id ? null : id);
   };
