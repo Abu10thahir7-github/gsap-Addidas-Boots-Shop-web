@@ -159,7 +159,7 @@ const BootsSection = () => {
             <BootCard key={boot.id} boot={boot} reverse={true} />
           ))}
         </div>
-      </div>
+      </div> 
     </section>
   );
 };

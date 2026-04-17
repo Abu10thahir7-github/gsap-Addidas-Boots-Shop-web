@@ -179,7 +179,7 @@ const Footer = () => {
         {/* ══════════════════════════════════════════════════
             MAIN FOOTER BODY
         ══════════════════════════════════════════════════ */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-20 pb-10">
+        <div className="relative z-10 !max-w-7xl !mx-auto !px-6 !md:px-12 !pt-20 !pb-10">
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
 
@@ -250,7 +250,7 @@ const Footer = () => {
                 {['FIFA Partner', '2025 Season', 'UCL Official'].map(badge => (
                   <span
                     key={badge}
-                    className="text-[8px] tracking-[0.2em] uppercase px-3 py-1 rounded-full"
+                    className="text-[8px] tracking-[0.2em] uppercase !px-3 !py-1 !rounded-full"
                     style={{
                       border: '1px solid rgba(255,255,255,0.08)',
                       color: 'rgba(255,255,255,0.2)',
@@ -412,8 +412,8 @@ const Footer = () => {
             BOTTOM BAR
         ══════════════════════════════════════════════════ */}
         <div
-          className="footer-bottom relative z-10 max-w-7xl mx-auto
-            px-6 md:px-12 py-6"
+          className="footer-bottom relative z-10 !max-w-7xl !mx-auto
+            !px-6 !md:px-12 !py-6"
           style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
         >
           <div className="flex flex-col md:flex-row items-center
@@ -443,7 +443,7 @@ const Footer = () => {
             <button
               onClick={scrollToTop}
               className="back-top-btn flex items-center gap-2.5 group
-                px-4 py-2 rounded-full"
+                !px-4 !py-2 !rounded-full"
               style={{
                 border: '1px solid rgba(255,255,255,0.08)',
                 background: 'rgba(255,255,255,0.02)',

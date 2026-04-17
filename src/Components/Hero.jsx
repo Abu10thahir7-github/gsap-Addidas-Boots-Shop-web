@@ -174,9 +174,8 @@ const Hero = () => {
           playsInline
           preload="auto"
           src="/assets/video/output.mp4"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover !top-0  "
         />
-         <div className="absolute inset-0 bg-black/70 z-10"></div>
       </div>
     </>
   );

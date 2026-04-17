@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import logo from '@/../public/assets/images/logo.png';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -98,8 +99,8 @@ const Navbar = () => {
         <ul className="flex items-center gap-1">
           {navbarLinks.map(link => (
             <li key={link.id}>
-              <a
-                href={`/${link.id}`}
+              <Link
+                href={link.href || `#${link.id}`}
                 className="relative font-bebas text-sm tracking-[0.1em]
                            text-white/75 hover:text-white
                            px-3 py-1.5 rounded-xl
@@ -120,7 +121,7 @@ const Navbar = () => {
                              group-hover:bg-white/60
                              transition-all duration-200"
                 />
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

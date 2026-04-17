@@ -24,7 +24,6 @@ export default function Home() {
       <BootMenu />
       <Reviews />
       <Stores />
-      <Footer />
     </main>
   );
 }
