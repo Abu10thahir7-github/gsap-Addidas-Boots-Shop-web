@@ -20,7 +20,7 @@ export default function Home() {
       <Hero />
       <BootSection />
       <About />
-      <Art />
+      {/* <Art /> */}
       <BootMenu />
       <Reviews />
       <Stores />

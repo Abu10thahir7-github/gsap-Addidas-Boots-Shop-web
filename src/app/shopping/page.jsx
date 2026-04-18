@@ -2,9 +2,12 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { products } from '../../../constants';
 import Link from 'next/link';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger, SplitText } from 'gsap/all';
 
+gsap.registerPlugin(ScrollTrigger, SplitText);
 // ── PRODUCT DATA ────────────────────────────────────────────────
-
 
 const BADGE_COLORS = {
   New: { bg: 'rgba(255,45,0,0.15)', color: '#FF2D00', border: 'rgba(255,45,0,0.3)' },
@@ -656,6 +659,7 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
   if (view === 'list')
     return (
       <div
+        className="product-card-stagger"
         style={{
           display: 'flex',
           gap: 20,
@@ -955,8 +959,8 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
           {product.collection}
         </p>
         <h3
+          className="font-bebas"
           style={{
-            fontFamily: 'var(--font-bebas, sans-serif)',
             fontSize: '1.15rem',
             color: '#fff',
             letterSpacing: '0.06em',
@@ -1022,6 +1026,7 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
             <span
+              className="font-bebas"
               style={{
                 fontFamily: 'var(--font-bebas, sans-serif)',
                 fontSize: '1.5rem',
@@ -1033,9 +1038,10 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
             </span>
             {discount > 0 && (
               <span
+                className="font-bebas"
                 style={{
                   color: 'rgba(255,255,255,0.25)',
-                  fontSize: 13,
+                  fontSize: '1rem',
                   textDecoration: 'line-through',
                 }}
               >
@@ -1418,6 +1424,32 @@ export default function ShopPage() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+  useGSAP(() => {
+    const titleSplit = new SplitText('.boots-title', { type: 'chars' });
+
+    const scrollTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#shop',
+        start: 'top center',
+      },
+    });
+
+    scrollTimeline
+      .from(titleSplit.chars, {
+        yPercent: 110,
+        opacity: 0,
+        stagger: 0.03,
+        duration: 0.8,
+        ease: 'expo.out',
+      })
+      .from('.stagger', {
+        y: 30,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.15,
+        ease: 'power3.out',
+      });
+  });
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
     check();
@@ -1478,27 +1510,7 @@ export default function ShopPage() {
     (filters.priceRange[1] < 350 ? 1 : 0);
 
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { --font-bebas: 'Bebas Neue', sans-serif; }
-        body { background: #070707; color: #fff; font-family: system-ui, sans-serif; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #111; }
-        ::-webkit-scrollbar-thumb { background: #FF2D00; border-radius: 99px; }
-        @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
-        @keyframes slideUp { from { opacity:0; transform: translateY(30px) } to { opacity:1; transform: translateY(0) } }
-        @keyframes slideInRight { from { transform: translateX(100%) } to { transform: translateX(0) } }
-        @keyframes slideInLeft  { from { transform: translateX(-100%) } to { transform: translateX(0) } }
-        input[type=range] { -webkit-appearance: none; height: 3px; background: rgba(255,255,255,0.1); border-radius: 99px; outline: none; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; background: #FF2D00; border-radius: 50%; cursor: pointer; }
-        .product-grid { display: grid; gap: 1rem; }
-        @media (min-width: 640px)  { .product-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (min-width: 1280px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
-      `}</style>
-
+    <section id="Shop">
       <div style={{ minHeight: '100vh', background: '#070707' }}>
         {/* ── TOP NAV ──────────────────────────────────── */}
         <nav
@@ -1518,9 +1530,8 @@ export default function ShopPage() {
         >
           {/* Logo */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-
             <Link
-            href={'/'}
+              href={'/'}
               style={{
                 fontFamily: 'var(--font-bebas)',
                 fontSize: '1.3rem',
@@ -1545,7 +1556,7 @@ export default function ShopPage() {
               width: 'min(320px, 40vw)',
             }}
           >
-            <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>⌕</span>
+            <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 23 }}>⌕</span>
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
@@ -1915,6 +1926,7 @@ export default function ShopPage() {
                     key={p.id}
                     product={p}
                     view="list"
+                    className="product-grid stagger"
                     onQuickView={setQuickViewProduct}
                     onAddToWishlist={toggleWishlist}
                     isWishlisted={wishlist.includes(p.id)}
@@ -1922,7 +1934,7 @@ export default function ShopPage() {
                 ))}
               </div>
             ) : (
-              <div className="product-grid">
+              <div className="product-grid stagger">
                 {filtered.map(p => (
                   <ProductCard
                     key={p.id}
@@ -1963,6 +1975,6 @@ export default function ShopPage() {
           onQtyChange={updateQty}
         />
       )}
-    </>
+    </section>
   );
 }

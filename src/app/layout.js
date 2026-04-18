@@ -37,9 +37,10 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${poppins.variable} h-full antialiased`}
       // 👆 Add poppins.variable here
     >
-       
-      <body className="min-h-full flex flex-col">{children}</body>
-        <Footer />
+      <body className="min-h-full flex flex-col">{children}
+
+      <Footer />
+      </body>
     </html>
   );
 }

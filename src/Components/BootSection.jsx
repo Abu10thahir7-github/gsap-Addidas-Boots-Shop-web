@@ -52,8 +52,7 @@ const BootCard = ({ boot, reverse = false }) => (
   >
     {/* Number */}
     <span
-      className="text-5xl font-black text-white/10 group-hover:text-white/20
-      transition-all duration-300 leading-none w-12 shrink-0 font-[var(--font-modern-negra)]"
+      className="text-5xl font-black text-white/10 group-hover:text-white/20 transition-all duration-300 leading-none w-12 shrink-0 font-[var(--font-modern-negra)]"
     >
       {String(boot.id).padStart(2, '0')}
     </span>
@@ -61,8 +60,7 @@ const BootCard = ({ boot, reverse = false }) => (
     {/* Info */}
     <div className="flex-1 info-name-des min-w-0">
       <h3
-        className="text-white  font-medium text-xl font-bebas tracking-widest leading-tight
-        group-hover:text-yellow-400 transition-colors duration-300 truncate"
+        className="text-white  font-medium text-xl font-bebas tracking-widest leading-tight group-hover:text-yellow-400 transition-colors duration-300 truncate"
       >
         {boot.name}
       </h3>
@@ -71,8 +69,7 @@ const BootCard = ({ boot, reverse = false }) => (
 
     {/* Price */}
     <span
-      className="shrink-0  info-price font-bebas text-yellow-400 font-medium text-xl tracking-tight
-      group-hover:scale-110 transition-transform duration-300 origin-center"
+      className="shrink-0  info-price font-bebas text-yellow-400 font-medium text-xl tracking-tight group-hover:scale-110 transition-transform duration-300 origin-center"
     >
       {boot.price}
     </span>
@@ -120,9 +117,7 @@ const BootsSection = () => {
     >
       {/* Background decorative text */}
       <span
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-        text-[20vw] font-black text-white/[0.03] select-none pointer-events-none
-        whitespace-nowrap font-bebas z-0"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black text-white/[0.03] select-none pointer-events-none whitespace-nowrap font-bebas z-0"
       >
         ADIDAS
       </span>
@@ -149,8 +144,7 @@ const BootsSection = () => {
 
         {/* Divider */}
         <div
-          className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px]
-          bg-gradient-to-b from-transparent via-white/20 to-transparent"
+          className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent"
         />
 
         {/* Right Column */}
@@ -159,7 +153,7 @@ const BootsSection = () => {
             <BootCard key={boot.id} boot={boot} reverse={true} />
           ))}
         </div>
-      </div> 
+      </div>
     </section>
   );
 };

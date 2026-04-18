@@ -64,8 +64,7 @@ const Navbar = () => {
           box-shadow inner highlight        → depth illusion
       */}
       <div
-        className="max-w-4xl mx-auto flex items-center justify-between
-                   rounded-2xl px-5 py-3"
+        className="max-w-4xl mx-auto flex items-center justify-between rounded-2xl px-5 py-3"
         style={{
           background: 'rgba(255, 255, 255, 0.08)',
           backdropFilter: 'blur(28px) saturate(180%) brightness(1.05)',
@@ -82,13 +81,11 @@ const Navbar = () => {
         <a href="#home" className="flex items-center gap-2 group">
           <Image
             src={logo}
-            className="object-contain w-[28px] h-[36px] drop-shadow-md
-                       transition-transform duration-300 group-hover:scale-110"
+            className="object-contain w-[28px] h-[36px] drop-shadow-md transition-transform duration-300 group-hover:scale-110"
             alt="Adidas logo"
           />
           <span
-            className="font-bebas text-xl tracking-[0.12em] text-white/90
-                       transition-colors duration-200 group-hover:text-white"
+            className="font-bebas text-xl tracking-[0.12em] text-white/90 transition-colors duration-200 group-hover:text-white"
             style={{ textShadow: '0 1px 8px rgba(0,0,0,0.4)' }}
           >
             ADIDAS
@@ -101,13 +98,7 @@ const Navbar = () => {
             <li key={link.id}>
               <Link
                 href={link.href || `#${link.id}`}
-                className="relative font-bebas text-sm tracking-[0.1em]
-                           text-white/75 hover:text-white
-                           px-3 py-1.5 rounded-xl
-                           transition-all duration-200
-                           hover:bg-white/10
-                           active:bg-white/15
-                           group"
+                className="relative font-bebas text-sm tracking-[0.1em] text-white/75 hover:text-white  px-3 py-1.5 rounded-xl transition-all duration-200 hover:bg-white/10 active:bg-white/15 group"
                 style={{
                   textShadow: '0 1px 4px rgba(0,0,0,0.3)',
                 }}
@@ -115,12 +106,7 @@ const Navbar = () => {
                 {link.title}
 
                 {/* Active/hover underline dot */}
-                <span
-                  className="absolute bottom-1 left-1/2 -translate-x-1/2
-                             w-1 h-1 rounded-full bg-white/0
-                             group-hover:bg-white/60
-                             transition-all duration-200"
-                />
+                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white/0 group-hover:bg-white/60 transition-all duration-200" />
               </Link>
             </li>
           ))}
@@ -129,10 +115,7 @@ const Navbar = () => {
         {/* CTA Button — pill glass style */}
         <a
           href="#shop"
-          className="font-bebas text-sm tracking-[0.12em] text-white
-                     px-4 py-1.5 rounded-xl
-                     transition-all duration-200
-                     active:scale-95"
+          className="font-bebas text-sm tracking-[0.12em] text-white px-4 py-1.5 rounded-xl transition-all duration-200 active:scale-95"
           style={{
             background: 'rgba(255, 255, 255, 0.15)',
             border: '1px solid rgba(255, 255, 255, 0.25)',

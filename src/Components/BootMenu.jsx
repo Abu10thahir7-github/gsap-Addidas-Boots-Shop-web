@@ -9,7 +9,6 @@ import { SplitText } from 'gsap/SplitText';
 gsap.registerPlugin(SplitText);
 
 const Menu = () => {
-  const contentRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const titleSplitRef = useRef(null);
@@ -144,10 +143,7 @@ const Menu = () => {
       </div>
 
       {/* ── Named tabs ───────────────────────────────────── */}
-      <nav
-        className="relative z-10 max-w-7xl mx-auto mb-10 overflow-x-auto scrollbar-none
-  [-webkit-overflow-scrolling:touch]"
-      >
+      <nav className="relative z-10 max-w-7xl mx-auto mb-10 overflow-x-auto scrollbar-none [-webkit-overflow-scrolling:touch]">
         {' '}
         {/* ✅ scroll on parent, iOS momentum */}
         <div className="flex Bootbutton gap-6 md:gap-10 min-w-max px-1 pb-1">
@@ -158,9 +154,7 @@ const Menu = () => {
               <button
                 key={boot.id}
                 onClick={() => goToSlide(index)}
-                className={`relative pb-2 text-xs md:text-sm tracking-[0.2em] uppercase
-            transition-all duration-300 font-bebas whitespace-nowrap flex-shrink-0
-            ${isActive ? 'text-white' : 'text-white/30 hover:text-white/60'}`}
+                className={`relative pb-2 text-xs md:text-sm tracking-[0.2em] uppercase transition-all duration-300 font-bebas whitespace-nowrap flex-shrink-0 ${isActive ? 'text-white' : 'text-white/30 hover:text-white/60'}`}
               >
                 {boot.name}
                 {isActive && (
@@ -195,8 +189,7 @@ const Menu = () => {
             {(currentBoot.technology || ['Speed', 'Precision', 'Control']).map(tag => (
               <span
                 key={tag}
-                className="boot-tag text-[9px] tracking-[0.2em] uppercase px-3 py-1
-                  bg-white/5 border border-white/10 rounded-full text-white/50"
+                className="boot-tag text-[9px] tracking-[0.2em] uppercase px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/50"
               >
                 {tag}
               </span>
@@ -208,10 +201,7 @@ const Menu = () => {
             onClick={() => goToSlide(currentIndex - 1)}
             className="group flex items-center gap-3 text-left"
           >
-            <div
-              className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center
-              group-hover:border-[#FF2D00] group-hover:bg-[#FF2D00]/10 transition-all duration-300"
-            >
+            <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#FF2D00] group-hover:bg-[#FF2D00]/10 transition-all duration-300">
               <span className="text-white text-xs">←</span>
             </div>
             <div>
@@ -231,11 +221,7 @@ const Menu = () => {
           </div>
           <button
             onClick={() => goToSlide(currentIndex - 1)}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-20
-      w-10 h-10 rounded-full bg-black/40 backdrop-blur-md
-      border border-white/20 flex items-center justify-center
-      text-white text-lg active:scale-90 transition
-      lg:hidden"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-lg active:scale-90 transition lg:hidden"
           >
             ←
           </button>
@@ -243,19 +229,12 @@ const Menu = () => {
             key={currentIndex}
             src={currentBoot.image}
             alt={currentBoot.name}
-            className="boot-img relative z-10 h-[55vh] w-auto object-contain
-              drop-shadow-[0_0_60px_rgba(255,45,0,0.15)]"
+            className="boot-img relative z-10 h-[55vh] w-auto object-contain drop-shadow-[0_0_60px_rgba(255,45,0,0.15)]"
           />
           <button
             onClick={() => goToSlide(currentIndex + 1)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-20
-      w-10 h-10 rounded-full bg-black/40 backdrop-blur-md
-      border border-white/20 flex items-center justify-center
-      text-white text-lg active:scale-90 transition
-      lg:hidden"
-          >
-            →
-          </button>
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-lg active:scale-90 transition lg:hidden"
+          ></button>
         </div>
 
         {/* RIGHT — details ─────────────────────────────── */}
@@ -291,10 +270,7 @@ const Menu = () => {
               </p>
             </div>
 
-            <button
-              className="group flex items-center gap-2 bg-[#FF2D00] hover:bg-[#cc2400]
-              transition-colors px-5 py-2.5 rounded-full"
-            >
+            <button className="group flex items-center gap-2 bg-[#FF2D00] hover:bg-[#cc2400] transition-colors px-5  py-2.5 rounded-full">
               <span className="text-white text-xs tracking-[0.3em] uppercase font-light">
                 Explore
               </span>
@@ -325,10 +301,7 @@ const Menu = () => {
                 {nextBoot.name}
               </p>
             </div>
-            <div
-              className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center
-              group-hover:border-[#FF2D00] group-hover:bg-[#FF2D00]/10 transition-all duration-300"
-            >
+            <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#FF2D00] group-hover:bg-[#FF2D00]/10 transition-all duration-300">
               <span className="text-white text-xs">→</span>
             </div>
           </button>

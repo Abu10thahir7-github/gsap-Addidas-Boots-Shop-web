@@ -88,8 +88,7 @@ const Art = () => {
       </svg>
 
       <div
-        className="ghost-text absolute inset-0 flex items-center justify-center
-        pointer-events-none select-none z-[1] overflow-hidden"
+        className="ghost-text absolute inset-0 flex items-center justify-center pointer-events-none select-none z-[1] overflow-hidden"
       >
         <span
           className="font-bebas leading-none tracking-tighter text-[22vw] md:text-[18vw]"

@@ -66,94 +66,39 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  useGSAP(() => {
-    // Nav columns stagger in
-    gsap.from('.footer-col', {
-      scrollTrigger: { trigger: '#footer', start: 'top 90%' },
-      y: 40, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power3.out',
-    });
+useGSAP(() => {
+  const footer = footerRef.current;
+  if (!footer) return; // safety guard
 
-    // Newsletter block slides in
-    gsap.from('.footer-newsletter', {
-      scrollTrigger: { trigger: '#footer', start: 'top 85%' },
-      x: 50, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.2,
-    });
+  // Nav columns stagger in
+  gsap.from('.footer-col', {
+    scrollTrigger: { trigger: footer, start: 'top 90%' },
+    y: 40, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power3.out',
+  });
 
-    // Bottom bar fades in
-    gsap.from('.footer-bottom', {
-      scrollTrigger: { trigger: '.footer-bottom', start: 'top 98%' },
-      y: 20, opacity: 0, duration: 0.8, ease: 'power2.out',
-    });
+  // Newsletter block slides in
+  gsap.from('.footer-newsletter', {
+    scrollTrigger: { trigger: footer, start: 'top 85%' },
+    x: 50, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.2,
+  });
 
-    // Big wordmark scrubs in
-    gsap.from('.footer-wordmark', {
-      scrollTrigger: { trigger: '.footer-wordmark', start: 'top 95%' },
-      yPercent: 40, opacity: 0, duration: 1.2, ease: 'expo.out',
-    });
-  }, { scope: footerRef });
+  // Bottom bar fades in
+  gsap.from('.footer-bottom', {
+    scrollTrigger: { trigger: '.footer-bottom', start: 'top 98%' },
+    y: 20, opacity: 0, duration: 0.8, ease: 'power2.out',
+  });
+
+  // Big wordmark scrubs in
+  gsap.from('.footer-wordmark', {
+    scrollTrigger: { trigger: '.footer-wordmark', start: 'top 95%' },
+    yPercent: 40, opacity: 0, duration: 1.2, ease: 'expo.out',
+  });
+
+}, { scope: footerRef }); // 👈 this is the key fix
 
   return (
     <>
-      <style>{`
-        @keyframes shimmer {
-          0%   { background-position: -200% center; }
-          100% { background-position: 200% center; }
-        }
-        .footer-link {
-          position: relative;
-          display: inline-block;
-          transition: color 0.25s;
-        }
-        .footer-link::after {
-          content: '';
-          position: absolute;
-          bottom: -1px; left: 0;
-          width: 0; height: 1px;
-          background: #FF2D00;
-          transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
-        }
-        .footer-link:hover::after { width: 100%; }
-        .footer-link:hover { color: rgba(255,255,255,0.9); }
 
-        .social-btn {
-          transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-        }
-        .social-btn:hover {
-          transform: translateY(-4px);
-          border-color: rgba(255,45,0,0.5) !important;
-          background: rgba(255,45,0,0.08) !important;
-        }
-
-        .subscribe-btn {
-          transition: all 0.3s;
-        }
-        .subscribe-btn:hover {
-          background: #cc2400;
-          letter-spacing: 0.5em;
-        }
-
-        .back-top-btn {
-          transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-        }
-        .back-top-btn:hover {
-          transform: translateY(-4px);
-          border-color: rgba(255,45,0,0.5);
-          box-shadow: 0 8px 30px rgba(255,45,0,0.15);
-        }
-        .back-top-btn:hover .arrow-icon {
-          transform: translateY(-3px);
-        }
-        .arrow-icon { transition: transform 0.3s; }
-
-        .wordmark-char {
-          display: inline-block;
-          transition: color 0.2s, -webkit-text-stroke 0.2s;
-        }
-        .footer-wordmark:hover .wordmark-char {
-          color: transparent;
-          -webkit-text-stroke: 1px rgba(255,45,0,0.4);
-        }
-      `}</style>
 
       <footer
         id="footer"
@@ -327,8 +272,7 @@ const Footer = () => {
                     onChange={e => setEmail(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && handleSubscribe()}
                     placeholder="your@email.com"
-                    className="w-full bg-transparent text-white text-sm tracking-wider
-                      outline-none placeholder:text-white/20"
+                    className="w-full bg-transparent text-white text-sm tracking-wider outline-none placeholder:text-white/20"
                     style={{
                       borderBottom: '1px solid rgba(255,255,255,0.12)',
                       padding: '0.75rem 3rem 0.75rem 0',
@@ -339,8 +283,7 @@ const Footer = () => {
                   />
                   <button
                     onClick={handleSubscribe}
-                    className="absolute right-0 top-1/2 -translate-y-1/2
-                      text-white/40 hover:text-[#FF2D00] transition-colors text-lg"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 text-white/40 hover:text-[#FF2D00] transition-colors text-lg"
                     aria-label="Subscribe"
                   >
                     →
@@ -387,8 +330,7 @@ const Footer = () => {
         {/* ══════════════════════════════════════════════════
             GIANT WORDMARK
         ══════════════════════════════════════════════════ */}
-        <div className="footer-wordmark relative z-10 overflow-hidden
-          select-none text-center px-4 mt-4 cursor-default"
+        <div className="footer-wordmark relative z-10 overflow-hidden select-none text-center px-4 mt-4 cursor-default"
           onClick={scrollToTop}
           title="Back to top"
         >
@@ -412,16 +354,13 @@ const Footer = () => {
             BOTTOM BAR
         ══════════════════════════════════════════════════ */}
         <div
-          className="footer-bottom relative z-10 !max-w-7xl !mx-auto
-            !px-6 !md:px-12 !py-6"
+          className="footer-bottom relative z-10 !max-w-7xl !mx-auto !px-6 !md:px-12 !py-6"
           style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
         >
-          <div className="flex flex-col md:flex-row items-center
-            justify-between gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
 
             {/* Legal links */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start
-              gap-x-5 gap-y-2">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2">
               {['Privacy Policy', 'Terms of Use', 'Cookie Settings', 'Accessibility'].map(item => (
                 <a
                   key={item}
@@ -442,19 +381,16 @@ const Footer = () => {
             {/* Back to top */}
             <button
               onClick={scrollToTop}
-              className="back-top-btn flex items-center gap-2.5 group
-                !px-4 !py-2 !rounded-full"
+              className="back-top-btn flex items-center gap-2.5 group  !px-4 !py-2 !rounded-full"
               style={{
                 border: '1px solid rgba(255,255,255,0.08)',
                 background: 'rgba(255,255,255,0.02)',
               }}
             >
-              <span className="text-[9px] tracking-[0.35em] uppercase text-white/25
-                group-hover:text-white/50 transition-colors">
+              <span className="text-[9px] tracking-[0.35em] uppercase text-white/25  group-hover:text-white/50 transition-colors">
                 Back to Top
               </span>
-              <span className="arrow-icon text-white/25 text-xs
-                group-hover:text-[#FF2D00] transition-colors">
+              <span className="arrow-icon text-white/25 text-xs group-hover:text-[#FF2D00] transition-colors">
                 ↑
               </span>
             </button>

@@ -281,84 +281,55 @@ const Stores = () => {
   const isOpen = isStoreOpenNow(activeStore.hours, activeStore.timezone);
   const filtered = activeRegion === 'All' ? stores : stores.filter(s => s.region === activeRegion);
 
-  useGSAP(
-    () => {
-      // Title entrance
-      const split = new SplitText('.stores-title', { type: 'chars' });
-      gsap.from(split.chars, {
-        scrollTrigger: { trigger: '#stores', start: 'top 50%' },
-        yPercent: 110,
-        opacity: 0,
-        stagger: 0.03,
-        duration: 0.8,
-        ease: 'expo.out',
-      });
+  useGSAP(() => {
+    // Title entrance
+    const split = new SplitText('.stores-title', { type: 'chars' });
+    gsap.from(split.chars, {
+      scrollTrigger: { trigger: '#stores', start: 'top 50%' },
+      yPercent: 110,
+      opacity: 0,
+      stagger: 0.03,
+      duration: 0.8,
+      ease: 'expo.out',
+    });
 
-      gsap.from('.stores-meta', {
-        scrollTrigger: { trigger: '#stores', start: 'top 55%' },
-        y: 24,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.7,
-        ease: 'power3.out',
-        delay: 0.5,
-      });
+    gsap.from('.stores-meta', {
+      scrollTrigger: { trigger: '#stores', start: 'top 55%' },
+      y: 24,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.7,
+      ease: 'power3.out',
+      delay: 0.5,
+    });
 
-      gsap.from('.map-panel', {
-        scrollTrigger: { trigger: '#stores', start: 'top 50%' },
-        x: 60,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        delay: 0.5,
-      });
+    gsap.from('.map-panel', {
+      scrollTrigger: { trigger: '#stores', start: 'top 50%' },
+      x: 60,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+      delay: 0.5,
+    });
 
-      gsap.from('.list-panel', {
-        scrollTrigger: { trigger: '#stores', start: 'top 50%' },
-        x: -60,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        delay: 0.5,
-      });
-    },
-    { scope: sectionRef },
-  );
+    gsap.from('.list-panel', {
+      scrollTrigger: { trigger: '#stores', start: 'top 50%' },
+      x: -60,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+      delay: 0.5,
+    });
+  });
 
   return (
     <>
-      <style>{`
-        @keyframes pulseRing {
-          0%,100% { transform: scale(1); opacity: 0.6; }
-          50%      { transform: scale(1.8); opacity: 0; }
-        }
-        .store-row {
-          transition: background 0.3s, border-color 0.3s, padding-left 0.3s;
-        }
-        .store-row:hover { padding-left: 1.5rem; }
-        .coord-tick {
-          animation: fadeInUp 0.6s ease forwards;
-          opacity: 0;
-        }
-        @keyframes fadeInUp {
-          from { opacity:0; transform: translateY(6px); }
-          to   { opacity:1; transform: translateY(0); }
-        }
-      `}</style>
-
-      <section
-        id="stores"
-        ref={sectionRef}
-        className="relative w-full bg-[#070707] overflow-hidden py-24"
-      >
+      <section id="stores" className="relative w-full bg-[#070707] overflow-hidden py-24">
         {/* ── Noise ──────────────────────────────────────── */}
         <div className="noisy absolute inset-0 opacity-[0.025] pointer-events-none z-0" />
 
         {/* ── Ghost BG text ──────────────────────────────── */}
-        <div
-          className="absolute inset-0 flex items-center justify-center
-          pointer-events-none select-none z-0 overflow-hidden"
-        >
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden">
           <span
             className="font-bebas text-[18vw] leading-none"
             style={{ WebkitTextStroke: '1px rgba(212,160,23,0.04)', color: 'transparent' }}
@@ -456,8 +427,7 @@ const Stores = () => {
               <button
                 key={r}
                 onClick={() => setActiveRegion(r)}
-                className="relative px-4 py-1.5 rounded-full text-[10px] tracking-[0.3em]
-                  uppercase font-bebas transition-all duration-300"
+                className="relative px-4 py-1.5 rounded-full text-[10px] tracking-[0.3em] uppercase font-bebas transition-all duration-300"
                 style={{
                   background: activeRegion === r ? '#FF2D00' : 'rgba(255,255,255,0.04)',
                   color: activeRegion === r ? '#fff' : 'rgba(255,255,255,0.3)',
@@ -584,8 +554,7 @@ const Stores = () => {
                           className="flex items-center gap-1.5 group"
                         >
                           <span
-                            className="text-[9px] tracking-[0.3em] uppercase group-hover:text-white/70
-                              transition-colors"
+                            className="text-[9px] tracking-[0.3em] uppercase group-hover:text-white/70 transition-colors"
                             style={{ color: store.tagColor + 'aa' }}
                           >
                             Directions
