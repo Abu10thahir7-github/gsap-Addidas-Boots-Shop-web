@@ -35,6 +35,10 @@
 :root {
   --background: #ffffff;
   --foreground: #000000;
+  --red: #ff2d00;
+  --gold: #d4a017;
+  --bg: #070707;
+  --serif: 'DM Serif Display', serif;
 }
 
 @theme inline {
@@ -57,6 +61,7 @@
 .scrollbar-none::-webkit-scrollbar {
   display: none; /* Chrome / Safari */
 }
+
 html,
 body {
   width: 100%;
@@ -123,8 +128,6 @@ body {
   }
 }
 
-
- 
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -445,5 +448,247 @@ button {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+@keyframes drawLine {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.contact-hero-title {
+  perspective: 800px;
+}
+
+.form-input-wrap input:focus,
+.form-input-wrap textarea:focus {
+  outline: none;
+}
+
+.send-btn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    letter-spacing 0.3s,
+    box-shadow 0.3s;
+}
+.send-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+.send-btn:hover::before {
+  transform: translateX(100%);
+}
+.send-btn:hover {
+  letter-spacing: 0.5em !important;
+  box-shadow: 0 8px 30px rgba(255, 45, 0, 0.3);
+}
+
+.contact-card {
+  transition:
+    transform 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.social-row {
+  transition: all 0.3s;
+}
+.social-row:hover {
+  padding-left: 1.5rem !important;
+}
+.social-row:hover .social-arrow {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+@media (max-width: 768px) {
+  .custom-cursor,
+  .cursor-dot {
+    display: none;
+  }
+  .main-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-title-size {
+    font-size: clamp(4rem, 16vw, 7rem) !important;
+  }
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 480px) {
+  .stats-row {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 45, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 45, 0, 0);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes marqueeL {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.tl-item-btn {
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.tl-item-btn:hover {
+  opacity: 1 !important;
+}
+
+.dna-card {
+  transition:
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+.dna-card:hover {
+  transform: translateY(-6px) !important;
+}
+
+.player-card {
+  transition:
+    transform 0.4s,
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+.player-card:hover {
+  transform: scale(1.02) !important;
+}
+
+.val-item {
+  transition: transform 0.3s;
+}
+.val-item:hover {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 1024px) {
+  .dna-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .players-bento {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .players-bento .wide-card {
+    grid-column: span 1 !important;
+  }
+  .origin-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .mission-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (max-width: 640px) {
+  .dna-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .players-bento {
+    grid-template-columns: 1fr !important;
+  }
+  .values-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .timeline-nav {
+    flex-wrap: wrap;
+    gap: 8px !important;
+  }
+  .manifesto-size {
+    font-size: clamp(2.5rem, 10vw, 5rem) !important;
   }
 }

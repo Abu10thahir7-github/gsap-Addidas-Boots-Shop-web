@@ -31,6 +31,13 @@ const About = () => {
         ease: 'expo.out',
         stagger: 0.06,
       })
+      .from('.subtitle', {
+        opacity: 0,
+        xPercent: 100,
+        duration: 0.5,
+        ease: 'expo.out',
+        stagger: 0.06,
+      })
       .from('.topGrid div, .bottomGrid div', {
         opacity: 0,
         duration: 1,
@@ -45,7 +52,7 @@ const About = () => {
         <h2 className="font-bebas text-[clamp(3rem,8vw,6rem)] leading-none tracking-widest text-white uppercase">
           The <span className="text-[#FF2D00]">Legacy</span>
         </h2>
-        <p className="hidden md:block text-white/40 text-xs tracking-[0.3em] uppercase pb-3">
+        <p className="subtitle hidden md:block text-white/40 text-xs tracking-[0.3em] uppercase pb-3">
           Adidas F50 · Since 2004
         </p>
       </div>

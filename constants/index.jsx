@@ -1,10 +1,10 @@
 const navbarLinks = [
+  { title: 'Home', id: 'home' ,href: '/'},
   { title: 'Boots', id: 'boots' },
 
   { title: 'Shop', id: 'shop', href: '/shopping' },
-  { title: 'Home', id: 'home' },
-  { title: 'About', id: 'about' },
-  { title: 'Contact', id: 'contact' },
+  { title: 'About', id: 'about', href: '/about' },
+  { title: 'Contact', id: 'contact' , href: '/contact'},
 ];
 
 const AllBoots = [

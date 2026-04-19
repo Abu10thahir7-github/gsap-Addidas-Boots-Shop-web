@@ -102,7 +102,7 @@ const BootsSection = () => {
         duration: 0.8,
         ease: 'power1.inOut',
         stagger: 0.05,
-      })
+      },)
       .from('.info-price', {
         opacity: 0,
         duration: 0.8,

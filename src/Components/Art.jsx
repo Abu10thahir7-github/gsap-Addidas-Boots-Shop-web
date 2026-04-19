@@ -24,6 +24,12 @@ const Art = () => {
     });
 
     maskTimeline
+      .from('.will-fade', {
+        opacity: 0,
+        y: -30,
+        stagger: 0.2,
+        ease: 'power2.inOut',
+      })
       .to('.will-fade', { opacity: 0, y: -30, stagger: 0.2, ease: 'power2.inOut' })
       .to('.masked-img', {
         scale: 1.9,
@@ -87,9 +93,7 @@ const Art = () => {
         />
       </svg>
 
-      <div
-        className="ghost-text absolute inset-0 flex items-center justify-center pointer-events-none select-none z-[1] overflow-hidden"
-      >
+      <div className="ghost-text absolute inset-0 flex items-center justify-center pointer-events-none select-none z-[1] overflow-hidden">
         <span
           className="font-bebas leading-none tracking-tighter text-[22vw] md:text-[18vw]"
           style={{
@@ -205,15 +209,13 @@ const Art = () => {
         </div>
 
         <span
-          className="will-fade absolute left-0 top-1/2 -translate-y-1/2 font-bebas
-              text-[12px] tracking-[0.4em] text-white/20 uppercase hidden md:block"
+          className="will-fade absolute left-0 top-1/2 -translate-y-1/2 font-bebas text-[12px] tracking-[0.4em] text-white/20 uppercase hidden md:block"
           style={{ writingMode: 'vertical-rl', transform: 'translateY(-50%) rotate(180deg)' }}
         >
           Adidas · Predator · Limited
         </span>
         <span
-          className="will-fade absolute right-0 top-1/2 -translate-y-1/2 font-bebas
-              text-[12px] tracking-[0.4em] text-[#d4a017]/40 uppercase hidden md:block"
+          className="will-fade absolute right-0 top-1/2 -translate-y-1/2 font-bebas text-[12px] tracking-[0.4em] text-[#d4a017]/40 uppercase hidden md:block"
           style={{ writingMode: 'vertical-rl' }}
         >
           Crafted for Champions

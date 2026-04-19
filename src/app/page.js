@@ -16,11 +16,10 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <Hero />
       <BootSection />
       <About />
-      {/* <Art /> */}
+      <Art />
       <BootMenu />
       <Reviews />
       <Stores />

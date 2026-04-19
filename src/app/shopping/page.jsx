@@ -1365,6 +1365,7 @@ const FilterSidebar = ({ filters, setFilters, onClose, isMobile }) => {
 
   return (
     <div
+      className="filter"
       style={{
         width: 220,
         flexShrink: 0,
@@ -1425,7 +1426,7 @@ export default function ShopPage() {
   const [isMobile, setIsMobile] = useState(false);
 
   useGSAP(() => {
-    const titleSplit = new SplitText('.boots-title', { type: 'chars' });
+    const titleSplit = new SplitText('.shop-title', { type: 'chars' });
 
     const scrollTimeline = gsap.timeline({
       scrollTrigger: {
@@ -1435,20 +1436,60 @@ export default function ShopPage() {
     });
 
     scrollTimeline
-      .from(titleSplit.chars, {
-        yPercent: 110,
+      .from('.shop-subtitle', {
+        y: 110,
         opacity: 0,
-        stagger: 0.03,
-        duration: 0.8,
+        stagger: 0.06,
+        duration: 1.4,
         ease: 'expo.out',
       })
-      .from('.stagger', {
-        y: 30,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.15,
-        ease: 'power3.out',
-      });
+      .from(
+        titleSplit.chars,
+        {
+          yPercent: 110,
+          opacity: 0,
+          stagger: 0.06,
+          duration: 1.4,
+          ease: 'expo.out',
+        },
+        '<',
+      ) // 👈 same start time
+
+      .from(
+        '.product-count',
+        {
+          y: 110,
+          opacity: 0,
+          stagger: 0.06,
+          duration: 1.4,
+          ease: 'expo.out',
+        },
+        '<',
+      )
+
+      .from(
+        '.filter',
+        {
+          x: -60,
+          opacity: 0,
+          duration: 1.4,
+          stagger: 0.15,
+          ease: 'power3.out',
+        },
+        '<',
+      )
+
+      .from(
+        '.stagger',
+        {
+          y: 60,
+          opacity: 0,
+          duration: 1.4,
+          stagger: 0.15,
+          ease: 'power3.out',
+        },
+        '<',
+      );
   });
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
@@ -1674,7 +1715,10 @@ export default function ShopPage() {
             }}
           />
           <div style={{ maxWidth: 1400, margin: '0 auto', position: 'relative' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+            <div
+              className="shop-subtitle"
+              style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}
+            >
               <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#FF2D00' }} />
               <span
                 style={{
@@ -1688,6 +1732,7 @@ export default function ShopPage() {
               </span>
             </div>
             <h1
+              className="shop-title"
               style={{
                 fontFamily: 'var(--font-bebas)',
                 fontSize: 'clamp(3rem, 8vw, 6rem)',
@@ -1700,7 +1745,10 @@ export default function ShopPage() {
               ALL{' '}
               <span style={{ WebkitTextStroke: '1.5px #FF2D00', color: 'transparent' }}>BOOTS</span>
             </h1>
-            <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, letterSpacing: '0.08em' }}>
+            <p
+              className="product-count"
+              style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, letterSpacing: '0.08em' }}
+            >
               {filtered.length} of {products.length} products
             </p>
           </div>

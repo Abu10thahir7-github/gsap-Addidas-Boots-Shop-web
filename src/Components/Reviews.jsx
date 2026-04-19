@@ -225,19 +225,19 @@ const Reviews = () => {
     });
 
     scrollTimeline
-      .from(titleSplit.chars, {
-        yPercent: 100,
-        opacity: 0,
-        stagger: 0.03,
-        duration: 0.5,
-        ease: 'expo.out',
-      })
       .from('.reviews-meta', {
         y: 30,
         opacity: 0,
         duration: 0.5,
         stagger: 0.1,
         ease: 'power3.out',
+      })
+      .from(titleSplit.chars, {
+        yPercent: 100,
+        opacity: 0,
+        stagger: 0.03,
+        duration: 0.5,
+        ease: 'expo.out',
       })
       .from('.rating-block', {
         scale: 0.85,
@@ -333,17 +333,11 @@ const Reviews = () => {
         <p className="text-white/20 text-xs tracking-[0.3em] uppercase">
           Click any card to read the full review
         </p>
-        <button
-          className="group flex items-center gap-2 border border-white/10 hover:border-[#FF2D00]/50 rounded-full px-7 py-2.5 transition-all duration-300"
-        >
-          <span
-            className="font-bebas text-xs tracking-[0.4em] uppercase text-white/40 group-hover:text-white/70 transition-colors"
-          >
+        <button className="group flex items-center gap-2 border border-white/10 hover:border-[#FF2D00]/50 rounded-full px-7 py-2.5 transition-all duration-300">
+          <span className="font-bebas text-xs tracking-[0.4em] uppercase text-white/40 group-hover:text-white/70 transition-colors">
             View All Reviews
           </span>
-          <span
-            className="text-white/30 text-xs group-hover:translate-x-1 group-hover:text-[#FF2D00] transition-all"
-          >
+          <span className="text-white/30 text-xs group-hover:translate-x-1 group-hover:text-[#FF2D00] transition-all">
             →
           </span>
         </button>
