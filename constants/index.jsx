@@ -1,10 +1,11 @@
 const navbarLinks = [
-  { title: 'Home', id: 'home' ,href: '/'},
+  { title: 'Home', id: 'home', href: '/' },
   { title: 'Boots', id: 'boots' },
 
   { title: 'Shop', id: 'shop', href: '/shopping' },
+  { title: 'products', id: 'products', href: '/productDetails' },
   { title: 'About', id: 'about', href: '/about' },
-  { title: 'Contact', id: 'contact' , href: '/contact'},
+  { title: 'Contact', id: 'contact', href: '/contact' },
 ];
 
 const AllBoots = [
