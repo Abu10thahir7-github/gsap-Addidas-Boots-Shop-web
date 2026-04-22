@@ -46,6 +46,8 @@
   --font-modern-negra: 'Modern Negra', sans-serif;
   --font-serif: 'DM Serif Text', serif;
   --font-outward: 'Outward', sans-serif;
+  --font-bebas: 'Bebas', sans-serif;
+  --bebas: 'Bebas', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

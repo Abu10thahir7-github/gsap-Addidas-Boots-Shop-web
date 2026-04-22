@@ -180,6 +180,7 @@ export default function AboutPage() {
     () => {
       // ── Hero ────────────────────────────────────────────────────
       const heroSplit = new SplitText('.about-hero-h1', { type: 'chars' });
+
       gsap.from(heroSplit.chars, {
         yPercent: 130,
         opacity: 0,
@@ -235,35 +236,145 @@ export default function AboutPage() {
       });
 
       // ── Values counter row ──────────────────────────────────────
-      gsap.from('.val-item', {
+      gsap.from('.values-row', {
         scrollTrigger: { trigger: '.values-row', start: 'top 82%' },
-        y: 30,
+        y: 50,
         opacity: 0,
-        stagger: 0.08,
+
         duration: 0.7,
         ease: 'back.out(1.5)',
       });
+      //story section
+      const scrollTimelineStory = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.timeline-section',
+          start: 'top center',
+        },
+      });
+      const storyH2Split = new SplitText('.story-h2', { type: 'chars' });
 
-      // ── Timeline ────────────────────────────────────────────────
+      scrollTimelineStory.from(storyH2Split.chars, {
+        yPercent: 110,
+        opacity: 0,
+        stagger: 0.03,
+        duration: 0.8,
+        ease: 'expo.out',
+      });
+      scrollTimelineStory.from('.timeline-nav', {
+        y: 50,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.5,
+        ease: 'power3.out',
+      });
+      scrollTimelineStory.from('.timeline-line', {
+        y: 50,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.5,
+        ease: 'power3.out',
+      });
+      scrollTimelineStory.from('.timeline-item', {
+        y: 50,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.5,
+        ease: 'power3.out',
+      });
+      scrollTimelineStory.from('.timeline-active-card', {
+        y: 50,
+        opacity: 0,
 
-      // ── DNA cards ───────────────────────────────────────────────
-      gsap.from('.dna-grid', {
-        scrollTrigger: { trigger: '.dna-section', start: 'top 78%' },
+        duration: 0.5,
+        ease: 'power3.out',
+      });
+
+      //dna section
+      const scrollTimelineDna = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.dna-section',
+          start: 'top center',
+        },
+      });
+      const DnaH2Split = new SplitText('.dna-section h2', { type: 'chars' });
+
+      scrollTimelineDna.from(DnaH2Split.chars, {
+        yPercent: 110,
+        opacity: 0,
+        stagger: 0.03,
+        duration: 0.8,
+        ease: 'expo.out',
+      });
+      scrollTimelineDna.from('.dna-card', {
         y: 50,
         opacity: 0,
         stagger: 0.12,
         duration: 0.8,
         ease: 'power3.out',
       });
+      //player section
+      const scrollTimelinePlayers = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.players-section',
+          start: 'top center',
+        },
+      });
+      const PlayersH2Split = new SplitText('.players-section h2', { type: 'chars' });
 
-      // ── Players bento ────────────────────────────────────────────
-      gsap.from('.player-card', {
-        scrollTrigger: { trigger: '.players-section', start: 'top 78%' },
+      scrollTimelinePlayers.from(PlayersH2Split.chars, {
+        yPercent: 110,
+        opacity: 0,
+        stagger: 0.03,
+        duration: 0.8,
+        ease: 'expo.out',
+      });
+      scrollTimelinePlayers.from('.player-card', {
         scale: 0.93,
         opacity: 0,
         stagger: 0.08,
         duration: 0.8,
         ease: 'back.out(1.3)',
+      });
+
+      //mission section
+      const scrollTimelineMission = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.mission-grid',
+          start: 'top center',
+        },
+      });
+      const MissionH2Split = new SplitText('.mission-grid h2', { type: 'chars' });
+
+
+
+      scrollTimelineMission.from(
+        '.mission-left',
+        {
+          xPercent: -210,
+          opacity: 0,
+          stagger: 0.03,
+          duration: 0.8,
+          ease: 'expo.out',
+        },
+        '<',
+      );
+      scrollTimelineMission.from(
+        '.mission-right',
+        {
+          xPercent: 110,
+          opacity: 0,
+          stagger: 0.03,
+          duration: 0.8,
+          ease: 'expo.out',
+        },
+        '<',
+      );
+  scrollTimelineMission.from(MissionH2Split.chars, {
+        yPercent: 110,
+        opacity: 0,
+        stagger: 0.03,
+        duration: 0.8,
+        ease: 'expo.out',
       });
 
       // ── Manifesto ────────────────────────────────────────────────
@@ -615,6 +726,7 @@ export default function AboutPage() {
               >
                 <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#FF2D00' }} />
                 <span
+                  className=""
                   style={{
                     fontFamily: 'var(--bebas)',
                     fontSize: 10,
@@ -701,7 +813,7 @@ export default function AboutPage() {
               ].map(({ year, event, color }) => (
                 <div
                   key={year}
-                  className="origin-meta"
+                  className="origin-meta "
                   style={{
                     display: 'flex',
                     gap: '1.25rem',
@@ -709,10 +821,11 @@ export default function AboutPage() {
                     background: 'rgba(255,255,255,0.02)',
                     border: '1px solid rgba(255,255,255,0.07)',
                     borderRadius: '0.875rem',
-                    alignItems: 'flex-start',
+                    alignItems: 'center',
                   }}
                 >
                   <span
+                    className="font-bebas"
                     style={{
                       fontFamily: 'var(--bebas)',
                       fontSize: '1.5rem',
@@ -836,7 +949,7 @@ export default function AboutPage() {
 
           <div style={{ overflow: 'hidden', marginBottom: '3rem' }}>
             <h2
-              className="font-bebas"
+              className="font-bebas story-h2"
               style={{
                 fontSize: 'clamp(3rem,8vw,7rem)',
                 lineHeight: 0.88,
@@ -900,7 +1013,6 @@ export default function AboutPage() {
                 height: 1,
                 background: 'rgba(255,255,255,0.08)',
                 width: '100%',
-                marginBottom: '1.5rem',
               }}
             />
             <div
@@ -931,6 +1043,7 @@ export default function AboutPage() {
                     }}
                   />
                   <span
+                    className="font-bebas"
                     style={{
                       fontFamily: 'var(--bebas)',
                       fontSize: '1.1rem',
@@ -948,6 +1061,7 @@ export default function AboutPage() {
 
           {/* Active card */}
           <div
+            className="timeline-active-card"
             style={{
               padding: '2.5rem',
               background: 'rgba(255,255,255,0.02)',
@@ -1472,6 +1586,7 @@ export default function AboutPage() {
         >
           {/* Left */}
           <div
+            className="mission-left"
             style={{
               padding: '5rem 3rem 5rem',
               borderRight: '1px solid rgba(255,255,255,0.06)',
@@ -1559,6 +1674,7 @@ export default function AboutPage() {
 
           {/* Right */}
           <div
+            className="mission-right"
             style={{
               padding: '5rem 3rem 5rem',
               background: 'rgba(212,160,23,0.02)',

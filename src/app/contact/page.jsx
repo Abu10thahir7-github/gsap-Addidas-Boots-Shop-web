@@ -175,11 +175,11 @@ export default function ContactPage() {
       setSubmitted(true);
     }, 2000);
   };
-
   useGSAP(
     () => {
-      // Hero title chars
+      // Hero entrance
       const heroSplit = new SplitText('.contact-hero-title', { type: 'chars' });
+
       gsap.from(heroSplit.chars, {
         yPercent: 120,
         opacity: 0,
@@ -190,21 +190,33 @@ export default function ContactPage() {
         delay: 0.2,
       });
 
-      gsap.from('.contact-eyebrow', {
+      gsap.from(['.contact-eyebrow', '.contact-subtext'], {
         y: 20,
         opacity: 0,
         duration: 0.8,
         ease: 'power3.out',
-      });
-      gsap.from('.contact-subtext', {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        delay: 0.6,
+        stagger: 0.4,
+        delay: 0.2,
       });
 
-      // Stats count up
+      gsap.from('.diag-line', {
+        scaleY: 0,
+        duration: 1.8,
+        ease: 'power4.out',
+        stagger: 0.15,
+        transformOrigin: 'top',
+      });
+
+      // Scroll-triggered helpers
+      const scrollFrom = (trigger, targets, vars, position = '') => {
+        const tl = gsap.timeline({ scrollTrigger: { trigger, start: 'top center' } });
+        []
+          .concat(targets)
+          .forEach(([sel, v], i) => tl.from(sel, { ...vars, ...v }, i === 0 ? '' : position));
+        return tl;
+      };
+
+      // Stats
       gsap.from('.stat-item', {
         scrollTrigger: { trigger: '.stats-row', start: 'top 85%' },
         y: 30,
@@ -214,33 +226,43 @@ export default function ContactPage() {
         ease: 'back.out(1.5)',
       });
 
-      // Form slides in
-      gsap.from('.form-panel', {
-        scrollTrigger: { trigger: '.form-panel', start: 'top 80%' },
-        x: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
+      // Main grid panels + children
+      const gridTl = gsap.timeline({
+        scrollTrigger: { trigger: '.main-grid', start: 'top center' },
       });
+      gridTl
+        .from(
+          ['.form-panel', '.info-panel'],
+          {
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            stagger: { each: 0, from: 'start', amount: 0 },
+            x: i => (i === 0 ? -50 : 50),
+          },
+          '<',
+        )
+        .from(
+          ['.form-panel div', '.info-panel div'],
+          {
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power3.out',
+            stagger: 0.1,
+          },
+          '<',
+        );
 
-      // Info panel slides in
-      gsap.from('.info-panel', {
-        scrollTrigger: { trigger: '.info-panel', start: 'top 80%' },
-        x: -50,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-      });
-
-
-      // Diagonal lines draw in
-      gsap.from('.diag-line', {
-        scaleY: 0,
-        duration: 1.8,
-        ease: 'power4.out',
-        stagger: 0.15,
-        transformOrigin: 'top',
-      });
+      // FAQ row
+      gsap
+        .timeline({ scrollTrigger: { trigger: '.faq-row', start: 'top center' } })
+        .from('.faq-row div', {
+          y: 50,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power3.out',
+          stagger: 0.1,
+        });
 
       // Bottom CTA
       gsap.from('.bottom-cta-text', {
@@ -557,6 +579,7 @@ export default function ContactPage() {
               }}
             >
               <p
+                className="font-bebas"
                 style={{
                   fontFamily: 'var(--font-bebas)',
                   fontSize: 'clamp(2rem, 4vw, 3.5rem)',
@@ -952,7 +975,6 @@ export default function ContactPage() {
                     animationDelay: `${i * 0.1}s`,
                   }}
                 >
-
                   <p
                     style={{
                       fontFamily: 'var(--font-bebas)',
@@ -1043,7 +1065,6 @@ export default function ContactPage() {
             </div>
 
             {/* Map placeholder */}
-
 
             {/* Social links */}
             <div>
@@ -1137,11 +1158,12 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-     <StoreLocation />
+        <StoreLocation />
         {/* ══════════════════════════════════════════════
             FAQ ROW
         ══════════════════════════════════════════════ */}
         <div
+          className="faq-row"
           style={{
             borderTop: '1px solid rgba(255,255,255,0.06)',
             padding: '4rem 1.5rem',
