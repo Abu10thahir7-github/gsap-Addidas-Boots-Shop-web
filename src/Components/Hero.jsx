@@ -20,8 +20,6 @@ const Hero = () => {
       type: 'chars, words',
     });
 
-   
-
     // Apply text-gradient class once before animating
     heroSplit.chars.forEach(char => char.classList.add('text-gradient'));
 
@@ -58,7 +56,7 @@ const Hero = () => {
         .to(
           '.hero-left-boot',
           {
-            y: 670,
+            y: 520,
             x: 100,
             rotate: -30,
             ease: 'power4.inOut',
@@ -68,13 +66,13 @@ const Hero = () => {
         .to(
           '.hero-right-boot',
           {
-            y: 650,
+            y: 500,
             x: -100,
             rotate: 50,
             ease: 'power4.inOut',
           },
           0,
-        )
+        );
     });
 
     mm.add('(min-width: 768px)', () => {
@@ -107,7 +105,7 @@ const Hero = () => {
             ease: 'power4.inOut',
           },
           0,
-        )
+        );
     });
 
     const startValue = isMobile ? 'top 90%' : 'center 60%';

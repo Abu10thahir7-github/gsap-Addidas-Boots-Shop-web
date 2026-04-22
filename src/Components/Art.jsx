@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import React, { useRef } from 'react';
-import UnderImge from '../../public/assets/images/ARTbgImage.webp';
+import UnderImge from '../../public/assets/images/ARTbgImage.png';
 import gsap from 'gsap';
 import { useMediaQuery } from 'react-responsive';
 import { useGSAP } from '@gsap/react';

@@ -13,215 +13,227 @@ gsap.registerPlugin(ScrollTrigger);
 const Navbar = () => {
   const navRef = useRef(null);
   const arrowRef = useRef(null);
-  const [navVisible, setNavVisible] = useState(false);
+  const logoRef = useRef(null);
+  const linksRef = useRef([]);
+  const ctaRef = useRef(null);
+  const lineRef = useRef(null);
 
+  /* ─── GSAP context ──────────────────────────────────────────── */
   useGSAP(() => {
-    // ── Entrance: nav starts hidden above viewport
+    /* 1. Start hidden */
     gsap.set(navRef.current, { yPercent: -130, opacity: 0 });
+    gsap.set(arrowRef.current, { opacity: 0, y: -12 });
 
-    // ── Arrow pulse loop (subtle breathe)
-    gsap.to(arrowRef.current, {
-      y: 6,
-      duration: 1.1,
-      ease: 'sine.inOut',
+    /* 2. Entrance timeline */
+    const tl = gsap.timeline({ delay: 0.3, defaults: { ease: 'expo.out' } });
+
+    tl
+      /* nav pill drops in */
+      .to(navRef.current, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 1.1,
+      })
+      /* progress line expands from center */
+      .fromTo(
+        lineRef.current,
+        { scaleX: 0, transformOrigin: 'center' },
+        { scaleX: 1, duration: 0.8, ease: 'power3.out' },
+        '-=0.6',
+      )
+      /* logo slides in */
+      .fromTo(logoRef.current, { x: -18, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, '-=0.5')
+      /* links stagger up */
+      .fromTo(
+        linksRef.current,
+        { y: 14, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.45, stagger: 0.07 },
+        '-=0.4',
+      )
+      /* CTA pops in */
+      .fromTo(
+        ctaRef.current,
+        { scale: 0.82, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2)' },
+        '-=0.3',
+      );
+  }, []);
+
+  /* ─── Show nav on arrow click ───────────────────────────────── */
+
+  /* ─── Link hover: underline clip-path reveal ────────────────── */
+  const onLinkEnter = e => {
+    gsap.to(e.currentTarget.querySelector('.link-line'), {
+      scaleX: 1,
+      transformOrigin: 'left center',
+      duration: 0.35,
+      ease: 'power3.out',
     });
-
-    // ── Hide nav when user scrolls down
-    let lastScrollY = 0;
-    ScrollTrigger.create({
-      start: 'top top',
-      end: 'max',
-      onUpdate: self => {
-        const currentScrollY = self.scroll();
-        const isScrollingDown = currentScrollY > lastScrollY;
-        const isPastThreshold = currentScrollY > 60;
-
-        if (isScrollingDown && isPastThreshold) {
-          // Hide nav
-          gsap.to(navRef.current, {
-            yPercent: -130,
-            opacity: 0,
-            duration: 0.1,
-            ease: 'power2.inOut',
-            overwrite: 'auto',
-            onComplete: () => setNavVisible(false),
-          });
-          // Reveal arrow
-          gsap.to(arrowRef.current, {
-            opacity: 1,
-            scale: 1,
-            pointerEvents: 'auto',
-            duration: 0.1,
-            ease: 'back.out(1.4)',
-            overwrite: 'auto',
-          });
-        }
-
-        lastScrollY = currentScrollY;
-      },
-    });
-  });
-
-  const showNav = () => {
-    if (navVisible) return;
-    setNavVisible(true);
-
-    // Slide nav in
-    gsap.to(navRef.current, {
-      yPercent: 0,
+    gsap.to(e.currentTarget.querySelector('.link-num'), {
       opacity: 1,
-      duration: 0.1,
-      ease: 'expo.out',
-      overwrite: 'auto',
+      y: 0,
+      duration: 0.25,
+      ease: 'power2.out',
     });
+    gsap.to(e.currentTarget, { color: '#ffffff', duration: 0.2 });
+  };
 
-    // Hide arrow
-    gsap.to(arrowRef.current, {
-      opacity: 0,
-      scale: 0.7,
-      pointerEvents: 'none',
-      duration: 0.1,
+  const onLinkLeave = e => {
+    gsap.to(e.currentTarget.querySelector('.link-line'), {
+      scaleX: 0,
+      transformOrigin: 'right center',
+      duration: 0.28,
       ease: 'power2.in',
-      overwrite: 'auto',
+    });
+    gsap.to(e.currentTarget.querySelector('.link-num'), {
+      opacity: 0,
+      y: 4,
+      duration: 0.2,
+      ease: 'power2.in',
+    });
+    gsap.to(e.currentTarget, { color: 'rgba(255,255,255,0.55)', duration: 0.2 });
+  };
+
+  /* ─── CTA hover: white fill wipe up ─────────────────────────── */
+  const onCtaEnter = e => {
+    gsap.to(e.currentTarget.querySelector('.cta-fill'), {
+      scaleY: 1,
+      transformOrigin: 'bottom center',
+      duration: 0.35,
+      ease: 'power3.out',
+    });
+    gsap.to(e.currentTarget.querySelector('.cta-label'), {
+      color: '#000',
+      duration: 0.3,
+    });
+  };
+
+  const onCtaLeave = e => {
+    gsap.to(e.currentTarget.querySelector('.cta-fill'), {
+      scaleY: 0,
+      transformOrigin: 'top center',
+      duration: 0.28,
+      ease: 'power2.in',
+    });
+    gsap.to(e.currentTarget.querySelector('.cta-label'), {
+      color: '#fff',
+      duration: 0.25,
     });
   };
 
   return (
     <>
-      {/* ── Down-arrow trigger ─────────────────────────────────── */}
-      <button
-        ref={arrowRef}
-        onClick={showNav}
-        aria-label="Show navigation"
-        className="fixed top-0 left-1/2 -translate-x-1/2 z-[1000] flex flex-col items-center gap-0.5 pt-2 cursor-pointer group"
-        style={{ background: 'none', border: 'none', padding: 0 }}
-      >
-        {/* Pill handle */}
-        <span
-          className="w-10 h-1 rounded-full transition-all duration-300 group-hover:w-14"
-          style={{ background: 'rgba(255,255,255,0.35)' }}
+      {/* ── Navbar ──────────────────────────────────────────────── */}
+      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-[999]   ">
+        {/* Hairline gradient across the very top */}
+        <div
+          ref={lineRef}
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
+          }}
         />
 
-        {/* Chevron */}
-        <svg
-          width="28"
-          height="18"
-          viewBox="0 0 28 18"
-          fill="none"
-          className="mt-0.5 transition-transform duration-300 group-hover:scale-110"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <polyline
-            points="3,4 14,14 25,4"
-            stroke="rgba(255,255,255,0.9)"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            filter="url(#glow)"
-          />
-          <polyline
-            points="3,10 14,20 25,10"
-            stroke="rgba(255,255,255,0.35)"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-
-      {/* ── Navbar ──────────────────────────────────────────────── */}
-      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-[999] px-4 sm:px-6 py-3">
+        {/* Pill */}
         <div
-          className="max-w-4xl mx-auto flex items-center justify-between rounded-2xl px-4 sm:px-5 py-2.5"
           style={{
-            background: 'rgba(255, 255, 255, 0.08)',
-            backdropFilter: 'blur(28px) saturate(180%) brightness(1.05)',
-            WebkitBackdropFilter: 'blur(28px) saturate(180%) brightness(1.05)',
-            border: '1px solid rgba(255, 255, 255, 0.18)',
-            boxShadow: `
-              0 8px 32px rgba(0, 0, 0, 0.25),
-              0 1px 0 rgba(255, 255, 255, 0.22) inset,
-              0 -1px 0 rgba(0, 0, 0, 0.08) inset
-            `,
+            background: 'rgba(10, 10, 10, 0.72)',
+            backdropFilter: 'blur(24px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+            border: '1px solid rgba(255,255,255,0.10)',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.12) inset',
           }}
         >
-          {/* Logo */}
-          <a href="#home" className="flex items-center gap-2 group shrink-0">
-            <Image
-              src={logo}
-              className="object-contain w-[26px] h-[34px] drop-shadow-md transition-transform duration-300 group-hover:scale-110"
-              alt="Adidas logo"
-            />
-            <span
-              className="font-bebas text-xl tracking-[0.12em] text-white/90 transition-colors duration-200 group-hover:text-white hidden sm:block"
-              style={{ textShadow: '0 1px 8px rgba(0,0,0,0.4)' }}
+          <div className="max-w-5xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 rounded-2xl">
+            {/* Logo */}
+            <a ref={logoRef} href="#home" className="flex items-center gap-2.5 group shrink-0">
+              <div className="relative">
+                <Image
+                  src={logo}
+                  className="object-contain w-[24px] h-[30px] transition-transform duration-300 group-hover:scale-110"
+                  alt="Adidas logo"
+                />
+              </div>
+              <Link
+                href="/"
+                className="font-bebas text-lg tracking-[0.18em] text-white/80 group-hover:text-white transition-colors duration-200 hidden sm:block"
+              >
+                ADIDAS
+              </Link>
+            </a>
+
+            {/* Desktop links */}
+            <ul className="hidden md:flex items-center gap-1">
+              {navbarLinks.map((link, i) => (
+                <li key={link.id}>
+                  <Link
+                    ref={el => (linksRef.current[i] = el)}
+                    href={link.href || `#${link.id}`}
+                    onMouseEnter={onLinkEnter}
+                    onMouseLeave={onLinkLeave}
+                    className="relative flex flex-col items-center px-3.5 py-1.5"
+                    style={{ color: 'rgba(255,255,255,0.55)' }}
+                  >
+                    {/* index */}
+                    <span
+                      className="link-num absolute top-0 text-[8px] font-mono text-[#ff2d00]/80 tracking-widest leading-none"
+                      style={{ opacity: 0, transform: 'translateY(4px)' }}
+                    >
+                      0{i + 1}
+                    </span>
+                    {/* label */}
+                    <span className="font-bebas text-[13px] tracking-[0.16em] mt-2 leading-none">
+                      {link.title}
+                    </span>
+                    {/* underline */}
+                    <span
+                      className="link-line absolute bottom-0.5 left-3.5 right-3.5 h-px bg-[#ff2d00]"
+                      style={{ transform: 'scaleX(0)', transformOrigin: 'right center' }}
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Mobile links (scrollable) */}
+            <ul
+              className="flex md:hidden items-center gap-0.5 overflow-x-auto max-w-[calc(100vw-180px)]"
+              style={{ scrollbarWidth: 'none' }}
             >
-              ADIDAS
-            </span>
-          </a>
+              {navbarLinks.map((link, i) => (
+                <li key={link.id} className="shrink-0">
+                  <Link
+                    ref={el => (linksRef.current[i] = el)}
+                    href={link.href || `#${link.id}`}
+                    className="font-bebas text-[11px] tracking-[0.1em] text-white/60 hover:text-white px-2.5 py-1.5 block whitespace-nowrap transition-colors duration-200"
+                  >
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-          {/* Nav Links — hidden on mobile */}
-          <ul className="hidden md:flex items-center gap-1">
-            {navbarLinks.map(link => (
-              <li key={link.id}>
-                <Link
-                  href={link.href || `#${link.id}`}
-                  className="relative font-bebas text-sm tracking-[0.1em] text-white/75 hover:text-white px-3 py-1.5 rounded-xl transition-all duration-200 hover:bg-white/10 active:bg-white/15 group"
-                  style={{ textShadow: '0 1px 4px rgba(0,0,0,0.3)' }}
-                >
-                  {link.title}
-                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white/0 group-hover:bg-white/60 transition-all duration-200" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* Mobile: compact scrollable links */}
-          <ul className="flex md:hidden items-center gap-0.5 overflow-x-auto max-w-[calc(100vw-180px)] no-scrollbar">
-            {navbarLinks.map(link => (
-              <li key={link.id} className="shrink-0">
-                <Link
-                  href={link.href || `#${link.id}`}
-                  className="font-bebas text-xs tracking-[0.08em] text-white/70 hover:text-white px-2.5 py-1.5 rounded-lg transition-all duration-200 hover:bg-white/10 whitespace-nowrap block"
-                  style={{ textShadow: '0 1px 4px rgba(0,0,0,0.3)' }}
-                >
-                  {link.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* CTA */}
-          <a
-            href="#shop"
-            className="font-bebas text-xs sm:text-sm tracking-[0.12em] text-white px-3 sm:px-4 py-1.5 rounded-xl transition-all duration-200 active:scale-95 shrink-0"
-            style={{
-              background: 'rgba(255, 255, 255, 0.15)',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.2), 0 1px 0 rgba(255,255,255,0.2) inset',
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.22)';
-              e.currentTarget.style.boxShadow =
-                '0 4px 16px rgba(0,0,0,0.25), 0 1px 0 rgba(255,255,255,0.3) inset';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
-              e.currentTarget.style.boxShadow =
-                '0 2px 8px rgba(0,0,0,0.2), 0 1px 0 rgba(255,255,255,0.2) inset';
-            }}
-          >
-            SHOP NOW
-          </a>
+            {/* CTA */}
+            <a
+              ref={ctaRef}
+              href="#shop"
+              onMouseEnter={onCtaEnter}
+              onMouseLeave={onCtaLeave}
+              className="relative shrink-0 overflow-hidden px-4 py-1.5 rounded-xl cursor-pointer"
+              style={{
+                border: '1px solid rgba(255,255,255,0.18)',
+                background: 'rgba(255,255,255,0.06)',
+              }}
+            >
+              <span
+                className="cta-fill absolute inset-0 bg-white rounded-xl"
+                style={{ transform: 'scaleY(0)', transformOrigin: 'bottom center' }}
+              />
+              <span className="cta-label relative z-10 font-bebas text-[13px] tracking-[0.18em] text-white">
+                SHOP NOW
+              </span>
+            </a>
+          </div>
         </div>
       </nav>
     </>

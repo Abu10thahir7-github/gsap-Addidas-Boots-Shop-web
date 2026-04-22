@@ -570,14 +570,13 @@ const Stores = () => {
 
             {/* RIGHT — map panel ────────────────────────── */}
             <div
-              className="map-panel lg:col-span-7 relative rounded-3xl overflow-hidden"
+              className="map-panel lg:col-span-7 relative rounded-3xl overflow-hidden min-h-[280px] md:min-h-[480px]"
               style={{
                 backgroundImage: "url('/assets/images/map.png')",
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
 
                 border: '1px solid rgba(255,255,255,0.06)',
-                minHeight: '480px',
               }}
             >
               {/* Corner markers */}
@@ -655,7 +654,7 @@ const Stores = () => {
                     </div>
                     <div className="flex flex-col items-end gap-1">
                       <span
-                        className="text-[11px] px-2.5 py-1 rounded-full font-bebas tracking-[0.2em]"
+                        className="text-sm md:text-[11px] px-2.5 py-1 rounded-full font-bebas tracking-[0.2em]"
                         style={{
                           background: `${activeStore.tagColor}20`,
                           color: activeStore.tagColor,
@@ -673,14 +672,16 @@ const Stores = () => {
                           }}
                         />
                         <span
-                          className="text-[11px] tracking-[0.2em] uppercase"
+                          className="text-[9px] md:text-[11px] tracking-[0.2em] uppercase"
                           style={{
                             color: activeStore.isOpen ? '#34d399' : 'rgba(255,255,255,0.2)',
                           }}
                         >
                           {isOpen ? 'Open Now' : 'Closed'}
                         </span>
-                        <span className="text-[11px] text-white/20">· {activeStore.hours}</span>
+                        <span className="text-[9px] md:text-[11px] text-white/20">
+                          · {activeStore.hours}
+                        </span>
                       </div>
                     </div>
                   </div>
