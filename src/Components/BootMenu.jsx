@@ -234,7 +234,7 @@ const Menu = () => {
           <button
             onClick={() => goToSlide(currentIndex + 1)}
             className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-lg active:scale-90 transition lg:hidden"
-          ></button>
+          >→</button>
         </div>
 
         {/* RIGHT — details ─────────────────────────────── */}
