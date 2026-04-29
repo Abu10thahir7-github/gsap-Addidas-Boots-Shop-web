@@ -9,6 +9,7 @@ const nextConfig = {
       },
     ],
   },
+
   reactCompiler: true,
 };
 

@@ -144,9 +144,12 @@ const Navbar = () => {
             boxShadow: '0 8px 40px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.12) inset',
           }}
         >
-          <div className="max-w-5xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 rounded-2xl">
+          <div
+            ref={logoRef}
+            className="max-w-5xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 rounded-2xl"
+          >
             {/* Logo */}
-            <a ref={logoRef} href="#home" className="flex items-center gap-2.5 group shrink-0">
+            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
               <div className="relative">
                 <Image
                   src={logo}
@@ -154,13 +157,10 @@ const Navbar = () => {
                   alt="Adidas logo"
                 />
               </div>
-              <Link
-                href="/"
-                className="font-bebas text-lg tracking-[0.18em] text-white/80 group-hover:text-white transition-colors duration-200 hidden sm:block"
-              >
+              <span className="font-bebas text-lg tracking-[0.18em] text-white/80 group-hover:text-white transition-colors duration-200 hidden sm:block">
                 ADIDAS
-              </Link>
-            </a>
+              </span>
+            </Link>
 
             {/* Desktop links */}
             <ul className="hidden md:flex items-center gap-1">
