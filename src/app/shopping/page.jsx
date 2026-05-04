@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger, SplitText } from 'gsap/all';
+import AnimatedButton from '@/Components/UI/AnimatedButton';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 // ── PRODUCT DATA ────────────────────────────────────────────────
@@ -333,7 +334,7 @@ const QuickView = ({ product, onClose, onAddToCart }) => {
                 </button>
               </div>
 
-              <button
+              <AnimatedButton
                 onClick={() => {
                   if (!selectedSize) {
                     alert('Please select a size');
@@ -342,23 +343,12 @@ const QuickView = ({ product, onClose, onAddToCart }) => {
                   onAddToCart(product, selectedSize, qty);
                   onClose();
                 }}
-                style={{
-                  flex: 1,
-                  background: '#FF2D00',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: 10,
-                  padding: '12px',
-                  cursor: 'pointer',
-                  fontFamily: 'var(--font-bebas, sans-serif)',
-                  fontSize: '1rem',
-                  letterSpacing: '0.3em',
-                  textTransform: 'uppercase',
-                  transition: 'background 0.2s',
-                }}
-              >
-                Add to Cart
-              </button>
+                text="ADD TO CART"
+                bgColor="#FF2D00"
+                textColor='#FF2D00'
+                hoverTextColor='#fff'
+
+              />
             </div>
           </div>
         </div>
@@ -922,26 +912,16 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
             justifyContent: 'center',
           }}
         >
-          <button
+          <AnimatedButton
+            text="QUICK VIEW"
             onClick={() => onQuickView(product)}
+            className=" "
             style={{
               background: '#FF2D00',
-              color: '#fff',
               border: 'none',
-              borderRadius: 10,
-              padding: '10px 20px',
-              cursor: 'pointer',
-              fontFamily: 'var(--font-bebas, sans-serif)',
-              fontSize: '0.8rem',
-              letterSpacing: '0.35em',
-              textTransform: 'uppercase',
-              transform: hovered ? 'translateY(0)' : 'translateY(10px)',
-              transition: 'transform 0.3s',
               boxShadow: '0 4px 20px rgba(255,45,0,0.3)',
             }}
-          >
-            Quick View
-          </button>
+          />
         </div>
       </div>
 
@@ -1273,7 +1253,7 @@ const FilterSidebar = ({ filters, setFilters, onClose, isMobile }) => {
       </div>
 
       {/* Reset */}
-      <button
+      <AnimatedButton
         onClick={() =>
           setFilters({
             category: [],
@@ -1283,21 +1263,12 @@ const FilterSidebar = ({ filters, setFilters, onClose, isMobile }) => {
             badge: [],
           })
         }
-        style={{
-          background: 'rgba(255,255,255,0.04)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: 10,
-          padding: '10px',
-          cursor: 'pointer',
-          color: 'rgba(255,255,255,0.4)',
-          fontSize: 11,
-          letterSpacing: '0.25em',
-          textTransform: 'uppercase',
-          transition: 'all 0.2s',
-        }}
-      >
-        Reset All Filters
-      </button>
+       className='text-center'
+
+        text='Reset All Filters'
+      />
+
+
     </div>
   );
 
@@ -1584,50 +1555,6 @@ export default function ShopPage() {
             </Link>
           </div>
 
-          {/* Search */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: 10,
-              padding: '6px 12px',
-              width: 'min(320px, 40vw)',
-            }}
-          >
-            <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 23 }}>⌕</span>
-            <input
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              placeholder="Search boots..."
-              style={{
-                background: 'none',
-                border: 'none',
-                outline: 'none',
-                color: '#fff',
-                fontSize: 12,
-                letterSpacing: '0.05em',
-                width: '100%',
-              }}
-            />
-            {search && (
-              <button
-                onClick={() => setSearch('')}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'rgba(255,255,255,0.3)',
-                  cursor: 'pointer',
-                  fontSize: 12,
-                }}
-              >
-                ✕
-              </button>
-            )}
-          </div>
-
           {/* Right actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <button
@@ -1714,43 +1641,88 @@ export default function ShopPage() {
               pointerEvents: 'none',
             }}
           />
-          <div style={{ maxWidth: 1400, margin: '0 auto', position: 'relative' }}>
-            <div
-              className="shop-subtitle"
-              style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}
-            >
-              <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#FF2D00' }} />
-              <span
+          <div className="flex flex-row justify-between max-w-[1400px] mx-auto   items-center gap-4">
+            <div style={{}}>
+              <div
+                className="shop-subtitle"
+                style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}
+              >
+                <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#FF2D00' }} />
+                <span
+                  style={{
+                    color: '#FF2D00',
+                    fontSize: 9,
+                    letterSpacing: '0.5em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Boot Collection · 2025
+                </span>
+              </div>
+              <h1
+                className="shop-title"
                 style={{
-                  color: '#FF2D00',
-                  fontSize: 9,
-                  letterSpacing: '0.5em',
-                  textTransform: 'uppercase',
+                  fontFamily: 'var(--font-bebas)',
+                  fontSize: 'clamp(3rem, 8vw, 6rem)',
+                  color: '#fff',
+                  letterSpacing: '0.04em',
+                  lineHeight: 0.9,
+                  margin: '0 0 0.5rem',
                 }}
               >
-                Boot Collection · 2025
-              </span>
+                ALL <span style={{ color: '#FF2D00' }}>BOOTS</span>
+              </h1>
+              <p
+                className="product-count"
+                style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, letterSpacing: '0.08em' }}
+              >
+                {filtered.length} of {products.length} products
+              </p>
             </div>
-            <h1
-              className="shop-title"
+
+            {/* Search */}
+            <div
               style={{
-                fontFamily: 'var(--font-bebas)',
-                fontSize: 'clamp(3rem, 8vw, 6rem)',
-                color: '#fff',
-                letterSpacing: '0.04em',
-                lineHeight: 0.9,
-                margin: '0 0 0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 10,
+                padding: '6px 12px',
+                width: 'min(320px, 40vw)',
               }}
             >
-              ALL{' '}
-              <span style={{ WebkitTextStroke: '1.5px #FF2D00', color: 'transparent' }}>BOOTS</span>
-            </h1>
-            <p
-              className="product-count"
-              style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, letterSpacing: '0.08em' }}
-            >
-              {filtered.length} of {products.length} products
-            </p>
+              <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 23 }}>⌕</span>
+              <input
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="Search boots..."
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                  color: '#fff',
+                  fontSize: 12,
+                  letterSpacing: '0.05em',
+                  width: '100%',
+                }}
+              />
+              {search && (
+                <button
+                  onClick={() => setSearch('')}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'rgba(255,255,255,0.3)',
+                    cursor: 'pointer',
+                    fontSize: 12,
+                  }}
+                >
+                  ✕
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -1937,7 +1909,7 @@ export default function ShopPage() {
           style={{
             maxWidth: 1400,
             margin: '0 auto',
-            padding: '1.5rem',
+            paddingBlock: '1.5rem',
             display: 'flex',
             gap: '2rem',
             alignItems: 'flex-start',

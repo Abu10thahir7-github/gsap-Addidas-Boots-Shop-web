@@ -5,6 +5,8 @@ import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
+import AnimatedButton from './UI/AnimatedButton';
+import { ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(SplitText);
 
@@ -234,7 +236,9 @@ const Menu = () => {
           <button
             onClick={() => goToSlide(currentIndex + 1)}
             className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-lg active:scale-90 transition lg:hidden"
-          >→</button>
+          >
+            →
+          </button>
         </div>
 
         {/* RIGHT — details ─────────────────────────────── */}
@@ -270,14 +274,22 @@ const Menu = () => {
               </p>
             </div>
 
-            <button className="group flex items-center gap-2 bg-[#FF2D00] hover:bg-[#cc2400] transition-colors px-5  py-2.5 rounded-full">
-              <span className="text-white text-xs tracking-[0.3em] uppercase font-light">
-                Explore
-              </span>
-              <span className="text-white text-xs group-hover:translate-x-1 transition-transform">
-                →
-              </span>
-            </button>
+            <AnimatedButton
+              className="group bg-[#FF2D00] px-5 py-2.5 rounded-full "
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 4,
+            
+
+              }}
+
+            >
+              <span className="text-white text-xs tracking-[0.3em] uppercase">Explore</span>
+
+              <ArrowRight className="text-white w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </AnimatedButton>
           </div>
 
           {/* Colorway */}

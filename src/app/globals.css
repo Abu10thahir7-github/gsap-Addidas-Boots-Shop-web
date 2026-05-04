@@ -84,7 +84,7 @@ body {
   mask-image: url('/assets/images/ball-kick-bg-remove.png');
   mask-repeat: no-repeat;
   mask-position: center;
-  mask-size: 50%;
+  mask-size: 30%;
 }
 /* globals.css */
 

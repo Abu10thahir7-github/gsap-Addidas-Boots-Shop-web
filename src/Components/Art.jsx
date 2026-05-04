@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import React, { useRef } from 'react';
 import UnderImge from '../../public/assets/images/ARTbgImage.png';
+
 import gsap from 'gsap';
 import { useMediaQuery } from 'react-responsive';
 import { useGSAP } from '@gsap/react';
@@ -107,7 +108,7 @@ const Art = () => {
       </div>
 
       <div
-        className="container mx-auto max-w-7xl"
+        className="container  "
         style={{
           position: 'relative',
           zIndex: 2,
@@ -187,8 +188,8 @@ const Art = () => {
           <div
             className="cocktail-img"
             style={{
-              width: 'min(60vw, 900px)',
-              height: 'clamp(280px, 75vh, 500px)',
+              width: '100%',
+              height: '100vh',
               borderRadius: '2rem',
               overflow: 'hidden',
               position: 'absolute',
@@ -197,13 +198,23 @@ const Art = () => {
               transform: 'translate(-50%, -70%)',
             }}
           >
-            <Image
-              src={UnderImge}
-              alt="F50 Boot Art"
-              fill
-              sizes="100%"
+            <video
+              src="/assets/video/bootanimation.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
               className="masked-img"
-              style={{ objectFit: 'cover' }}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                transformOrigin: 'center center',
+              }}
             />
           </div>
         </div>
@@ -234,34 +245,22 @@ const Art = () => {
             <div className="w-10 h-px bg-[#d4a017] opacity-50" />
           </div>
 
-          {/* CTA */}
-          <div className="mt-2 flex items-center gap-6">
-            <button className="border border-white/20 backdrop-blur-sm bg-white/5 text-white/80 text-[10px] tracking-[0.4em] uppercase px-4 py-2 rounded-full">
-              <span
-                className="font-bebas text-lg tracking-[0.4em] uppercase text-[#fff]
-                group-hover:text-[#FF2D00] transition-colors"
-              >
+          {/* CTAs */}
+          <div className="mt-4 flex items-center gap-6">
+            <button className="group border border-white/20 backdrop-blur-sm bg-white/5 text-white/80 text-[10px] tracking-[0.4em] uppercase px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white/10 transition-all">
+              <span className="font-bebas text-lg tracking-[0.4em] uppercase text-white group-hover:text-[#FF2D00] transition-colors">
                 Explore Collection
               </span>
-              <span
-                className="text-[#fff]/50 text-lg group-hover:translate-x-1
-                group-hover:text-[#FF2D00] transition-all"
-              >
+              <span className="text-white/50 text-lg group-hover:translate-x-1 group-hover:text-[#FF2D00] transition-all">
                 →
               </span>
             </button>
 
             <button className="group flex items-center gap-2">
-              <span
-                className="font-bebas text-lg tracking-[0.4em] uppercase text-[#FF2D00]
-                group-hover:text-white/50 transition-colors"
-              >
+              <span className="font-bebas text-lg tracking-[0.4em] uppercase text-[#FF2D00] group-hover:text-white/50 transition-colors">
                 Watch Film
               </span>
-              <div
-                className="w-5 h-5 rounded-full border border-[#FF2D00]  flex items-center
-                justify-center group-hover:border-white/40 transition-colors"
-              >
+              <div className="w-5 h-5 rounded-full border border-[#FF2D00] flex items-center justify-center group-hover:border-white/40 transition-colors">
                 <span className="text-[#FF2D00] group-hover:border-white/40 text-[8px]">▶</span>
               </div>
             </button>

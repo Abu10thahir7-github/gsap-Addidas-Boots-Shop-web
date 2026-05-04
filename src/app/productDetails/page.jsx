@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger, SplitText } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
+import AnimatedButton from '@/Components/UI/AnimatedButton';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -715,11 +716,11 @@ export default function ProductDetail() {
 
               {/* cta */}
               <div className="cta-row flex gap-3">
-                <button
+                <AnimatedButton
                   onClick={handleAddToCart}
                   className="add-btn flex-1 flex items-center justify-center gap-2 text-white rounded-xl py-4"
                   style={{
-                    background: addedToCart ? 'rgba(52,211,153,0.18)' : '#FF2D00',
+                    background: addedToCart ? ' ' : '',
                     border: addedToCart ? '1px solid rgba(52,211,153,0.45)' : 'none',
                     fontFamily: 'var(--bebas)',
                     fontSize: '0.95rem',
@@ -727,6 +728,10 @@ export default function ProductDetail() {
                     textTransform: 'uppercase',
                     boxShadow: '0 6px 24px rgba(255,45,0,0.2)',
                   }}
+                  Parentstyle={{
+                    
+                  }}
+
                 >
                   {addedToCart ? (
                     <>
@@ -736,7 +741,7 @@ export default function ProductDetail() {
                   ) : (
                     'Add to Bag →'
                   )}
-                </button>
+                </AnimatedButton>
 
                 <button
                   onClick={() => setWishlisted(w => !w)}
