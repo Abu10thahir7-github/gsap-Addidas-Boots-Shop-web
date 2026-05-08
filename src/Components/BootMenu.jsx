@@ -126,6 +126,7 @@ const Menu = () => {
         <div className="flex items-center gap-2">
           {AllBoots.map((_, i) => (
             <button
+              suppressHydrationWarning
               key={i}
               onClick={() => goToSlide(i)}
               className={`transition-all duration-300 rounded-full ${
@@ -154,6 +155,7 @@ const Menu = () => {
             const isActive = index === currentIndex;
             return (
               <button
+                suppressHydrationWarning
                 key={boot.id}
                 onClick={() => goToSlide(index)}
                 className={`relative pb-2 text-xs md:text-sm tracking-[0.2em] uppercase transition-all duration-300 font-bebas whitespace-nowrap flex-shrink-0 ${isActive ? 'text-white' : 'text-white/30 hover:text-white/60'}`}
@@ -200,6 +202,7 @@ const Menu = () => {
 
           {/* Prev boot */}
           <button
+            suppressHydrationWarning
             onClick={() => goToSlide(currentIndex - 1)}
             className="group flex items-center gap-3 text-left"
           >
@@ -222,6 +225,7 @@ const Menu = () => {
             <div className="w-72 h-72 rounded-full bg-[#FF2D00]/5 blur-3xl" />
           </div>
           <button
+            suppressHydrationWarning
             onClick={() => goToSlide(currentIndex - 1)}
             className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-lg active:scale-90 transition lg:hidden"
           >
@@ -234,6 +238,7 @@ const Menu = () => {
             className="boot-img relative z-10 h-[55vh] w-auto object-contain drop-shadow-[0_0_60px_rgba(255,45,0,0.15)]"
           />
           <button
+            suppressHydrationWarning
             onClick={() => goToSlide(currentIndex + 1)}
             className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-lg active:scale-90 transition lg:hidden"
           >
@@ -281,10 +286,7 @@ const Menu = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: 4,
-            
-
               }}
-
             >
               <span className="text-white text-xs tracking-[0.3em] uppercase">Explore</span>
 
@@ -302,6 +304,7 @@ const Menu = () => {
 
           {/* Next boot */}
           <button
+            suppressHydrationWarning
             onClick={() => goToSlide(currentIndex + 1)}
             className="group flex items-center gap-3 text-left self-end"
           >

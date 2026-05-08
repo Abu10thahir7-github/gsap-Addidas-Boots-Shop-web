@@ -247,7 +247,7 @@ const Art = () => {
 
           {/* CTAs */}
           <div className="mt-4 flex items-center gap-6">
-            <button className="group border border-white/20 backdrop-blur-sm bg-white/5 text-white/80 text-[10px] tracking-[0.4em] uppercase px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white/10 transition-all">
+            <button suppressHydrationWarning className="group border border-white/20 backdrop-blur-sm bg-white/5 text-white/80 text-[10px] tracking-[0.4em] uppercase px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white/10 transition-all">
               <span className="font-bebas text-lg tracking-[0.4em] uppercase text-white group-hover:text-[#FF2D00] transition-colors">
                 Explore Collection
               </span>
@@ -256,7 +256,7 @@ const Art = () => {
               </span>
             </button>
 
-            <button className="group flex items-center gap-2">
+            <button suppressHydrationWarning className="group flex items-center gap-2">
               <span className="font-bebas text-lg tracking-[0.4em] uppercase text-[#FF2D00] group-hover:text-white/50 transition-colors">
                 Watch Film
               </span>

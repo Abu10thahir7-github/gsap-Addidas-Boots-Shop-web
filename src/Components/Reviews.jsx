@@ -333,7 +333,10 @@ const Reviews = () => {
         <p className="text-white/20 text-xs tracking-[0.3em] uppercase">
           Click any card to read the full review
         </p>
-        <button className="group flex items-center gap-2 border border-white/10 hover:border-[#FF2D00]/50 rounded-full px-7 py-2.5 transition-all duration-300">
+        <button
+          suppressHydrationWarning
+          className="group flex items-center gap-2 border border-white/10 hover:border-[#FF2D00]/50 rounded-full px-7 py-2.5 transition-all duration-300"
+        >
           <span className="font-bebas text-xs tracking-[0.4em] uppercase text-white/40 group-hover:text-white/70 transition-colors">
             View All Reviews
           </span>

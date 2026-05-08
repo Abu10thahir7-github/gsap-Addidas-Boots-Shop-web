@@ -425,6 +425,7 @@ const Stores = () => {
           <div className="stores-meta flex gap-2 flex-wrap mb-10">
             {regions.map(r => (
               <button
+                suppressHydrationWarning
                 key={r}
                 onClick={() => setActiveRegion(r)}
                 className="relative px-4 py-1.5 rounded-full text-[10px] tracking-[0.3em] uppercase font-bebas transition-all duration-300"
@@ -448,6 +449,7 @@ const Stores = () => {
                 const isOpen = isStoreOpenNow(store.hours, store.timezone);
                 return (
                   <button
+                    suppressHydrationWarning
                     key={store.id}
                     onClick={() => setActiveId(store.id)}
                     className="store-row text-left w-full px-4 py-4 rounded-2xl"

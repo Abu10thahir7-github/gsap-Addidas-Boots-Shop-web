@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger, SplitText } from 'gsap/all';
@@ -57,7 +57,10 @@ const Footer = () => {
   const handleSubscribe = () => {
     if (!email.includes('@')) return;
     gsap.to(inputRef.current, {
-      scale: 0.97, duration: 0.1, yoyo: true, repeat: 1,
+      scale: 0.97,
+      duration: 0.1,
+      yoyo: true,
+      repeat: 1,
       onComplete: () => setSubscribed(true),
     });
   };
@@ -66,71 +69,96 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-useGSAP(() => {
-  const footer = footerRef.current;
-  if (!footer) return; // safety guard
+  useGSAP(
+    () => {
+      const footer = footerRef.current;
+      if (!footer) return; // safety guard
 
-  // Nav columns stagger in
-  gsap.from('.footer-col', {
-    scrollTrigger: { trigger: footer, start: 'top 90%' },
-    y: 40, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power3.out',
-  });
+      // Nav columns stagger in
+      gsap.from('.footer-col', {
+        scrollTrigger: { trigger: footer, start: 'top 90%' },
+        y: 40,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
 
-  // Newsletter block slides in
-  gsap.from('.footer-newsletter', {
-    scrollTrigger: { trigger: footer, start: 'top 85%' },
-    x: 50, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.2,
-  });
+      // Newsletter block slides in
+      gsap.from('.footer-newsletter', {
+        scrollTrigger: { trigger: footer, start: 'top 85%' },
+        x: 50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        delay: 0.2,
+      });
 
-  // Bottom bar fades in
-  gsap.from('.footer-bottom', {
-    scrollTrigger: { trigger: '.footer-bottom', start: 'top 98%' },
-    y: 20, opacity: 0, duration: 0.8, ease: 'power2.out',
-  });
+      // Bottom bar fades in
+      gsap.from('.footer-bottom', {
+        scrollTrigger: { trigger: '.footer-bottom', start: 'top 98%' },
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      });
 
-  // Big wordmark scrubs in
-  gsap.from('.footer-wordmark', {
-    scrollTrigger: { trigger: '.footer-wordmark', start: 'top 95%' },
-    yPercent: 40, opacity: 0, duration: 1.2, ease: 'expo.out',
-  });
-
-}, { scope: footerRef }); // 👈 this is the key fix
+      // Big wordmark scrubs in
+      gsap.from('.footer-wordmark', {
+        scrollTrigger: { trigger: '.footer-wordmark', start: 'top 95%' },
+        yPercent: 40,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'expo.out',
+      });
+    },
+    { scope: footerRef },
+  ); // 👈 this is the key fix
 
   return (
     <>
-
-
-      <footer
-        id="footer"
-        ref={footerRef}
-        className="relative w-full bg-[#050505] overflow-hidden"
-      >
+      <footer id="footer" ref={footerRef} className="relative w-full bg-[#050505] overflow-hidden">
         {/* ── Noise overlay ───────────────────────────────── */}
         <div className="noisy absolute inset-0 opacity-[0.03] pointer-events-none z-0" />
 
         {/* ── Top red rule ────────────────────────────────── */}
-        <div className="w-full h-px"
-          style={{ background: 'linear-gradient(to right, transparent, #FF2D00, transparent)' }} />
+        <div
+          className="w-full h-px"
+          style={{ background: 'linear-gradient(to right, transparent, #FF2D00, transparent)' }}
+        />
 
         {/* ── Diagonal accent ─────────────────────────────── */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0"
-          preserveAspectRatio="none">
-          <line x1="0" y1="0" x2="8%" y2="100%"
-            stroke="#d4a017" strokeWidth="0.5" strokeOpacity="0.06" />
-          <line x1="100%" y1="0" x2="92%" y2="100%"
-            stroke="#FF2D00" strokeWidth="0.5" strokeOpacity="0.04" />
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none z-0"
+          preserveAspectRatio="none"
+        >
+          <line
+            x1="0"
+            y1="0"
+            x2="8%"
+            y2="100%"
+            stroke="#d4a017"
+            strokeWidth="0.5"
+            strokeOpacity="0.06"
+          />
+          <line
+            x1="100%"
+            y1="0"
+            x2="92%"
+            y2="100%"
+            stroke="#FF2D00"
+            strokeWidth="0.5"
+            strokeOpacity="0.04"
+          />
         </svg>
 
         {/* ══════════════════════════════════════════════════
             MAIN FOOTER BODY
         ══════════════════════════════════════════════════ */}
         <div className="relative z-10 !max-w-7xl !mx-auto !px-6 !md:px-12 !pt-20 !pb-10">
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-
             {/* ── LEFT BRAND BLOCK ────────────────────────── */}
             <div className="footer-col lg:col-span-4 flex flex-col gap-8">
-
               {/* Logo + tagline */}
               <div>
                 <div className="flex items-center gap-3 mb-4">
@@ -157,8 +185,8 @@ useGSAP(() => {
                 </div>
 
                 <p className="text-white/30 text-sm leading-relaxed tracking-wide max-w-xs">
-                  Born from the pursuit of pure speed. The F50 is more than a boot
-                  — it's the weapon of champions.
+                  Born from the pursuit of pure speed. The F50 is more than a boot — it's the weapon
+                  of champions.
                 </p>
               </div>
 
@@ -173,16 +201,13 @@ useGSAP(() => {
                       key={s.name}
                       href={s.href}
                       aria-label={s.label}
-                       className="social-btn w-10 h-10 rounded-xl flex items-center justify-center"
+                      className="social-btn w-10 h-10 rounded-xl flex items-center justify-center"
                       style={{
                         background: 'rgba(255,255,255,0.04)',
                         border: '1px solid rgba(255,255,255,0.08)',
                       }}
                     >
-                      <svg
-                        width="14" height="14" viewBox="0 0 24 24"
-                        fill="rgba(255,255,255,0.5)"
-                      >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)">
                         <path d={s.path} />
                       </svg>
                     </a>
@@ -238,7 +263,6 @@ useGSAP(() => {
 
             {/* ── RIGHT NEWSLETTER ────────────────────────── */}
             <div className="footer-newsletter lg:col-span-3 flex flex-col gap-6">
-
               {/* Heading */}
               <div>
                 <div className="flex items-center gap-2 mb-3">
@@ -259,7 +283,8 @@ useGSAP(() => {
                 </h3>
                 <p className="text-white/25 text-xs leading-relaxed tracking-wide">
                   Limited releases. Player collabs.
-                  <br />No spam — just speed.
+                  <br />
+                  No spam — just speed.
                 </p>
               </div>
 
@@ -267,6 +292,7 @@ useGSAP(() => {
               {!subscribed ? (
                 <div ref={inputRef} className="relative">
                   <input
+                  suppressHydrationWarning
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
@@ -278,10 +304,10 @@ useGSAP(() => {
                       padding: '0.75rem 3rem 0.75rem 0',
                       transition: 'border-color 0.3s',
                     }}
-                    onFocus={e => e.target.parentElement.style.setProperty(
-                      '--b', '#FF2D00')}
+                    onFocus={e => e.target.parentElement.style.setProperty('--b', '#FF2D00')}
                   />
                   <button
+                    suppressHydrationWarning
                     onClick={handleSubscribe}
                     className="absolute right-0 top-1/2 -translate-y-1/2 text-white/40 hover:text-[#FF2D00] transition-colors text-lg"
                     aria-label="Subscribe"
@@ -313,24 +339,20 @@ useGSAP(() => {
                   { n: 'Weekly', l: 'Drops' },
                 ].map(({ n, l }) => (
                   <div key={l} className="flex flex-col gap-0.5">
-                    <span className="font-bebas text-xl text-white/50 leading-none">
-                      {n}
-                    </span>
-                    <span className="text-[8px] tracking-[0.3em] uppercase text-white/20">
-                      {l}
-                    </span>
+                    <span className="font-bebas text-xl text-white/50 leading-none">{n}</span>
+                    <span className="text-[8px] tracking-[0.3em] uppercase text-white/20">{l}</span>
                   </div>
                 ))}
               </div>
             </div>
-
           </div>
         </div>
 
         {/* ══════════════════════════════════════════════════
             GIANT WORDMARK
         ══════════════════════════════════════════════════ */}
-        <div className="footer-wordmark relative z-10 overflow-hidden select-none text-center px-4 mt-4 cursor-default"
+        <div
+          className="footer-wordmark relative z-10 overflow-hidden select-none text-center px-4 mt-4 cursor-default"
           onClick={scrollToTop}
           title="Back to top"
         >
@@ -358,7 +380,6 @@ useGSAP(() => {
           style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-
             {/* Legal links */}
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2">
               {['Privacy Policy', 'Terms of Use', 'Cookie Settings', 'Accessibility'].map(item => (
@@ -380,6 +401,7 @@ useGSAP(() => {
 
             {/* Back to top */}
             <button
+              suppressHydrationWarning
               onClick={scrollToTop}
               className="back-top-btn flex items-center gap-2.5 group  !px-4 !py-2 !rounded-full"
               style={{
@@ -394,14 +416,15 @@ useGSAP(() => {
                 ↑
               </span>
             </button>
-
           </div>
         </div>
 
         {/* ── Bottom accent ───────────────────────────────── */}
-        <div className="w-full h-[2px]"
+        <div
+          className="w-full h-[2px]"
           style={{
-            background: 'linear-gradient(to right, transparent, #FF2D00, #d4a017, #FF2D00, transparent)',
+            background:
+              'linear-gradient(to right, transparent, #FF2D00, #d4a017, #FF2D00, transparent)',
           }}
         />
       </footer>
