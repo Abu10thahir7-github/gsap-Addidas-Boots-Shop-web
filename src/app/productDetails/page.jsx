@@ -5,6 +5,7 @@ import { ScrollTrigger, SplitText } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
 import AnimatedButton from '@/Components/UI/AnimatedButton';
 import { useParams } from 'next/navigation';
+import { products } from '../../../constants';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
