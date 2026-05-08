@@ -1,9 +1,7 @@
 const navbarLinks = [
   { title: 'Home', id: 'home', href: '/' },
-  { title: 'Boots', id: 'boots' },
-
-  { title: 'Shop', id: 'shop', href: '/shopping' },
-  { title: 'products', id: 'products', href: '/productDetails' },
+  { title: 'Boots', id: 'boots', href: '/shopping' },
+ 
   { title: 'About', id: 'about', href: '/about' },
   { title: 'Contact', id: 'contact', href: '/contact' },
 ];

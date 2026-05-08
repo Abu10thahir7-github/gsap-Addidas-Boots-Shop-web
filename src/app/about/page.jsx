@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger, SplitText } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
+import messi from '../../../public/assets/images/messi.png';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -103,6 +104,7 @@ const players = [
     boot: 'Predator 25 Elite',
     flag: 'gb',
     accent: '#FF2D00',
+    image: '/assets/images/bellimgum.png',
     wide: false,
   },
   {
@@ -111,6 +113,7 @@ const players = [
     boot: 'F50 Heartbreaker',
     flag: 'es',
     accent: '#FF2D00',
+    image: '/assets/images/yamal.png',
     wide: false,
   },
   {
@@ -119,6 +122,7 @@ const players = [
     boot: 'Copa Pure 3',
     flag: 'de',
     accent: '#d4a017',
+    image: '/assets/images/muller.png',
     wide: false,
   },
   {
@@ -127,6 +131,7 @@ const players = [
     boot: 'Predator Blaze',
     flag: 'es',
     accent: '#d4a017',
+    image: '/assets/images/pedri.png',
     wide: false,
   },
 ];
@@ -345,8 +350,6 @@ export default function AboutPage() {
       });
       const MissionH2Split = new SplitText('.mission-grid h2', { type: 'chars' });
 
-
-
       scrollTimelineMission.from(
         '.mission-left',
         {
@@ -369,7 +372,7 @@ export default function AboutPage() {
         },
         '<',
       );
-  scrollTimelineMission.from(MissionH2Split.chars, {
+      scrollTimelineMission.from(MissionH2Split.chars, {
         yPercent: 110,
         opacity: 0,
         stagger: 0.03,
@@ -1352,6 +1355,7 @@ export default function AboutPage() {
             </h2>
           </div>
 
+          {/* ─── PLAYERS BENTO ─────────────────────────────── */}
           <div
             className="players-bento"
             style={{
@@ -1360,7 +1364,7 @@ export default function AboutPage() {
               gap: '1rem',
             }}
           >
-            {/* Wide card — Messi */}
+            {/* ── WIDE CARD — Messi ──────────────────────────── */}
             <div
               className="player-card wide-card"
               style={{
@@ -1368,206 +1372,332 @@ export default function AboutPage() {
                 gridRow: 'span 2',
                 padding: '2.5rem',
                 borderRadius: '1.5rem',
-                background:
-                  'linear-gradient(135deg, rgba(212,160,23,0.08), rgba(255,255,255,0.02))',
-                border: '1px solid rgba(212,160,23,0.2)',
+                background: 'linear-gradient(135deg, rgba(212,160,23,0.10) 0%, rgba(0,0,0,0) 60%)',
+                border: '1px solid rgba(212,160,23,0.22)',
                 position: 'relative',
                 overflow: 'hidden',
-                minHeight: 280,
+                minHeight: 320,
+                transition: 'border-color 0.4s ease',
               }}
+              onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(212,160,23,0.5)')}
+              onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(212,160,23,0.22)')}
             >
-              {/* Decorative ghost number */}
+              {/* Ghost jersey number */}
               <span
                 style={{
                   position: 'absolute',
-                  bottom: -20,
-                  right: -10,
+                  bottom: -24,
+                  left: '38%',
                   fontFamily: 'var(--bebas)',
-                  fontSize: '12rem',
+                  fontSize: '14rem',
                   lineHeight: 1,
-                  WebkitTextStroke: '1px rgba(212,160,23,0.06)',
+                  WebkitTextStroke: '1px rgba(212,160,23,0.07)',
                   color: 'transparent',
                   pointerEvents: 'none',
                   userSelect: 'none',
+                  zIndex: 1,
                 }}
               >
                 10
               </span>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: '1rem' }}>
-                <Image
-                  src="https://flagcdn.com/ar.svg"
-                  width={40}
-                  height={40}
-                  alt="avatar"
-                  unoptimized
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-                <span style={{ fontSize: 22 }}>🇦🇷</span>
-                <span
-                  style={{
-                    fontFamily: 'var(--bebas)',
-                    fontSize: 9,
-                    letterSpacing: '0.4em',
-                    color: '#d4a017',
-                    textTransform: 'uppercase',
-                    padding: '3px 10px',
-                    borderRadius: 99,
-                    background: 'rgba(212,160,23,0.12)',
-                    border: '1px solid rgba(212,160,23,0.25)',
-                  }}
-                >
-                  Signature
-                </span>
-              </div>
-
-              <h3
-                className="font-bebas"
-                style={{
-                  fontSize: 'clamp(2rem,5vw,4rem)',
-                  color: '#fff',
-                  letterSpacing: '0.04em',
-                  lineHeight: 1,
-                  marginBottom: 6,
-                }}
-              >
-                Lionel Messi
-              </h3>
-              <p
-                style={{
-                  fontFamily: 'var(--bebas)',
-                  fontSize: 10,
-                  letterSpacing: '0.3em',
-                  color: 'rgba(255,255,255,0.3)',
-                  textTransform: 'uppercase',
-                  marginBottom: '1rem',
-                }}
-              >
-                GOAT · Inter Miami CF
-              </p>
+              {/* ── Messi Image — right side cutout ── */}
               <div
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  background: 'rgba(212,160,23,0.1)',
-                  border: '1px solid rgba(212,160,23,0.25)',
-                  borderRadius: 99,
-                  padding: '5px 14px',
+                  position: 'absolute',
+                  right: 0,
+                  bottom: 0,
+                  width: '52%',
+                  height: '105%',
+                  zIndex: 2,
+
+                  transition: 'transform 0.5s ease',
                 }}
+                onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.03)')}
+                onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
               >
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#d4a017' }} />
-                <span
+                <Image
+                  src={messi}
+                  alt="Lionel Messi"
+                  fill
+                  unoptimized
                   style={{
-                    fontFamily: 'var(--bebas)',
-                    fontSize: 9,
-                    letterSpacing: '0.3em',
-                    color: '#d4a017',
-                    textTransform: 'uppercase',
+                    objectFit: 'contain',
+                    objectPosition: 'bottom right',
+                    filter: 'drop-shadow(-8px 0 30px rgba(212,160,23,0.25))',
+                  }}
+                />
+              </div>
+
+              {/* ── Text Content — left side ── */}
+              <div style={{ position: 'relative', zIndex: 3, maxWidth: '55%' }}>
+                {/* Flag + badge row */}
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: '1.25rem' }}
+                >
+                  <Image
+                    src="https://flagcdn.com/ar.svg"
+                    width={28}
+                    height={20}
+                    alt="Argentina"
+                    unoptimized
+                    style={{ borderRadius: 3, objectFit: 'cover' }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: 'var(--bebas)',
+                      fontSize: 9,
+                      letterSpacing: '0.4em',
+                      color: '#d4a017',
+                      textTransform: 'uppercase',
+                      padding: '3px 10px',
+                      borderRadius: 99,
+                      background: 'rgba(212,160,23,0.12)',
+                      border: '1px solid rgba(212,160,23,0.28)',
+                    }}
+                  >
+                    Signature
+                  </span>
+                </div>
+
+                <h3
+                  className="font-bebas"
+                  style={{
+                    fontSize: 'clamp(2.2rem, 5vw, 4.2rem)',
+                    color: '#fff',
+                    letterSpacing: '0.04em',
+                    lineHeight: 1,
+                    marginBottom: 6,
                   }}
                 >
-                  F50 Elite · Messi Edition
-                </span>
+                  Lionel
+                  <br />
+                  Messi
+                </h3>
+
+                <p
+                  style={{
+                    fontFamily: 'var(--bebas)',
+                    fontSize: 10,
+                    letterSpacing: '0.3em',
+                    color: 'rgba(255,255,255,0.3)',
+                    textTransform: 'uppercase',
+                    marginBottom: '1.5rem',
+                  }}
+                >
+                  GOAT · Inter Miami CF
+                </p>
+
+                {/* Boot badge */}
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    background: 'rgba(212,160,23,0.10)',
+                    border: '1px solid rgba(212,160,23,0.25)',
+                    borderRadius: 99,
+                    padding: '5px 14px',
+                  }}
+                >
+                  <span
+                    style={{ width: 5, height: 5, borderRadius: '50%', background: '#d4a017' }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: 'var(--bebas)',
+                      fontSize: 9,
+                      letterSpacing: '0.3em',
+                      color: '#d4a017',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    F50 Elite · Messi Edition
+                  </span>
+                </div>
+
+                {/* Thin gold line accent */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: -40,
+                    left: 0,
+                    width: 48,
+                    height: 2,
+                    background: 'linear-gradient(to right, #d4a017, transparent)',
+                    borderRadius: 99,
+                  }}
+                />
               </div>
             </div>
 
-            {/* Other players */}
+            {/* ── SMALL CARDS ─────────────────────────────────── */}
             {players.slice(1).map((p, i) => (
               <div
                 key={p.name}
                 className="player-card"
                 style={{
-                  padding: '1.5rem',
+                  padding: '1.4rem',
                   borderRadius: '1.25rem',
                   background:
                     i % 2 === 0
-                      ? 'linear-gradient(135deg, rgba(255,45,0,0.06), rgba(255,255,255,0.02))'
-                      : 'linear-gradient(135deg, rgba(212,160,23,0.06), rgba(255,255,255,0.02))',
-                  border: `1px solid ${p.accent}20`,
+                      ? 'linear-gradient(135deg, rgba(255,45,0,0.07), rgba(0,0,0,0))'
+                      : 'linear-gradient(135deg, rgba(212,160,23,0.07), rgba(0,0,0,0))',
+                  border: `1px solid ${p.accent}22`,
                   position: 'relative',
                   overflow: 'hidden',
+                  minHeight: 200,
+                  transition: 'border-color 0.35s ease',
                 }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = `${p.accent}55`)}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = `${p.accent}22`)}
               >
+                {/* Ghost jersey number */}
                 <span
                   className="font-bebas"
                   style={{
                     position: 'absolute',
-                    bottom: -8,
-                    right: 8,
-
-                    fontSize: '4rem',
+                    bottom: -10,
+                    left: '30%',
+                    fontSize: '5.5rem',
                     lineHeight: 1,
-                    WebkitTextStroke: `1px ${p.accent}08`,
+                    WebkitTextStroke: `1px ${p.accent}09`,
                     color: 'transparent',
                     pointerEvents: 'none',
                     userSelect: 'none',
+                    zIndex: 1,
                   }}
                 >
                   {String(i + 2).padStart(2, '0')}
                 </span>
 
-                <div
-                  style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: '0.75rem' }}
-                >
-                  <Image
-                    src={`https://flagcdn.com/${p.flag}.svg`}
-                    width={40}
-                    height={40}
-                    alt="avatar"
-                    unoptimized
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                  <span
+                {/* ── Player Image — bottom-right cutout ── */}
+                {p.image && (
+                  <div
                     style={{
-                      fontFamily: 'var(--bebas)',
-                      fontSize: 8,
-                      letterSpacing: '0.3em',
-                      color: p.accent,
-                      textTransform: 'uppercase',
-                      padding: '2px 8px',
-                      borderRadius: 99,
-                      background: `${p.accent}12`,
-                      border: `1px solid ${p.accent}25`,
+                      position: 'absolute',
+                      right: 0,
+                      bottom: 0,
+                      width: '55%',
+                      height: '90%',
+                      zIndex: 2,
+                  
+                      transition: 'transform 0.4s ease',
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
+                    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <Image
+                      src={p.image}
+                      alt={p.name}
+                      fill
+                      unoptimized
+                      style={{
+                        objectFit: 'contain',
+                        objectPosition: 'bottom right',
+                        filter: `drop-shadow(-6px 0 20px ${p.accent}30)`,
+                      }}
+                    />
+                  </div>
+                )}
+
+                {/* ── Text Content — left ── */}
+                <div style={{ position: 'relative', zIndex: 3, maxWidth: '60%' }}>
+                  {/* Flag + badge */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 5,
+                      marginBottom: '0.75rem',
                     }}
                   >
-                    Adidas Athlete
-                  </span>
+                    <Image
+                      src={`https://flagcdn.com/${p.flag}.svg`}
+                      width={22}
+                      height={16}
+                      alt={p.name}
+                      unoptimized
+                      style={{ borderRadius: 2, objectFit: 'cover' }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: 'var(--bebas)',
+                        fontSize: 8,
+                        letterSpacing: '0.3em',
+                        color: p.accent,
+                        textTransform: 'uppercase',
+                        padding: '2px 8px',
+                        borderRadius: 99,
+                        background: `${p.accent}12`,
+                        border: `1px solid ${p.accent}28`,
+                      }}
+                    >
+                      Adidas Athlete
+                    </span>
+                  </div>
+
+                  <h4
+                    className="font-bebas"
+                    style={{
+                      fontSize: '1.3rem',
+                      color: '#fff',
+                      letterSpacing: '0.06em',
+                      lineHeight: 1.1,
+                      marginBottom: 4,
+                    }}
+                  >
+                    {p.name}
+                  </h4>
+
+                  <p
+                    style={{
+                      fontFamily: 'var(--bebas)',
+                      fontSize: 9,
+                      letterSpacing: '0.25em',
+                      color: 'rgba(255,255,255,0.28)',
+                      textTransform: 'uppercase',
+                      marginBottom: '0.85rem',
+                    }}
+                  >
+                    {p.role}
+                  </p>
+
+                  {/* Boot label */}
+                  <div
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 5,
+                      padding: '3px 10px',
+                      borderRadius: 99,
+                      background: `${p.accent}10`,
+                      border: `1px solid ${p.accent}20`,
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 4,
+                        height: 4,
+                        borderRadius: '50%',
+                        background: p.accent,
+                        opacity: 0.8,
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: 'var(--bebas)',
+                        fontSize: 8,
+                        letterSpacing: '0.2em',
+                        textTransform: 'uppercase',
+                        color: p.accent,
+                        opacity: 0.85,
+                      }}
+                    >
+                      {p.boot}
+                    </span>
+                  </div>
                 </div>
-                <h4
-                  className="font-bebas"
-                  style={{
-                    fontSize: '1.25rem',
-                    color: '#fff',
-                    letterSpacing: '0.06em',
-                    lineHeight: 1,
-                    marginBottom: 3,
-                  }}
-                >
-                  {p.name}
-                </h4>
-                <p
-                  style={{
-                    fontFamily: 'var(--bebas)',
-                    fontSize: 9,
-                    letterSpacing: '0.25em',
-                    color: 'rgba(255,255,255,0.3)',
-                    textTransform: 'uppercase',
-                    marginBottom: '0.75rem',
-                  }}
-                >
-                  {p.role}
-                </p>
-                <span
-                  style={{
-                    fontSize: 9,
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                    color: p.accent,
-                    opacity: 0.7,
-                  }}
-                >
-                  {p.boot}
-                </span>
               </div>
             ))}
           </div>

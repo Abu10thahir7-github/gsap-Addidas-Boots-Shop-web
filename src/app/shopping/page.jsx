@@ -6,6 +6,9 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger, SplitText } from 'gsap/all';
 import AnimatedButton from '@/Components/UI/AnimatedButton';
+import { useRouter } from 'next/navigation';
+
+
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 // ── PRODUCT DATA ────────────────────────────────────────────────
@@ -345,9 +348,8 @@ const QuickView = ({ product, onClose, onAddToCart }) => {
                 }}
                 text="ADD TO CART"
                 bgColor="#FF2D00"
-                textColor='#FF2D00'
-                hoverTextColor='#fff'
-
+                textColor="#FF2D00"
+                hoverTextColor="#fff"
               />
             </div>
           </div>
@@ -640,6 +642,7 @@ const CartDrawer = ({ cart, onClose, onRemove, onQtyChange }) => {
 
 // ── PRODUCT CARD ─────────────────────────────────────────────────
 const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view }) => {
+  const router = useRouter();
   const [hovered, setHovered] = useState(false);
   const discount =
     product.originalPrice > product.price
@@ -649,6 +652,7 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
   if (view === 'list')
     return (
       <div
+        onClick={() => router.push(`/productDetails/${product.id}`)}
         className="product-card-stagger"
         style={{
           display: 'flex',
@@ -773,6 +777,7 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
 
   return (
     <div
+     onClick={() => router.push(`/productDetails/${product.id}`)}
       style={{
         position: 'relative',
         borderRadius: '1.25rem',
@@ -1263,12 +1268,9 @@ const FilterSidebar = ({ filters, setFilters, onClose, isMobile }) => {
             badge: [],
           })
         }
-       className='text-center'
-
-        text='Reset All Filters'
+        className="text-center"
+        text="Reset All Filters"
       />
-
-
     </div>
   );
 

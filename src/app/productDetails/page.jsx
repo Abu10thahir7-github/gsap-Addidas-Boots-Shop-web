@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger, SplitText } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
 import AnimatedButton from '@/Components/UI/AnimatedButton';
+import { useParams } from 'next/navigation';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -157,6 +158,10 @@ const Stars = ({ rating, size = 10 }) => (
 );
 
 export default function ProductDetail() {
+  const params = useParams();
+  const id = Number(params.id);
+
+  const product = products.find(p => p.id === id);
   const pageRef = useRef(null);
   const cursorRef = useRef(null);
 
@@ -315,7 +320,9 @@ export default function ProductDetail() {
     },
     { scope: pageRef },
   );
-
+  if (!product) {
+    return <div className="text-white p-10">Product not found</div>;
+  }
   return (
     <>
       {/* cursor ring */}
@@ -728,10 +735,7 @@ export default function ProductDetail() {
                     textTransform: 'uppercase',
                     boxShadow: '0 6px 24px rgba(255,45,0,0.2)',
                   }}
-                  Parentstyle={{
-                    
-                  }}
-
+                  Parentstyle={{}}
                 >
                   {addedToCart ? (
                     <>

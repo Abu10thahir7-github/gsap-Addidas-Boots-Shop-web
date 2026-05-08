@@ -8,7 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useGSAP } from '@gsap/react';
 
 const Art = () => {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isMobile = useMediaQuery({ maxWidth: 767 }, undefined, matches => matches);
   const containerRef = useRef(null);
 
   useGSAP(() => {
@@ -112,7 +112,6 @@ const Art = () => {
         style={{
           position: 'relative',
           zIndex: 2,
-          padding: '5rem 2rem',
 
           display: 'flex',
           flexDirection: 'column',
@@ -134,7 +133,7 @@ const Art = () => {
           </span>
         </div>
 
-        <div className="will-fade flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="will-fade p-5 flex flex-col md:flex-row md:items-end justify-between gap-6">
           {/* Big title */}
           <div className="relative">
             {/* Eyebrow */}
@@ -181,7 +180,10 @@ const Art = () => {
           'bottom-0 left-0 border-b border-l',
           'bottom-0 right-0 border-b border-r',
         ].map((pos, i) => (
-          <div key={i} className={`will-fade absolute ${pos} w-6 h-6 border-[#d4a017]/30 z-20`} />
+          <div
+            key={i}
+            className={`will-fade m-5 absolute ${pos} w-6 h-6 border-[#d4a017]/30 z-20`}
+          />
         ))}
         {/* Masked Image */}
         <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>

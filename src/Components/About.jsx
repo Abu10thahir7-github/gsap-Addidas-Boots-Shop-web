@@ -181,7 +181,8 @@ const SectionHeading = memo(({ sectionRef }) => {
   }, []);
 
   return (
-    <div className="mb-4 overflow-hidden">
+
+    <div className="  mb-4 overflow-hidden">
       {/* ── Top label row ── */}
       <div className="subtitle-about flex items-center gap-3 mb-6">
         <div className="h-px w-8 shrink-0" style={{ background: RED }} />
@@ -201,7 +202,7 @@ const SectionHeading = memo(({ sectionRef }) => {
       </div>
 
       {/* ── Main title + right badge ── */}
-      <div className="flex items-end justify-between gap-4">
+      <div className=" mx-auto max-w-6xl flex items-end justify-between gap-4">
         <h2
           ref={h2Ref}
           className="font-bebas leading-none tracking-widest text-white uppercase"
@@ -225,15 +226,15 @@ const SectionHeading = memo(({ sectionRef }) => {
 
       {/* ── Stats strip ── */}
       <div
-        className="subtitle-about flex items-center flex-wrap gap-x-6 gap-y-2 mt-4 pt-4"
-        style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+        className=" subtitle-about flex items-center flex-wrap gap-x-6 gap-y-2 mt-4  "
+
       >
         {[
           { label: 'Since', value: '2004' },
           { label: 'Chapter', value: '07' },
           { label: 'Brand', value: 'Adidas' },
         ].map((s, i) => (
-          <React.Fragment key={s.label}>
+          <React.Fragment className='' key={s.label}>
             {i > 0 && (
               <span
                 className="hidden sm:inline w-1 h-1 rounded-full"
@@ -241,11 +242,10 @@ const SectionHeading = memo(({ sectionRef }) => {
               />
             )}
             <span
-              className="text-[9px] tracking-[0.4em] uppercase"
+              className=" mx-auto max-w-6xl text-[9px] tracking-[0.4em] uppercase"
               style={{ color: 'rgba(255,255,255,0.2)' }}
             >
-              {s.label}{' '}
-              <span style={{ color: 'rgba(255,255,255,0.5)' }}>{s.value}</span>
+              {s.label} <span style={{ color: 'rgba(255,255,255,0.5)' }}>{s.value}</span>
             </span>
           </React.Fragment>
         ))}
@@ -274,7 +274,10 @@ const Ticker = () => {
   return (
     <div
       className="overflow-hidden my-5"
-      style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+      style={{
+        borderTop: '1px solid rgba(255,255,255,0.05)',
+        borderBottom: '1px solid rgba(255,255,255,0.05)',
+      }}
     >
       <div
         ref={trackRef}
@@ -282,11 +285,7 @@ const Ticker = () => {
         style={{ width: 'max-content', gap: '2.5rem' }}
       >
         {doubled.map((item, i) => (
-          <span
-            key={i}
-            className="flex items-center shrink-0"
-            style={{ gap: '2.5rem' }}
-          >
+          <span key={i} className="flex items-center shrink-0" style={{ gap: '2.5rem' }}>
             <span
               className="font-bebas text-sm tracking-[0.35em] uppercase"
               style={{ color: 'rgba(255,255,255,0.15)' }}
@@ -311,7 +310,11 @@ const CardModal = ({ card, onClose }) => {
   useGSAP(
     () => {
       const tl = gsap.timeline();
-      tl.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: 'power2.out' })
+      tl.fromTo(
+        overlayRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.35, ease: 'power2.out' },
+      )
         .fromTo(
           panelRef.current,
           { clipPath: 'inset(100% 0% 0% 0%)', opacity: 0 },
@@ -345,14 +348,18 @@ const CardModal = ({ card, onClose }) => {
   }, [onClose]);
 
   useEffect(() => {
-    const handler = e => { if (e.key === 'Escape') handleClose(); };
+    const handler = e => {
+      if (e.key === 'Escape') handleClose();
+    };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [handleClose]);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, []);
 
   return (
@@ -377,70 +384,115 @@ const CardModal = ({ card, onClose }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-20 pointer-events-none" />
           <div
             className="absolute right-0 top-0 bottom-0 w-px z-30"
-            style={{ background: `linear-gradient(to bottom, transparent, ${RED} 40%, ${RED} 60%, transparent)` }}
+            style={{
+              background: `linear-gradient(to bottom, transparent, ${RED} 40%, ${RED} 60%, transparent)`,
+            }}
           />
           {card.type === 'video' ? (
-            <video autoPlay muted loop playsInline src={card.src} className="w-full h-full object-cover" />
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              src={card.src}
+              className="w-full h-full object-cover"
+            />
           ) : (
             <Image src={card.src} alt={card.title} fill className="object-cover" />
           )}
           <div className="absolute top-5 left-5 z-30">
             <span
               className="text-[10px] tracking-[0.35em] uppercase px-3 py-1.5 rounded-full font-medium"
-              style={{ background: 'rgba(255,45,0,0.15)', border: `1px solid rgba(255,45,0,0.4)`, color: RED }}
+              style={{
+                background: 'rgba(255,45,0,0.15)',
+                border: `1px solid rgba(255,45,0,0.4)`,
+                color: RED,
+              }}
             >
               {card.label}
             </span>
           </div>
           <div className="absolute bottom-4 right-6 z-30 hidden md:block">
-            <span className="font-bebas text-[90px] leading-none select-none" style={{ color: 'rgba(255,255,255,0.04)' }}>
+            <span
+              className="font-bebas text-[90px] leading-none select-none"
+              style={{ color: 'rgba(255,255,255,0.04)' }}
+            >
               {String(card.id).padStart(2, '0')}
             </span>
           </div>
         </div>
 
-        <div className="hidden md:block w-px self-stretch" style={{ background: 'rgba(255,255,255,0.06)' }} />
+        <div
+          className="hidden md:block w-px self-stretch"
+          style={{ background: 'rgba(255,255,255,0.06)' }}
+        />
 
         {/* Content */}
         <div ref={contentRef} className="flex flex-col flex-1 overflow-y-auto p-7 md:p-10 gap-6">
           <div className="modal-anim flex items-center gap-3">
             <div className="h-px w-8" style={{ background: RED }} />
-            <span className="text-[10px] tracking-[0.4em] uppercase" style={{ color: RED }}>{card.category}</span>
+            <span className="text-[10px] tracking-[0.4em] uppercase" style={{ color: RED }}>
+              {card.category}
+            </span>
           </div>
-          <h2 className="modal-anim font-bebas leading-none tracking-wider text-white whitespace-pre-line" style={{ fontSize: 'clamp(2.8rem,6vw,5rem)' }}>
+          <h2
+            className="modal-anim font-bebas leading-none tracking-wider text-white whitespace-pre-line"
+            style={{ fontSize: 'clamp(2.8rem,6vw,5rem)' }}
+          >
             {card.title}
           </h2>
-          <p className="modal-anim text-sm leading-relaxed tracking-wide max-w-md" style={{ color: 'rgba(255,255,255,0.45)' }}>
+          <p
+            className="modal-anim text-sm leading-relaxed tracking-wide max-w-md"
+            style={{ color: 'rgba(255,255,255,0.45)' }}
+          >
             {card.description}
           </p>
-          <div className="modal-anim h-px w-full" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          <div
+            className="modal-anim h-px w-full"
+            style={{ background: 'rgba(255,255,255,0.06)' }}
+          />
           <div className="modal-anim grid grid-cols-3 gap-4">
             {card.stats.map(s => (
               <div key={s.label} className="flex flex-col gap-1.5 group/stat">
                 <span className="font-bebas text-3xl md:text-4xl text-white tracking-wider leading-none group-hover/stat:text-[#FF2D00] transition-colors duration-300">
                   {s.value}
                 </span>
-                <span className="text-[10px] tracking-[0.3em] uppercase" style={{ color: 'rgba(255,255,255,0.25)' }}>
+                <span
+                  className="text-[10px] tracking-[0.3em] uppercase"
+                  style={{ color: 'rgba(255,255,255,0.25)' }}
+                >
                   {s.label}
                 </span>
               </div>
             ))}
           </div>
-          <div className="modal-anim h-px w-full" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          <div
+            className="modal-anim h-px w-full"
+            style={{ background: 'rgba(255,255,255,0.06)' }}
+          />
           <div className="modal-anim flex flex-wrap gap-2">
             {card.tags.map(tag => (
               <span
                 key={tag}
                 className="text-[10px] tracking-[0.25em] uppercase px-3 py-1.5 rounded-full transition-colors duration-300 cursor-default hover:text-white/70"
-                style={{ border: '1px solid rgba(255,255,255,0.09)', color: 'rgba(255,255,255,0.4)' }}
+                style={{
+                  border: '1px solid rgba(255,255,255,0.09)',
+                  color: 'rgba(255,255,255,0.4)',
+                }}
               >
                 {tag}
               </span>
             ))}
           </div>
           <div className="flex-1" />
-          <div className="modal-anim flex items-center justify-between pt-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-            <span className="text-[10px] tracking-[0.4em] uppercase" style={{ color: 'rgba(255,255,255,0.15)' }}>
+          <div
+            className="modal-anim flex items-center justify-between pt-2"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+          >
+            <span
+              className="text-[10px] tracking-[0.4em] uppercase"
+              style={{ color: 'rgba(255,255,255,0.15)' }}
+            >
               Adidas F50 · Legacy
             </span>
             <button
@@ -449,11 +501,14 @@ const CardModal = ({ card, onClose }) => {
               style={{ color: 'rgba(255,255,255,0.35)' }}
             >
               Close
-              <span
-                className="w-7 h-7 rounded-full border border-white/15 flex items-center justify-center group-hover/close:border-white/50 group-hover/close:bg-white/5 transition-all duration-300"
-              >
+              <span className="w-7 h-7 rounded-full border border-white/15 flex items-center justify-center group-hover/close:border-white/50 group-hover/close:bg-white/5 transition-all duration-300">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                  <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path
+                    d="M1 1L9 9M9 1L1 9"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </span>
             </button>
@@ -510,7 +565,7 @@ const TiltCard = ({ children, className, onClick }) => {
   return (
     <div
       ref={cardRef}
-      className={`${className} cursor-pointer`}
+      className={`${className}  `}
       style={{ willChange: 'transform' }}
       onClick={onClick}
     >
@@ -531,7 +586,13 @@ const ExpandIcon = () => (
       style={{ borderColor: 'rgba(255,255,255,0.25)', background: 'rgba(255,255,255,0.04)' }}
     >
       <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-        <path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M2 8L8 2M8 2H3.5M8 2V6.5"
+          stroke="white"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     </div>
   </div>
@@ -563,10 +624,7 @@ const CardFooter = ({ id, label, title }) => (
     >
       {String(id).padStart(2, '0')}
     </span>
-    <span
-      className="block text-[9px] tracking-[0.45em] uppercase mb-1.5"
-      style={{ color: RED }}
-    >
+    <span className="block text-[9px] tracking-[0.45em] uppercase mb-1.5" style={{ color: RED }}>
       {label}
     </span>
     <h3 className="font-bebas text-3xl text-white leading-none tracking-wider">
@@ -606,11 +664,7 @@ const About = () => {
 
   return (
     <>
-      <section
-        ref={sectionRef}
-        id="about"
-        className="mx-auto max-w-6xl px-5 md:px-0 py-20"
-      >
+      <section ref={sectionRef} id="about" className=" px-5 md:px-0 py-20">
         {/* Section heading — memo protected */}
         <SectionHeading sectionRef={sectionRef} />
 
@@ -618,15 +672,16 @@ const About = () => {
         <Ticker />
 
         {/* ── Row 1: 3 | 6 | 3 columns ─────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-3 mb-3">
-
+        <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-3 mb-3">
           {/* Card 1 — Design */}
-          <TiltCard className={`xl:col-span-3 h-[340px] ${base}`} onClick={() => openModal(CARDS[0])}>
+          <TiltCard className={`xl:col-span-3 h-[340px] ${base}`}>
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <Image
-              width={500} height={500}
-              src={image1} alt="Engineered Speed"
+              width={500}
+              height={500}
+              src={image1}
+              alt="Engineered Speed"
               className="object-cover w-full h-full scale-105 group-hover:scale-100 transition-transform duration-700"
             />
             <CardLabel label="Design" />
@@ -635,11 +690,15 @@ const About = () => {
           </TiltCard>
 
           {/* Card 2 — Video (Featured, wider) */}
-          <TiltCard className={`xl:col-span-6 h-[340px] ${base}`} onClick={() => openModal(CARDS[1])}>
+          <TiltCard className={`xl:col-span-6 h-[340px] ${base}`}>
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/80 via-transparent to-black/25" />
             <video
-              autoPlay muted loop playsInline preload="auto"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
               src="/assets/video/PredetorVideo.mp4"
               className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
             />
@@ -662,12 +721,14 @@ const About = () => {
           </TiltCard>
 
           {/* Card 3 — Fit */}
-          <TiltCard className={`xl:col-span-3 h-[340px] ${base}`} onClick={() => openModal(CARDS[2])}>
+          <TiltCard className={`xl:col-span-3 h-[340px] ${base}`}>
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <Image
-              width={500} height={500}
-              src={image2} alt="Precision Fit"
+              width={500}
+              height={500}
+              src={image2}
+              alt="Precision Fit"
               className="object-cover w-full h-full scale-105 group-hover:scale-100 transition-transform duration-700"
             />
             <CardLabel label="Fit" />
@@ -677,14 +738,17 @@ const About = () => {
         </div>
 
         {/* ── Row 2: 3 | 3 | 3 | 3 columns ────────────────────────────── */}
-        <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-12 gap-3">
-
+        <div className=" mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-2 xl:grid-cols-12 gap-3">
           {/* Card 4 — Video */}
-          <TiltCard className={`xl:col-span-3 h-[290px] ${base}`} onClick={() => openModal(CARDS[3])}>
+          <TiltCard className={`xl:col-span-3 h-[290px] ${base}`}>
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-transparent to-transparent" />
             <video
-              autoPlay muted loop playsInline preload="auto"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
               src="/assets/video/F50 Video.mp4"
               className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
             />
@@ -694,12 +758,14 @@ const About = () => {
           </TiltCard>
 
           {/* Card 5 — Game */}
-          <TiltCard className={`xl:col-span-3 h-[290px] ${base}`} onClick={() => openModal(CARDS[4])}>
+          <TiltCard className={`xl:col-span-3 h-[290px] ${base}`}>
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <Image
-              width={500} height={500}
-              src={image3} alt="Game Ready"
+              width={500}
+              height={500}
+              src={image3}
+              alt="Game Ready"
               className="object-cover w-full h-full scale-105 group-hover:scale-100 transition-transform duration-700"
             />
             <CardLabel label="Game" />
@@ -708,12 +774,14 @@ const About = () => {
           </TiltCard>
 
           {/* Card 6 — Style */}
-          <TiltCard className={`xl:col-span-3 h-[290px] ${base}`} onClick={() => openModal(CARDS[5])}>
+          <TiltCard className={`xl:col-span-3 h-[290px] ${base}`}>
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <Image
-              width={500} height={500}
-              src={image4} alt="Street To Pitch"
+              width={500}
+              height={500}
+              src={image4}
+              alt="Street To Pitch"
               className="object-cover w-full h-full scale-105 group-hover:scale-100 transition-transform duration-700"
             />
             <CardLabel label="Style" />
@@ -722,12 +790,14 @@ const About = () => {
           </TiltCard>
 
           {/* Card 7 — Vision */}
-          <TiltCard className={`xl:col-span-3 h-[290px] ${base}`} onClick={() => openModal(CARDS[6])}>
+          <TiltCard className={`xl:col-span-3 h-[290px] ${base}`}>
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <Image
-              width={500} height={500}
-              src={image5} alt="Beyond Limits"
+              width={500}
+              height={500}
+              src={image5}
+              alt="Beyond Limits"
               className="object-cover w-full h-full scale-105 group-hover:scale-100 transition-transform duration-700"
             />
             {/* Special "FUTURE" badge for last card */}
@@ -750,9 +820,7 @@ const About = () => {
       </section>
 
       {/* Modal — client-side only, after mount */}
-      {mounted && activeCard && (
-        <CardModal key={modalKey} card={activeCard} onClose={closeModal} />
-      )}
+      {mounted && activeCard && <CardModal key={modalKey} card={activeCard} onClose={closeModal} />}
     </>
   );
 };
