@@ -976,8 +976,8 @@ export default function AboutPage() {
           {/* Timeline nav pills */}
           <div
             className="timeline-nav"
-            style={{
-              display: 'flex',
+             style={{
+                            display: 'flex',
               gap: '0.5rem',
               marginBottom: '3rem',
               overflowX: 'auto',
@@ -987,6 +987,7 @@ export default function AboutPage() {
           >
             {timeline.map((t, i) => (
               <button
+                suppressHydrationWarning
                 key={t.year}
                 onClick={() => setActiveTimeline(i)}
                 style={{
@@ -1581,7 +1582,7 @@ export default function AboutPage() {
                       width: '55%',
                       height: '90%',
                       zIndex: 2,
-                  
+
                       transition: 'transform 0.4s ease',
                     }}
                     onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}

@@ -704,6 +704,7 @@ export default function ContactPage() {
                   >
                     {topics.map(t => (
                       <button
+                        suppressHydrationWarning
                         key={t}
                         className="topic-pill"
                         onClick={() => {
@@ -800,6 +801,7 @@ export default function ContactPage() {
 
                 {/* Submit */}
                 <button
+                  suppressHydrationWarning
                   onClick={handleSubmit}
                   disabled={sending}
                   className="send-btn"
@@ -892,6 +894,7 @@ export default function ContactPage() {
                   <strong style={{ color: '#d4a017' }}>{form.email}</strong> within 24 hours.
                 </p>
                 <button
+                  suppressHydrationWarning
                   onClick={() => {
                     setSubmitted(false);
                     setForm({ name: '', email: '', topic: '', message: '' });

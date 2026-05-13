@@ -280,7 +280,7 @@ const Menu = () => {
             </div>
 
             <AnimatedButton
-              className="group bg-[#FF2D00] px-5 py-2.5 rounded-full "
+              className="group  px-5 py-2.5 rounded-full "
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -288,9 +288,9 @@ const Menu = () => {
                 gap: 4,
               }}
             >
-              <span className="text-white text-xs tracking-[0.3em] uppercase">Explore</span>
+              <span className="  text-xs tracking-[0.3em] uppercase">Explore</span>
 
-              <ArrowRight className="text-white w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="  w-4 h-4 transition-transform group-hover:translate-x-1" />
             </AnimatedButton>
           </div>
 

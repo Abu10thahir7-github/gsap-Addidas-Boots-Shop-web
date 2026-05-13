@@ -5,6 +5,7 @@ import Art from '@/Components/Art';
 import BootMenu from '@/Components/BootMenu';
 import Reviews from '@/Components/Reviews';
 import Stores from '@/Components/StoreLocation';
+import ArtSection from '@/Components/ArtSectionMobile';
 
 export default function Home() {
   return (
@@ -12,7 +13,12 @@ export default function Home() {
       <Hero />
       <BootSection />
       <About />
-      <Art />
+      <div className="hidden md:block">
+        <Art />
+      </div>
+      <div className=" block md:hidden ">
+        <ArtSection />
+      </div>
       <BootMenu />
       <Reviews />
       <Stores />

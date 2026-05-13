@@ -8,8 +8,6 @@ import { ScrollTrigger, SplitText } from 'gsap/all';
 import AnimatedButton from '@/Components/UI/AnimatedButton';
 import { useRouter } from 'next/navigation';
 
-
-
 gsap.registerPlugin(ScrollTrigger, SplitText);
 // ── PRODUCT DATA ────────────────────────────────────────────────
 
@@ -121,6 +119,7 @@ const QuickView = ({ product, onClose, onAddToCart }) => {
           {/* Details */}
           <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
             <button
+              suppressHydrationWarning
               onClick={onClose}
               style={{
                 position: 'absolute',
@@ -264,6 +263,7 @@ const QuickView = ({ product, onClose, onAddToCart }) => {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 {product.sizes.map(sz => (
                   <button
+                    suppressHydrationWarning
                     key={sz}
                     onClick={() => setSelectedSize(sz)}
                     style={{
@@ -299,6 +299,7 @@ const QuickView = ({ product, onClose, onAddToCart }) => {
                 }}
               >
                 <button
+                  suppressHydrationWarning
                   onClick={() => setQty(q => Math.max(1, q - 1))}
                   style={{
                     background: 'none',
@@ -323,6 +324,7 @@ const QuickView = ({ product, onClose, onAddToCart }) => {
                   {qty}
                 </span>
                 <button
+                  suppressHydrationWarning
                   onClick={() => setQty(q => q + 1)}
                   style={{
                     background: 'none',
@@ -433,6 +435,7 @@ const CartDrawer = ({ cart, onClose, onRemove, onQtyChange }) => {
             </span>
           </div>
           <button
+            suppressHydrationWarning
             onClick={onClose}
             style={{
               background: 'rgba(255,255,255,0.05)',
@@ -529,6 +532,7 @@ const CartDrawer = ({ cart, onClose, onRemove, onQtyChange }) => {
                       }}
                     >
                       <button
+                        suppressHydrationWarning
                         onClick={() => onQtyChange(item, Math.max(1, item.qty - 1))}
                         style={{
                           background: 'none',
@@ -546,6 +550,7 @@ const CartDrawer = ({ cart, onClose, onRemove, onQtyChange }) => {
                         {item.qty}
                       </span>
                       <button
+                        suppressHydrationWarning
                         onClick={() => onQtyChange(item, item.qty + 1)}
                         style={{
                           background: 'none',
@@ -571,6 +576,7 @@ const CartDrawer = ({ cart, onClose, onRemove, onQtyChange }) => {
                   </div>
                 </div>
                 <button
+                  suppressHydrationWarning
                   onClick={() => onRemove(item)}
                   style={{
                     background: 'none',
@@ -616,6 +622,7 @@ const CartDrawer = ({ cart, onClose, onRemove, onQtyChange }) => {
               </span>
             </div>
             <button
+              suppressHydrationWarning
               style={{
                 width: '100%',
                 background: '#FF2D00',
@@ -755,6 +762,7 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
             )}
           </div>
           <button
+            suppressHydrationWarning
             onClick={() => onQuickView(product)}
             style={{
               background: '#FF2D00',
@@ -777,7 +785,7 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
 
   return (
     <div
-     onClick={() => router.push(`/productDetails/${product.id}`)}
+      onClick={() => router.push(`/productDetails/${product.id}`)}
       style={{
         position: 'relative',
         borderRadius: '1.25rem',
@@ -839,6 +847,7 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
 
       {/* Wishlist */}
       <button
+        suppressHydrationWarning
         onClick={e => {
           e.stopPropagation();
           onAddToWishlist(product.id);
@@ -922,9 +931,9 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
             onClick={() => onQuickView(product)}
             className=" "
             style={{
-              background: '#FF2D00',
+              background: '#',
               border: 'none',
-              boxShadow: '0 4px 20px rgba(255,45,0,0.3)',
+        
             }}
           />
         </div>
@@ -1316,6 +1325,7 @@ const FilterSidebar = ({ filters, setFilters, onClose, isMobile }) => {
               FILTERS
             </span>
             <button
+              suppressHydrationWarning
               onClick={onClose}
               style={{
                 background: 'rgba(255,255,255,0.05)',
@@ -1560,6 +1570,7 @@ export default function ShopPage() {
           {/* Right actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <button
+              suppressHydrationWarning
               style={{
                 background: 'none',
                 border: 'none',
@@ -1595,6 +1606,7 @@ export default function ShopPage() {
             </button>
 
             <button
+              suppressHydrationWarning
               onClick={() => setCartOpen(true)}
               style={{
                 display: 'flex',
@@ -1712,6 +1724,7 @@ export default function ShopPage() {
               />
               {search && (
                 <button
+                  suppressHydrationWarning
                   onClick={() => setSearch('')}
                   style={{
                     background: 'none',
@@ -1753,6 +1766,7 @@ export default function ShopPage() {
             {/* Mobile filter toggle */}
             {isMobile && (
               <button
+                suppressHydrationWarning
                 onClick={() => setFilterOpen(true)}
                 style={{
                   display: 'flex',
@@ -1882,6 +1896,7 @@ export default function ShopPage() {
             <div style={{ marginLeft: 'auto', display: 'flex', gap: 4 }}>
               {['grid', 'list'].map(v => (
                 <button
+                  suppressHydrationWarning
                   key={v}
                   onClick={() => setView(v)}
                   style={{

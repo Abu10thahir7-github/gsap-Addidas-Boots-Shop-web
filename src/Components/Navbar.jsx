@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { navbarLinks } from '../../constants';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -17,6 +17,9 @@ const Navbar = () => {
   const linksRef = useRef([]);
   const ctaRef = useRef(null);
   const lineRef = useRef(null);
+  const menuRef = useRef(null);
+  const menuItemsRef = useRef([]);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   /* ─── GSAP context ──────────────────────────────────────────── */
   useGSAP(() => {
@@ -57,7 +60,43 @@ const Navbar = () => {
         { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2)' },
         '-=0.3',
       );
+
+    if (menuRef.current) {
+      gsap.set(menuRef.current, { xPercent: -100, display: 'none' });
+    }
   }, []);
+
+  useEffect(() => {
+    if (!menuRef.current) return;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    if (menuOpen) {
+      tl.set(menuRef.current, { display: 'block' })
+        .fromTo(menuRef.current, { xPercent: -100 }, { xPercent: 0, duration: 0.45 })
+        .fromTo(
+          menuItemsRef.current,
+          { x: -24, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.35, stagger: 0.08 },
+          '-=0.25',
+        );
+    } else {
+      tl.to(menuItemsRef.current, {
+        x: -24,
+        opacity: 0,
+        duration: 0.2,
+        stagger: 0.05,
+        ease: 'power2.in',
+      })
+        .to(menuRef.current, { xPercent: -100, duration: 0.35 }, '-=0.15')
+        .set(menuRef.current, { display: 'none' });
+    }
+
+    return () => tl.kill();
+  }, [menuOpen]);
+
+  const toggleMenu = () => setMenuOpen(prev => !prev);
+  const closeMenu = () => setMenuOpen(false);
 
   /* ─── Show nav on arrow click ───────────────────────────────── */
 
@@ -124,7 +163,7 @@ const Navbar = () => {
   return (
     <>
       {/* ── Navbar ──────────────────────────────────────────────── */}
-      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-[999]   ">
+      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50">
         {/* Hairline gradient across the very top */}
         <div
           ref={lineRef}
@@ -136,6 +175,7 @@ const Navbar = () => {
 
         {/* Pill */}
         <div
+          className="hidden md:block"
           style={{
             background: 'rgba(10, 10, 10, 0.72)',
             backdropFilter: 'blur(24px) saturate(160%)',
@@ -153,7 +193,7 @@ const Navbar = () => {
               <div className="relative">
                 <Image
                   src={logo}
-                  className="object-contain w-[24px] h-[30px] transition-transform duration-300 group-hover:scale-110"
+                  className="object-contain w-6 h-7.5 transition-transform duration-300 group-hover:scale-110"
                   alt="Adidas logo"
                 />
               </div>
@@ -195,31 +235,13 @@ const Navbar = () => {
               ))}
             </ul>
 
-            {/* Mobile links (scrollable) */}
-            <ul
-              className="flex md:hidden items-center gap-0.5 overflow-x-auto max-w-[calc(100vw-180px)]"
-              style={{ scrollbarWidth: 'none' }}
-            >
-              {navbarLinks.map((link, i) => (
-                <li key={link.id} className="shrink-0">
-                  <Link
-                    ref={el => (linksRef.current[i] = el)}
-                    href={link.href || `#${link.id}`}
-                    className="font-bebas text-[11px] tracking-[0.1em] text-white/60 hover:text-white px-2.5 py-1.5 block whitespace-nowrap transition-colors duration-200"
-                  >
-                    {link.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
             {/* CTA */}
             <a
               ref={ctaRef}
               href="#shop"
               onMouseEnter={onCtaEnter}
               onMouseLeave={onCtaLeave}
-              className="relative shrink-0 overflow-hidden px-4 py-1.5 rounded-xl cursor-pointer"
+              className="relative hidden md:block shrink-0 overflow-hidden px-4 py-1.5 rounded-xl cursor-pointer"
               style={{
                 border: '1px solid rgba(255,255,255,0.18)',
                 background: 'rgba(255,255,255,0.06)',
@@ -234,6 +256,56 @@ const Navbar = () => {
               </span>
             </a>
           </div>
+        </div>
+
+        <button
+          type="button"
+          aria-expanded={menuOpen}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          onClick={toggleMenu}
+          className="absolute z-50 m-5 right-0 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition-colors duration-200 hover:bg-white/10"
+        >
+          <span
+            className={`absolute h-0.5 w-5 bg-white transition-transform duration-300 ${
+              menuOpen ? 'rotate-45' : '-translate-y-1.5'
+            }`}
+          />
+          <span
+            className={`absolute h-0.5 w-5 bg-white transition-opacity duration-300 ${
+              menuOpen ? 'opacity-0' : 'opacity-100'
+            }`}
+          />
+          <span
+            className={`absolute h-0.5 w-5 bg-white transition-transform duration-300 ${
+              menuOpen ? '-rotate-45' : 'translate-y-1.5'
+            }`}
+          />
+        </button>
+        <div
+          ref={menuRef}
+          className="absolute top-full left-0 right-0 z-50 min-h-screen bg-[#070707]/96 backdrop-blur-xl px-6 py-8 md:hidden overflow-hidden"
+          aria-hidden={!menuOpen}
+        >
+          <div className="flex items-center justify-between mb-10">
+            <span className="font-bebas text-sm uppercase tracking-[0.28em] text-white/70">
+              Menu
+            </span>
+          </div>
+
+          <ul className="space-y-6">
+            {navbarLinks.map((link, i) => (
+              <li key={`mobile-${link.id}`}>
+                <Link
+                  ref={el => (menuItemsRef.current[i] = el)}
+                  href={link.href || `#${link.id}`}
+                  onClick={closeMenu}
+                  className="block text-2xl font-bebas uppercase tracking-[0.22em] text-white transition-colors duration-200 hover:text-[#ff2d00]"
+                >
+                  {link.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </nav>
     </>

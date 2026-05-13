@@ -373,6 +373,7 @@ export default function ProductDetail() {
             ))}
           </div>
           <button
+            suppressHydrationWarning
             className="flex items-center font-bebas gap-2 bg-[#FF2D00] hover:bg-[#cc2400] transition-colors rounded-full px-4 py-1.5"
             style={{
               fontSize: '0.8rem',
@@ -411,6 +412,7 @@ export default function ProductDetail() {
             <div className="flex lg:flex-col gap-3 order-2 lg:order-1 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0">
               {product.images.map((img, i) => (
                 <button
+                  suppressHydrationWarning
                   key={i}
                   onClick={() => switchImage(i)}
                   className={`thumb-item flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all ${activeImg === i ? 'active' : 'border-white/[0.07]'}`}
@@ -640,6 +642,7 @@ export default function ProductDetail() {
                     ['#1a1a1a', 'Core Black'],
                   ].map(([hex, label]) => (
                     <button
+                      suppressHydrationWarning
                       key={label}
                       title={label}
                       className="w-8 h-8 rounded-full border-2 transition-all hover:scale-110"
@@ -664,6 +667,7 @@ export default function ProductDetail() {
                     {!selectedSize && <span className="text-[#FF2D00] ml-1">*</span>}
                   </p>
                   <button
+                    suppressHydrationWarning
                     onClick={() => setSizeGuide(true)}
                     className="text-[9px] tracking-[0.3em] uppercase text-[#FF2D00]/60 hover:text-[#FF2D00] transition-colors underline underline-offset-2"
                     style={{ fontFamily: 'var(--bebas)' }}
@@ -674,6 +678,7 @@ export default function ProductDetail() {
                 <div className="flex flex-wrap gap-2">
                   {product.sizes.map(sz => (
                     <button
+                      suppressHydrationWarning
                       key={sz}
                       onClick={() => setSelectedSize(sz)}
                       className={`size-btn font-bebas w-[46px] h-[38px] rounded-lg text-sm border transition-all ${selectedSize === sz ? 'sel' : 'border-white/10 bg-white/[0.03] text-white/40'}`}
@@ -694,6 +699,7 @@ export default function ProductDetail() {
                 </p>
                 <div className="flex items-center gap-4 bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-2.5">
                   <button
+                    suppressHydrationWarning
                     onClick={() => setQty(q => Math.max(1, q - 1))}
                     className="text-white/40 hover:text-white text-lg leading-none transition-colors w-5 text-center"
                   >
@@ -706,6 +712,7 @@ export default function ProductDetail() {
                     {qty}
                   </span>
                   <button
+                    suppressHydrationWarning
                     onClick={() => setQty(q => q + 1)}
                     className="text-white/40 hover:text-white text-lg leading-none transition-colors w-5 text-center"
                   >
@@ -749,6 +756,7 @@ export default function ProductDetail() {
                 </AnimatedButton>
 
                 <button
+                  suppressHydrationWarning
                   onClick={() => setWishlisted(w => !w)}
                   className="w-14 h-14 rounded-xl flex items-center justify-center border text-lg transition-all hover:scale-105"
                   style={{
@@ -793,6 +801,7 @@ export default function ProductDetail() {
               ['reviews', 'Reviews'],
             ].map(([key, label]) => (
               <button
+                suppressHydrationWarning
                 key={key}
                 onClick={() => setActiveTab(key)}
                 className="tab-btn relative px-6 py-4 whitespace-nowrap transition-colors"
@@ -1226,6 +1235,7 @@ export default function ProductDetail() {
                         ${p.price}
                       </span>
                       <button
+                        suppressHydrationWarning
                         className="text-[9px] tracking-[0.25em] uppercase text-[#FF2D00]/60 hover:text-[#FF2D00] transition-colors"
                         style={{ fontFamily: 'var(--bebas)' }}
                       >
@@ -1260,6 +1270,7 @@ export default function ProductDetail() {
             onClick={e => e.stopPropagation()}
           >
             <button
+              suppressHydrationWarning
               onClick={() => setSizeGuide(false)}
               className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-white/40 hover:text-white transition-colors border border-white/10 bg-white/[0.04]"
             >

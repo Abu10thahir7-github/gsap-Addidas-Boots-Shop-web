@@ -1,7 +1,7 @@
 const navbarLinks = [
   { title: 'Home', id: 'home', href: '/' },
   { title: 'Boots', id: 'boots', href: '/shopping' },
- 
+
   { title: 'About', id: 'about', href: '/about' },
   { title: 'Contact', id: 'contact', href: '/contact' },
 ];
@@ -383,4 +383,60 @@ const products = [
     wornBy: null,
   },
 ];
-export { navbarLinks, AllBoots, reviews, products };
+const CARDS = [
+  {
+    id: 1,
+    label: '01 / VELOCITY',
+    title: 'BORN FROM FIRE',
+    sub: 'The silhouette that redefined the beautiful game.',
+    accent: '#FF2D00',
+    img: '/assets/images/yamal.png', // ← swap your real paths
+    tag: 'ART DROP I',
+  },
+  {
+    id: 2,
+    label: '02 / PRECISION',
+    title: 'FEEL EVERY BLADE',
+    sub: 'Micro-texture upper — total ball control at pace.',
+    accent: '#dfe0db',
+    img: '/assets/images/bellimgum.png',
+    tag: 'ART DROP II',
+  },
+  {
+    id: 3,
+    label: '03 / FORM',
+    title: 'DESIGN IS THE WEAPON',
+    sub: 'Engineered where sport meets sculpture.',
+    accent: '#FF2D00',
+    img: '/assets/images/pedri.png',
+    tag: 'ART DROP III',
+  },
+  {
+    id: 4,
+    label: '04 / PERFORMANCE',
+    title: 'TOP DESIGN, TOP PERFORMANCE',
+    sub: 'Engineered where sport meets sculpture.',
+    accent: '#107baf',
+    img: '/assets/images/messi.png',
+    tag: 'ART DROP IV',
+  },
+  {
+    id: 5,
+    label: '05 / ENGINE',
+    title: 'TOP POWER — TOP ENGINE',
+    sub: 'Engineered where sport meets sculpture.',
+    accent: '#dfe0db',
+    img: '/assets/images/neymar.png',
+    tag: 'ART DROP V',
+  },
+  {
+    id: 6,
+    label: '06 / CONTROL',
+    title: 'CONTROL —  PERFORMANCE',
+    sub: ' Engineered   sport meets sculpture.',
+    accent: '#FF2D00',
+    img: '/assets/images/muller.png',
+    tag: 'ART DROP VI',
+  },
+];
+export { navbarLinks, AllBoots, reviews, products, CARDS };
