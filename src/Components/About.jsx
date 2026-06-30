@@ -1,11 +1,11 @@
 'use client';
 import React, { useRef, useState, useEffect, useCallback, memo } from 'react';
 import Image from 'next/image';
-import image1 from '../../public/assets/images/Adidas F50 ads.jpg';
-import image2 from '../../public/assets/images/adidas Predator Poster.jpg';
-import image3 from '../../public/assets/images/adidas Roteiro.jpg';
-import image4 from '../../public/assets/images/adidas Sparkfusion.jpg';
-import image5 from '../../public/assets/images/Football Professional.jpg';
+import image1 from '../../public/assets/images/Adidas F50 ads.webp';
+import image2 from '../../public/assets/images/adidas Predator Poster.webp';
+import image3 from '../../public/assets/images/adidas Roteiro.webp';
+import image4 from '../../public/assets/images/adidas Sparkfusion.webp';
+import image5 from '../../public/assets/images/Football Professional.webp';
 import { useGSAP } from '@gsap/react';
 import gsap, { ScrollTrigger, SplitText } from 'gsap/all';
 
@@ -36,7 +36,7 @@ const CARDS = [
     label: '02 · Film',
     title: 'Born To\nDominate',
     category: 'Predator Legacy',
-    src: '/assets/video/PredetorVideo.mp4',
+    src: '/assets/video/PredetorVideo.webm',
     type: 'video',
     description:
       "The Predator line was a revolution. Rubber elements engineered for maximum ball control, swerve, and power. Worn by Zidane, Beckham, and Gerrard, it became the boot of the world's most creative players — a tool for those who bend the game to their will.",
@@ -68,7 +68,7 @@ const CARDS = [
     label: '04 · Film',
     title: 'F50 In\nAction',
     category: 'On The Pitch',
-    src: '/assets/video/F50 Video.mp4',
+    src: '/assets/video/F50 Video.webm',
     type: 'video',
     description:
       "Watch the F50 perform under real match conditions. From explosive first steps off the line to pinpoint crosses delivered at full sprint — this is the boot that rewrote what's possible at the highest level of the beautiful game.",
@@ -181,7 +181,6 @@ const SectionHeading = memo(({ sectionRef }) => {
   }, []);
 
   return (
-
     <div className="  mb-4 overflow-hidden">
       {/* ── Top label row ── */}
       <div className="subtitle-about flex items-center gap-3 mb-6">
@@ -225,16 +224,13 @@ const SectionHeading = memo(({ sectionRef }) => {
       </div>
 
       {/* ── Stats strip ── */}
-      <div
-        className=" subtitle-about flex items-center flex-wrap gap-x-6 gap-y-2 mt-4  "
-
-      >
+      <div className=" subtitle-about flex items-center flex-wrap gap-x-6 gap-y-2 mt-4  ">
         {[
           { label: 'Since', value: '2004' },
           { label: 'Chapter', value: '07' },
           { label: 'Brand', value: 'Adidas' },
         ].map((s, i) => (
-          <React.Fragment className='' key={s.label}>
+          <React.Fragment className="" key={s.label}>
             {i > 0 && (
               <span
                 className="hidden sm:inline w-1 h-1 rounded-full"
@@ -398,7 +394,7 @@ const CardModal = ({ card, onClose }) => {
               className="w-full h-full object-cover"
             />
           ) : (
-            <Image src={card.src} alt={card.title} fill className="object-cover" />
+            <Image priority src={card.src} alt={card.title} fill className="object-cover" />
           )}
           <div className="absolute top-5 left-5 z-30">
             <span
@@ -678,6 +674,8 @@ const About = () => {
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <Image
+              priority
+
               width={500}
               height={500}
               src={image1}
@@ -699,7 +697,7 @@ const About = () => {
               loop
               playsInline
               preload="auto"
-              src="/assets/video/PredetorVideo.mp4"
+              src="/assets/video/PredetorVideo.webm"
               className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
             />
             {/* Video playing badge — appears on hover */}
@@ -725,6 +723,7 @@ const About = () => {
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <Image
+              priority
               width={500}
               height={500}
               src={image2}
@@ -749,7 +748,7 @@ const About = () => {
               loop
               playsInline
               preload="auto"
-              src="/assets/video/F50 Video.mp4"
+              src="/assets/video/F50 Video.webm"
               className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
             />
             <CardLabel label="Film" />
@@ -762,6 +761,7 @@ const About = () => {
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <Image
+              priority
               width={500}
               height={500}
               src={image3}
@@ -778,6 +778,7 @@ const About = () => {
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <Image
+              priority
               width={500}
               height={500}
               src={image4}
@@ -794,6 +795,7 @@ const About = () => {
             <Noise />
             <GradientOverlay className="bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <Image
+              priority
               width={500}
               height={500}
               src={image5}

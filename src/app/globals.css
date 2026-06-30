@@ -81,7 +81,7 @@ body {
   color: transparent;
 }
 .masked-img {
-  mask-image: url('/assets/images/ball-kick-bg-remove.png');
+  mask-image: url('/assets/images/ball-kick-bg-remove.webp');
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: 30%;
@@ -95,7 +95,7 @@ body {
   font-family: var(--font-outward) !important ;
 }
 .noisy {
-  @apply absolute inset-0 size-full bg-[url('/assets/images/noise.png')] bg-cover bg-center z-10;
+  @apply absolute inset-0 size-full bg-[url('/assets/images/noise.webp')] bg-cover bg-center z-10;
 }
 
 #hero {
@@ -195,17 +195,17 @@ input[type='range']::-webkit-slider-thumb {
 }
 @media (min-width: 640px) {
   .product-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 @media (min-width: 1024px) {
   .product-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 @media (min-width: 1280px) {
   .product-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr) !important;
   }
 }
 video {

@@ -574,7 +574,7 @@ const Stores = () => {
             <div
               className="map-panel lg:col-span-7 relative rounded-3xl overflow-hidden min-h-[280px] md:min-h-[480px]"
               style={{
-                backgroundImage: "url('/assets/images/map.png')",
+                backgroundImage: "url('/assets/images/map.webp')",
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
 

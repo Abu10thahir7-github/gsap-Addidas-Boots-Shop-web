@@ -9,31 +9,30 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 // ── CONSTANTS ────────────────────────────────────────────────────
 const contacts = [
   {
-    icon: '📍',
     label: 'Headquarters',
-    value: 'Adi-Dassler-Str. 1\n91074 Herzogenaurach, Germany',
+    value: 'Adi-Dassler-Str. 1\nHerzogenaurach, Germany',
     accent: '#FF2D00',
+    icon: '⬡',
   },
   {
-    icon: '✉',
-    label: 'Email Us',
-    value: 'f50.support@adidas.com',
+    label: 'Global Flagship',
+    value: '677 Fifth Avenue\nNew York, NY 10022',
     accent: '#d4a017',
+    icon: '◈',
   },
   {
-    icon: '☎',
-    label: 'Hotline',
-    value: '+49 9132 84-0\nMon–Fri · 08:00–18:00 CET',
+    label: 'Press & Media',
+    value: 'press@adidas.com\n+49 9132 84-0',
     accent: '#FF2D00',
-  },
-  {
     icon: '◎',
-    label: 'Media & Press',
-    value: 'press.f50@adidas.com',
+  },
+  {
+    label: 'Partnerships',
+    value: 'collab@adidas.com\n+1 888 243 5327',
     accent: '#d4a017',
+    icon: '◇',
   },
 ];
-
 const topics = [
   'Boot Fitting & Sizing',
   'Order & Shipping',
@@ -44,45 +43,79 @@ const topics = [
   'General Feedback',
   'Other',
 ];
-
-const socials = [
-  { name: 'Instagram', handle: '@adidas', icon: 'IG' },
-  { name: 'Twitter / X', handle: '@adidas', icon: '𝕏' },
-  { name: 'YouTube', handle: 'Adidas Football', icon: '▶' },
-  { name: 'TikTok', handle: '@adidas', icon: '♪' },
+const stats = [
+  { value: 160, suffix: '+', label: 'Countries' },
+  { value: 95, suffix: 'K', label: 'Retail Points' },
+  { value: 60000, suffix: '+', label: 'Employees' },
 ];
 
-// ── ANIMATED COUNTER ────────────────────────────────────────────
-const Counter = ({ to, suffix = '' }) => {
-  const [val, setVal] = useState(0);
-  const ref = useRef(null);
+const socials = [
+  { name: 'Instagram', handle: '@adidas', icon: 'IG', count: '38.4M', color: '#FF2D00' },
+  { name: 'TikTok', handle: '@adidas', icon: 'TK', count: '12.1M', color: '#d4a017' },
+  { name: 'YouTube', handle: 'Adidas Football', icon: 'YT', count: '4.2M', color: '#FF2D00' },
+  { name: 'X / Twitter', handle: '@adidas', icon: 'X', count: '9.7M', color: '#d4a017' },
+];
+
+function LiveClock() {
+  const [time, setTime] = useState('');
   useEffect(() => {
+    const tick = () => {
+      const now = new Date();
+      setTime(
+        now.toLocaleTimeString('en-DE', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          timeZone: 'Europe/Berlin',
+        })
+      );
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return <span style={{ fontVariantNumeric: 'tabular-nums' }}>{time} CET</span>;
+}
+// ── ANIMATED COUNTER ────────────────────────────────────────────
+/* ─── ANIMATED COUNTER ───────────────────────────────── */
+function Counter({ value, suffix }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const observed = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
     const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          let start = 0;
-          const step = to / 60;
-          const t = setInterval(() => {
-            start += step;
-            if (start >= to) {
-              setVal(to);
-              clearInterval(t);
-            } else setVal(Math.floor(start));
-          }, 16);
+      ([entry]) => {
+        if (entry.isIntersecting && !observed.current) {
+          observed.current = true;
+          const duration = 1600;
+          const start = performance.now();
+          const animate = (now) => {
+            const t = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            setCount(Math.floor(eased * value));
+            if (t < 1) requestAnimationFrame(animate);
+            else setCount(value);
+          };
+          requestAnimationFrame(animate);
         }
       },
-      { threshold: 0.5 },
+      { threshold: 0.4 }
     );
-    if (ref.current) obs.observe(ref.current);
+    obs.observe(el);
     return () => obs.disconnect();
-  }, [to]);
+  }, [value]);
+
   return (
-    <span ref={ref}>
-      {val.toLocaleString()}
+    <span ref={ref} style={{ fontVariantNumeric: 'tabular-nums' }}>
+      {count.toLocaleString()}
       {suffix}
     </span>
   );
-};
+}
+
 
 // ── FLOATING LABEL INPUT ─────────────────────────────────────────
 const FloatInput = ({
@@ -166,7 +199,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [activeTopic, setActiveTopic] = useState(null);
-
+ const [hoveredSocial, setHoveredSocial] = useState(null);
   const handleSubmit = () => {
     if (!form.name || !form.email || !form.message) return;
     setSending(true);
@@ -920,246 +953,438 @@ export default function ContactPage() {
           </div>
 
           {/* ── RIGHT: INFO PANEL ──────────────────────── */}
-          <div
-            className="info-panel"
-            id="contact-info"
+         <>
+      <style>{`
+        @keyframes pulse-dot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50%        { opacity: 0.4; transform: scale(0.85); }
+        }
+        @keyframes slide-in {
+          from { opacity: 0; transform: translateY(18px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scan-line {
+          0%   { transform: translateY(0%); opacity: 0.6; }
+          100% { transform: translateY(100%); opacity: 0; }
+        }
+        .info-card-hover {
+          transition: border-color 0.3s, background 0.3s, transform 0.3s;
+        }
+        .info-card-hover:hover {
+          border-color: rgba(255,255,255,0.16) !important;
+          background: rgba(255,255,255,0.045) !important;
+          transform: translateY(-2px);
+        }
+        .social-row-new {
+          transition: background 0.25s, border-color 0.25s;
+        }
+        .social-row-new:hover .arrow-icon {
+          opacity: 1 !important;
+          transform: translateX(0) !important;
+        }
+      `}</style>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2.25rem',
+          animation: 'slide-in 0.7s ease both',
+        }}
+      >
+        {/* ── EYEBROW ── */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <svg width="18" height="2" viewBox="0 0 18 2">
+            <line x1="0" y1="1" x2="18" y2="1" stroke="#FF2D00" strokeWidth="1.5" />
+          </svg>
+          <span
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2rem',
+              fontFamily: 'var(--font-bebas)',
+              fontSize: 10,
+              letterSpacing: '0.55em',
+              color: '#FF2D00',
+              textTransform: 'uppercase',
             }}
           >
-            {/* Section label */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#d4a017' }} />
-              <span
-                style={{
-                  fontFamily: 'var(--font-bebas)',
-                  fontSize: 10,
-                  letterSpacing: '0.5em',
-                  color: '#d4a017',
-                  textTransform: 'uppercase',
-                }}
-              >
-                Our Details
-              </span>
-            </div>
+            Contact Hub
+          </span>
+        </div>
 
-            <div style={{ overflow: 'hidden' }}>
-              <h2
-                className="font-bebas"
-                style={{
-                  fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                  lineHeight: 0.9,
-                  color: '#fff',
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                Find Us
-                <br />
-                <span style={{ WebkitTextStroke: '1.5px #FF2D00', color: 'transparent' }}>
-                  Anywhere
-                </span>
-              </h2>
-            </div>
-
-            {/* Contact cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-              {contacts.map((c, i) => (
-                <div
-                  key={c.label}
-                  className="contact-card"
-                  style={{
-                    padding: '1.25rem',
-                    background: 'rgba(255,255,255,0.02)',
-                    border: `1px solid rgba(255,255,255,0.07)`,
-                    borderRadius: '1rem',
-                    animationDelay: `${i * 0.1}s`,
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-bebas)',
-                      fontSize: 9,
-                      letterSpacing: '0.4em',
-                      color: c.accent,
-                      textTransform: 'uppercase',
-                      marginBottom: 4,
-                    }}
-                  >
-                    {c.label}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 11,
-                      color: 'rgba(255,255,255,0.55)',
-                      lineHeight: 1.7,
-                      letterSpacing: '0.03em',
-                      whiteSpace: 'pre-line',
-                    }}
-                  >
-                    {c.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Live hours indicator */}
-            <div
+        {/* ── HEADING ── */}
+        <div style={{ overflow: 'hidden' }}>
+          <h2 className="font-bebas"  
+            style={{
+              fontFamily: 'var(--font-bebas)',
+              fontSize: 'clamp(3rem, 5.5vw, 5.5rem)',
+              lineHeight: 0.88,
+              letterSpacing: '0.03em',
+              textTransform: 'uppercase',
+              margin: 0,
+            }}
+          >
+            <span style={{ display: 'block', color: '#fff' }}>Strike</span>
+            <span
               style={{
-                padding: '1.25rem',
-                background: 'rgba(255,255,255,0.02)',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: '1rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 14,
+                display: 'block',
+                WebkitTextStroke: '1.5px #FF2D00',
+                color: 'transparent',
               }}
             >
-              <div style={{ position: 'relative', flexShrink: 0 }}>
-                <div
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: '50%',
-                    background: 'rgba(52,211,153,0.08)',
-                    border: '1px solid rgba(52,211,153,0.25)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <span style={{ color: '#34d399', fontSize: 14 }}>◎</span>
-                </div>
-                <span
-                  style={{
-                    position: 'absolute',
-                    top: 2,
-                    right: 2,
-                    width: 8,
-                    height: 8,
-                    borderRadius: '50%',
-                    background: '#34d399',
-                    boxShadow: '0 0 6px #34d399',
-                    animation: 'pulse 2s infinite',
-                  }}
-                />
-              </div>
-              <div>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-bebas)',
-                    fontSize: 10,
-                    letterSpacing: '0.4em',
-                    color: '#34d399',
-                    textTransform: 'uppercase',
-                    marginBottom: 2,
-                  }}
-                >
-                  Live Support
-                </p>
-                <p
-                  style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.04em' }}
-                >
-                  Our team is online · Mon–Fri 08:00–18:00 CET
-                </p>
-              </div>
+              First.
+            </span>
+            <span style={{ display: 'block', color: 'rgba(255,255,255,0.18)' }}>
+              Reach Us.
+            </span>
+          </h2>
+        </div>
+
+        {/* ── STATS ROW ── */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '0.5rem',
+          }}
+        >
+          {stats.map((s) => (
+            <div
+              key={s.label}
+              style={{
+                padding: '1rem 0.75rem',
+                background: 'rgba(255,255,255,0.025)',
+                border: '1px solid rgba(255,255,255,0.06)',
+                borderRadius: '0.75rem',
+                textAlign: 'center',
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: 'var(--font-bebas)',
+                  fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)',
+                  color: '#FF2D00',
+                  margin: 0,
+                  letterSpacing: '0.02em',
+                  lineHeight: 1,
+                }}
+              >
+                <Counter value={s.value} suffix={s.suffix} />
+              </p>
+              <p
+                style={{
+                  fontSize: 9,
+                  letterSpacing: '0.4em',
+                  color: 'rgba(255,255,255,0.3)',
+                  textTransform: 'uppercase',
+                  marginTop: 4,
+                  marginBottom: 0,
+                }}
+              >
+                {s.label}
+              </p>
             </div>
+          ))}
+        </div>
 
-            {/* Map placeholder */}
-
-            {/* Social links */}
-            <div>
+        {/* ── CONTACT CARDS ── */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
+          {contacts.map((c, i) => (
+            <div
+              key={c.label}
+              className="info-card-hover"
+              style={{
+                padding: '1.1rem 1rem',
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px solid rgba(255,255,255,0.07)',
+                borderRadius: '0.9rem',
+                position: 'relative',
+                overflow: 'hidden',
+                animationDelay: `${i * 0.08}s`,
+              }}
+            >
+              {/* accent stripe */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: 2,
+                  height: '100%',
+                  background: c.accent,
+                  borderRadius: '2px 0 0 2px',
+                  opacity: 0.7,
+                }}
+              />
               <p
                 style={{
                   fontFamily: 'var(--font-bebas)',
                   fontSize: 9,
                   letterSpacing: '0.45em',
-                  color: 'rgba(255,255,255,0.2)',
+                  color: c.accent,
                   textTransform: 'uppercase',
-                  marginBottom: 12,
+                  marginBottom: 6,
+                  marginLeft: 8,
                 }}
               >
-                Follow Us
+                {c.label}
               </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                {socials.map((s, i) => (
-                  <a
-                    key={s.name}
-                    href="#"
-                    onClick={e => e.preventDefault()}
-                    className="social-row"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '10px 12px',
-                      borderRadius: 10,
-                      textDecoration: 'none',
-                      background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.05)',
-                      transition: 'all 0.3s',
-                      paddingLeft: '0.75rem',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <span
-                        style={{
-                          width: 28,
-                          height: 28,
-                          borderRadius: 8,
-                          background: i % 2 === 0 ? 'rgba(255,45,0,0.1)' : 'rgba(212,160,23,0.1)',
-                          border: `1px solid ${i % 2 === 0 ? 'rgba(255,45,0,0.2)' : 'rgba(212,160,23,0.2)'}`,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: 11,
-                          color: i % 2 === 0 ? '#FF2D00' : '#d4a017',
-                          fontFamily: 'var(--font-bebas)',
-                        }}
-                      >
-                        {s.icon}
-                      </span>
-                      <div>
-                        <p
-                          style={{
-                            fontSize: 12,
-                            color: 'rgba(255,255,255,0.6)',
-                            letterSpacing: '0.04em',
-                            marginBottom: 1,
-                          }}
-                        >
-                          {s.name}
-                        </p>
-                        <p
-                          style={{
-                            fontSize: 10,
-                            color: 'rgba(255,255,255,0.25)',
-                            letterSpacing: '0.05em',
-                          }}
-                        >
-                          {s.handle}
-                        </p>
-                      </div>
-                    </div>
-                    <span
-                      className="social-arrow"
-                      style={{
-                        color: '#FF2D00',
-                        fontSize: 12,
-                        opacity: 0,
-                        transform: 'translateX(-6px)',
-                        transition: 'all 0.3s',
-                      }}
-                    >
-                      →
-                    </span>
-                  </a>
-                ))}
+              <p
+                style={{
+                  fontSize: 11,
+                  color: 'rgba(255,255,255,0.5)',
+                  lineHeight: 1.75,
+                  letterSpacing: '0.035em',
+                  whiteSpace: 'pre-line',
+                  marginLeft: 8,
+                }}
+              >
+                {c.value}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* ── LIVE STATUS ── */}
+        <div
+          style={{
+            padding: '1rem 1.25rem',
+            background: 'rgba(255,255,255,0.02)',
+            border: '1px solid rgba(255,255,255,0.07)',
+            borderRadius: '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 12,
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            {/* pulsing dot */}
+            <div style={{ position: 'relative', width: 36, height: 36, flexShrink: 0 }}>
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: '50%',
+                  background: 'rgba(52,211,153,0.08)',
+                  border: '1px solid rgba(52,211,153,0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <div
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: '50%',
+                    background: '#34d399',
+                    animation: 'pulse-dot 2s ease-in-out infinite',
+                  }}
+                />
               </div>
             </div>
+            <div>
+              <p
+                style={{
+                  fontFamily: 'var(--font-bebas)',
+                  fontSize: 10,
+                  letterSpacing: '0.42em',
+                  color: '#34d399',
+                  textTransform: 'uppercase',
+                  margin: 0,
+                  marginBottom: 2,
+                }}
+              >
+                Support Online
+              </p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0 }}>
+                Mon – Fri · 08:00 – 20:00
+              </p>
+            </div>
           </div>
+
+          {/* live clock */}
+          <div
+            style={{
+              fontFamily: 'var(--font-bebas)',
+              fontSize: 14,
+              letterSpacing: '0.1em',
+              color: 'rgba(255,255,255,0.25)',
+              textAlign: 'right',
+            }}
+          >
+            <LiveClock />
+          </div>
+        </div>
+
+        {/* ── DIVIDER ── */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr auto 1fr',
+            alignItems: 'center',
+            gap: 12,
+          }}
+        >
+          <div style={{ height: 1, background: 'rgba(255,255,255,0.05)' }} />
+          <span
+            style={{
+              fontFamily: 'var(--font-bebas)',
+              fontSize: 8,
+              letterSpacing: '0.5em',
+              color: 'rgba(255,255,255,0.15)',
+              textTransform: 'uppercase',
+            }}
+          >
+            Follow
+          </span>
+          <div style={{ height: 1, background: 'rgba(255,255,255,0.05)' }} />
+        </div>
+
+        {/* ── SOCIAL LINKS ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {socials.map((s, i) => {
+            const isHovered = hoveredSocial === i;
+            return (
+              <a
+                key={s.name}
+                href="#"
+                onClick={(e) => e.preventDefault()}
+                className="social-row-new"
+                onMouseEnter={() => setHoveredSocial(i)}
+                onMouseLeave={() => setHoveredSocial(null)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0.65rem 0.85rem',
+                  borderRadius: '0.75rem',
+                  textDecoration: 'none',
+                  background: isHovered
+                    ? 'rgba(255,255,255,0.04)'
+                    : 'rgba(255,255,255,0.015)',
+                  border: `1px solid ${isHovered ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.05)'}`,
+                }}
+              >
+                {/* left */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span
+                    style={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: 8,
+                      background: `${s.color}14`,
+                      border: `1px solid ${s.color}33`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: 9,
+                      color: s.color,
+                      fontFamily: 'var(--font-bebas)',
+                      letterSpacing: '0.05em',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {s.icon}
+                  </span>
+                  <div>
+                    <p
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(255,255,255,0.65)',
+                        letterSpacing: '0.04em',
+                        margin: 0,
+                        marginBottom: 1,
+                      }}
+                    >
+                      {s.name}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 10,
+                        color: 'rgba(255,255,255,0.22)',
+                        letterSpacing: '0.05em',
+                        margin: 0,
+                      }}
+                    >
+                      {s.handle}
+                    </p>
+                  </div>
+                </div>
+
+                {/* right: follower count + arrow */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-bebas)',
+                      fontSize: 12,
+                      letterSpacing: '0.08em',
+                      color: s.color,
+                      opacity: 0.7,
+                    }}
+                  >
+                    {s.count}
+                  </span>
+                  <span
+                    className="arrow-icon"
+                    style={{
+                      color: '#FF2D00',
+                      fontSize: 13,
+                      opacity: 0,
+                      transform: 'translateX(-6px)',
+                      transition: 'all 0.3s',
+                    }}
+                  >
+                    →
+                  </span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+
+        {/* ── BOTTOM TAG ── */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingTop: '0.5rem',
+            borderTop: '1px solid rgba(255,255,255,0.04)',
+          }}
+        >
+          <p
+            style={{
+              fontSize: 10,
+              color: 'rgba(255,255,255,0.15)',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              margin: 0,
+            }}
+          >
+            © 2025 Adidas AG. All rights reserved.
+          </p>
+          <div style={{ display: 'flex', gap: 6 }}>
+            {['Privacy', 'Legal', 'Cookies'].map((t) => (
+              <a
+                key={t}
+                href="#"
+                onClick={(e) => e.preventDefault()}
+                style={{
+                  fontSize: 9,
+                  letterSpacing: '0.12em',
+                  color: 'rgba(255,255,255,0.18)',
+                  textDecoration: 'none',
+                  textTransform: 'uppercase',
+                  transition: 'color 0.2s',
+                }}
+              >
+                {t}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
         </div>
         <StoreLocation />
         {/* ══════════════════════════════════════════════

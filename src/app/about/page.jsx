@@ -4,7 +4,8 @@ import gsap from 'gsap';
 import { ScrollTrigger, SplitText } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
-import messi from '../../../public/assets/images/messi.png';
+import messi from '../../../public/assets/images/messi.webp';
+import AnimatedButton from '@/Components/UI/AnimatedButton';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -104,7 +105,7 @@ const players = [
     boot: 'Predator 25 Elite',
     flag: 'gb',
     accent: '#FF2D00',
-    image: '/assets/images/bellimgum.png',
+    image: '/assets/images/bellimgum.webp',
     wide: false,
   },
   {
@@ -113,7 +114,7 @@ const players = [
     boot: 'F50 Heartbreaker',
     flag: 'es',
     accent: '#FF2D00',
-    image: '/assets/images/yamal.png',
+    image: '/assets/images/yamal.webp',
     wide: false,
   },
   {
@@ -122,7 +123,7 @@ const players = [
     boot: 'Copa Pure 3',
     flag: 'de',
     accent: '#d4a017',
-    image: '/assets/images/muller.png',
+    image: '/assets/images/muller.webp',
     wide: false,
   },
   {
@@ -131,7 +132,7 @@ const players = [
     boot: 'Predator Blaze',
     flag: 'es',
     accent: '#d4a017',
-    image: '/assets/images/pedri.png',
+    image: '/assets/images/pedri.webp',
     wide: false,
   },
 ];
@@ -492,6 +493,7 @@ export default function AboutPage() {
             },
             {
               side: 'right',
+              bottum: 'bottom',
               text: 'F50 · Speed · Control · Touch',
               color: 'rgba(255,45,0,0.3)',
               rot: 'none',
@@ -499,11 +501,11 @@ export default function AboutPage() {
           ].map(({ side, text, color, rot }) => (
             <span
               key={side}
-              className="hero-side-label"
+              className="hero-side-label  hidden md:block "
               style={{
                 position: 'absolute',
                 [side]: '1.5rem',
-                top: '50%',
+
                 writingMode: 'vertical-rl',
                 transform: `translateY(-50%) ${rot}`,
                 fontFamily: 'var(--bebas)',
@@ -545,7 +547,10 @@ export default function AboutPage() {
           </div>
 
           {/* Content */}
-          <div style={{ position: 'relative', zIndex: 2, maxWidth: 920 }}>
+          <div
+            className="flex flex-col gap-[70px] md:gap-0"
+            style={{ position: 'relative', zIndex: 2, maxWidth: 920 }}
+          >
             <p
               className="hero-eyebrow"
               style={{
@@ -976,8 +981,8 @@ export default function AboutPage() {
           {/* Timeline nav pills */}
           <div
             className="timeline-nav"
-             style={{
-                            display: 'flex',
+            style={{
+              display: 'flex',
               gap: '0.5rem',
               marginBottom: '3rem',
               overflowX: 'auto',
@@ -1065,7 +1070,7 @@ export default function AboutPage() {
 
           {/* Active card */}
           <div
-            className="timeline-active-card"
+            className="timeline-active-card flex flex-col md:grid"
             style={{
               padding: '2.5rem',
               background: 'rgba(255,255,255,0.02)',
@@ -1073,7 +1078,6 @@ export default function AboutPage() {
               borderRadius: '1.5rem',
               animation: 'fadeUp 0.4s ease',
               key: activeTimeline,
-              display: 'grid',
               gridTemplateColumns: 'auto 1fr',
               gap: '2rem',
               alignItems: 'start',
@@ -1418,6 +1422,7 @@ export default function AboutPage() {
                 onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
               >
                 <Image
+                  priority
                   src={messi}
                   alt="Lionel Messi"
                   fill
@@ -1437,6 +1442,7 @@ export default function AboutPage() {
                   style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: '1.25rem' }}
                 >
                   <Image
+                    priority
                     src="https://flagcdn.com/ar.svg"
                     width={28}
                     height={20}
@@ -1589,6 +1595,7 @@ export default function AboutPage() {
                     onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
                   >
                     <Image
+                      priority
                       src={p.image}
                       alt={p.name}
                       fill
@@ -1614,6 +1621,7 @@ export default function AboutPage() {
                     }}
                   >
                     <Image
+                      priority
                       src={`https://flagcdn.com/${p.flag}.svg`}
                       width={22}
                       height={16}
@@ -1906,16 +1914,19 @@ export default function AboutPage() {
             position: 'relative',
             overflow: 'hidden',
             borderTop: '1px solid rgba(255,255,255,0.06)',
-            background: 'linear-gradient(to bottom, transparent, rgba(255,45,0,0.04))',
+            backgroundImage: 'url("/assets/images/stadium.webp")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         >
           <div
             style={{
               position: 'absolute',
               inset: 0,
+
               pointerEvents: 'none',
               background:
-                'radial-gradient(ellipse 60% 80% at 50% 100%, rgba(255,45,0,0.07), transparent)',
+                'radial-gradient(ellipse 60% 80% at 50% 100%, rgba(255,45,0,0.07), #00000087)',
             }}
           />
 
@@ -1997,26 +2008,7 @@ export default function AboutPage() {
               — The Adidas F50 Creed
             </p>
 
-            <a
-              href="/shopping"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                background: '#FF2D00',
-                color: '#fff',
-                textDecoration: 'none',
-                borderRadius: 99,
-                padding: '14px 36px',
-                fontFamily: 'var(--bebas)',
-                fontSize: '0.95rem',
-                letterSpacing: '0.4em',
-                textTransform: 'uppercase',
-                boxShadow: '0 8px 30px rgba(255,45,0,0.25)',
-              }}
-            >
-              Shop The Collection →
-            </a>
+            <AnimatedButton text="Shop The Collection → " href="/shopping" />
           </div>
         </section>
 

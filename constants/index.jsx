@@ -10,7 +10,7 @@ const AllBoots = [
   {
     id: 1,
     name: 'Adidas Predator 25 Elite',
-    image: '/assets/MenuImages/Adidas Predator 25 Elite.png',
+    image: '/assets/MenuImages/Adidas Predator 25 Elite.webp',
     title: 'Total Control. Total Power.',
     price: '$430',
     description:
@@ -19,7 +19,7 @@ const AllBoots = [
   {
     id: 2,
     name: 'Adidas F50 Elite',
-    image: '/assets/MenuImages/Adidas F50 Elite.png',
+    image: '/assets/MenuImages/Adidas F50 Elite.webp',
     title: 'Born For Pure Speed.',
     price: '$260',
     description:
@@ -28,7 +28,7 @@ const AllBoots = [
   {
     id: 3,
     name: 'Adidas Copa Pure 3 Elite',
-    image: '/assets/MenuImages/Adidas Copa Pure 3 Elite.png',
+    image: '/assets/MenuImages/Adidas Copa Pure 3 Elite.webp',
     title: 'Touch That Tells Stories.',
     price: '$199',
     description:
@@ -37,7 +37,7 @@ const AllBoots = [
   {
     id: 4,
     name: 'Adidas Predator 25 Road to Glory',
-    image: '/assets/MenuImages/Adidas Predator 25 Road to Glory.png',
+    image: '/assets/MenuImages/Adidas Predator 25 Road to Glory.webp',
     title: 'Glory Awaits The Bold.',
     price: '$200',
     description:
@@ -46,7 +46,7 @@ const AllBoots = [
   {
     id: 5,
     name: 'Adidas F50 Road to Glory',
-    image: '/assets/MenuImages/Adidas F50 Road to Glory.png',
+    image: '/assets/MenuImages/Adidas F50 Road to Glory.webp',
     title: 'Sprint Into History.',
     price: '$160',
     description:
@@ -55,7 +55,7 @@ const AllBoots = [
   {
     id: 6,
     name: 'Adidas Predator 25 Radiant Blaze',
-    image: '/assets/MenuImages/Adidas Predator 25 Radiant Blaze.png',
+    image: '/assets/MenuImages/Adidas Predator 25 Radiant Blaze.webp',
     title: 'Electric. Relentless. Unstoppable.',
     price: '$260',
     description:
@@ -71,7 +71,7 @@ const reviews = [
     country: 'Spin',
     flag: 'es',
     rating: 5,
-    bootImage: '/assets/MenuImages/Adidas Copa Pure 3 Elite.png',
+    bootImage: '/assets/MenuImages/Adidas Copa Pure 3 Elite.webp',
     quote:
       "Fastest boot I've ever worn. First touch on the ball felt like an extension of my foot.",
     detail:
@@ -87,7 +87,7 @@ const reviews = [
     country: 'Germany',
     flag: 'de',
     rating: 5,
-    bootImage: '/assets/MenuImages/Adidas F50 Elite.png',
+    bootImage: '/assets/MenuImages/Adidas F50 Elite.webp',
     quote: 'Control like nothing else. Every deadball situation feels engineered for me.',
     detail:
       'Strikeskin zones give insane grip on the ball. Tried four boots this season — Predator 25 stays on.',
@@ -101,7 +101,7 @@ const reviews = [
     country: 'India',
     flag: 'in',
     rating: 5,
-    bootImage: '/assets/MenuImages/Adidas F50 Road to Glory.png',
+    bootImage: '/assets/MenuImages/Adidas F50 Road to Glory.webp',
     quote: "Wearing Messi's boot changed how I attack the ball. Pure confidence.",
     detail:
       'The fit is insanely snug, the sole is so responsive. Scored a hat-trick in my debut with these.',
@@ -115,7 +115,7 @@ const reviews = [
     country: ' USA',
     flag: 'us',
     rating: 4,
-    bootImage: '/assets/MenuImages/Adidas F50 Road to Glory.png',
+    bootImage: '/assets/MenuImages/Adidas F50 Road to Glory.webp',
     quote: 'Old-school leather feel, new-gen performance. Defenders need touch too.',
     detail:
       'Soft kangaroo leather upper feels premium. Perfect for long passing range. Took one game to break in.',
@@ -129,7 +129,7 @@ const reviews = [
     country: ' Japan',
     flag: 'jp',
     rating: 5,
-    bootImage: '/assets/MenuImages/Adidas Predator 25 Elite.png',
+    bootImage: '/assets/MenuImages/Adidas Predator 25 Elite.webp',
     quote: 'Every pass has purpose. The grip zones feel like cheating — in the best way.',
     detail: 'I play a lot of tight spaces, and the Predator 25 gives me confidence in every touch.',
     avatar: 'YT',
@@ -142,7 +142,7 @@ const reviews = [
     country: ' Ivory Coast',
     flag: 'ci',
     rating: 5,
-    bootImage: '/assets/MenuImages/Adidas Predator 25 Radiant Blaze.png',
+    bootImage: '/assets/MenuImages/Adidas Predator 25 Radiant Blaze.webp',
     quote: 'Wore these in the final. Scored the winner. Enough said.',
     detail:
       "Gold colorway, gold moment. The limited edition Road to Glory pack is a collector's dream that actually performs.",
@@ -156,7 +156,7 @@ const reviews = [
     country: ' Brazil',
     flag: 'br',
     rating: 5,
-    bootImage: '/assets/MenuImages/Adidas Predator 25 Road to Glory.png',
+    bootImage: '/assets/MenuImages/Adidas Predator 25 Road to Glory.webp',
     quote: "Lamine Yamal's boot on my feet? The pace is real.",
     detail: 'Rose laces are fire. The Aerocage keeps my foot locked even in wet conditions.',
     avatar: 'CR',
@@ -169,7 +169,7 @@ const reviews = [
     country: ' Sweden',
     flag: 'se',
     rating: 5,
-    bootImage: '/assets/MenuImages/Adidas F50 Road to Glory.png',
+    bootImage: '/assets/MenuImages/Adidas F50 Road to Glory.webp',
     quote: 'I never want another boot. Copa Pure is timeless.',
     detail:
       'As a technical player, touch is everything. The leather upper gives me feedback no synthetic boot can.',
@@ -192,7 +192,7 @@ const products = [
     badge: 'New',
     rating: 4.9,
     reviews: 312,
-    img: '/assets/ShopImages/boot-1.png',
+    img: '/assets/ShopImages/boot-1.webp',
     wornBy: 'Lamine Yamal',
   },
   {
@@ -209,7 +209,7 @@ const products = [
     badge: 'New',
     rating: 4.8,
     reviews: 276,
-    img: '/assets/ShopImages/boot-2.png',
+    img: '/assets/ShopImages/boot-2.webp',
     wornBy: 'Jude Bellingham',
   },
   {
@@ -226,7 +226,7 @@ const products = [
     badge: 'Sale',
     rating: 4.7,
     reviews: 198,
-    img: '/assets/ShopImages/boot-3.png',
+    img: '/assets/ShopImages/boot-3.webp',
     wornBy: 'Thomas Müller',
   },
   {
@@ -243,7 +243,7 @@ const products = [
     badge: 'Limited',
     rating: 5.0,
     reviews: 89,
-    img: '/assets/ShopImages/boot-4.png',
+    img: '/assets/ShopImages/boot-4.webp',
     wornBy: 'UCL Final',
   },
   {
@@ -260,7 +260,7 @@ const products = [
     badge: 'New',
     rating: 4.9,
     reviews: 142,
-    img: '/assets/ShopImages/boot-5.png',
+    img: '/assets/ShopImages/boot-5.webp',
     wornBy: 'Pedri',
   },
   {
@@ -277,7 +277,7 @@ const products = [
     badge: 'Signature',
     rating: 4.9,
     reviews: 445,
-    img: '/assets/ShopImages/boot-6.png',
+    img: '/assets/ShopImages/boot-6.webp',
     wornBy: 'Lionel Messi',
   },
   {
@@ -294,7 +294,7 @@ const products = [
     badge: 'Sale',
     rating: 4.5,
     reviews: 562,
-    img: '/assets/ShopImages/boot-7.png',
+    img: '/assets/ShopImages/boot-7.webp',
     wornBy: null,
   },
   {
@@ -311,7 +311,7 @@ const products = [
     badge: null,
     rating: 4.3,
     reviews: 834,
-    img: '/assets/ShopImages/boot-8.png',
+    img: '/assets/ShopImages/boot-8.webp',
     wornBy: null,
   },
   {
@@ -328,7 +328,7 @@ const products = [
     badge: null,
     rating: 4.4,
     reviews: 721,
-    img: '/assets/ShopImages/boot-9.png',
+    img: '/assets/ShopImages/boot-9.webp',
     wornBy: null,
   },
   {
@@ -345,7 +345,7 @@ const products = [
     badge: 'Signature',
     rating: 5.0,
     reviews: 201,
-    img: '/assets/ShopImages/boot-10.png',
+    img: '/assets/ShopImages/boot-10.webp',
     wornBy: 'Lamine Yamal',
   },
   {
@@ -362,7 +362,7 @@ const products = [
     badge: 'Heritage',
     rating: 4.8,
     reviews: 156,
-    img: '/assets/ShopImages/boot-11.png',
+    img: '/assets/ShopImages/boot-11.webp',
     wornBy: null,
   },
   {
@@ -379,7 +379,7 @@ const products = [
     badge: 'Sale',
     rating: 4.6,
     reviews: 289,
-    img: '/assets/ShopImages/boot-12.png',
+    img: '/assets/ShopImages/boot-12.webp',
     wornBy: null,
   },
 ];
@@ -390,7 +390,7 @@ const CARDS = [
     title: 'BORN FROM FIRE',
     sub: 'The silhouette that redefined the beautiful game.',
     accent: '#FF2D00',
-    img: '/assets/images/yamal.png', // ← swap your real paths
+    img: '/assets/images/yamal.webp', // ← swap your real paths
     tag: 'ART DROP I',
   },
   {
@@ -399,7 +399,7 @@ const CARDS = [
     title: 'FEEL EVERY BLADE',
     sub: 'Micro-texture upper — total ball control at pace.',
     accent: '#dfe0db',
-    img: '/assets/images/bellimgum.png',
+    img: '/assets/images/bellimgum.webp',
     tag: 'ART DROP II',
   },
   {
@@ -408,7 +408,7 @@ const CARDS = [
     title: 'DESIGN IS THE WEAPON',
     sub: 'Engineered where sport meets sculpture.',
     accent: '#FF2D00',
-    img: '/assets/images/pedri.png',
+    img: '/assets/images/pedri.webp',
     tag: 'ART DROP III',
   },
   {
@@ -417,7 +417,7 @@ const CARDS = [
     title: 'TOP DESIGN, TOP PERFORMANCE',
     sub: 'Engineered where sport meets sculpture.',
     accent: '#107baf',
-    img: '/assets/images/messi.png',
+    img: '/assets/images/messi.webp',
     tag: 'ART DROP IV',
   },
   {
@@ -426,7 +426,7 @@ const CARDS = [
     title: 'TOP POWER — TOP ENGINE',
     sub: 'Engineered where sport meets sculpture.',
     accent: '#dfe0db',
-    img: '/assets/images/neymar.png',
+    img: '/assets/images/neymar.webp',
     tag: 'ART DROP V',
   },
   {
@@ -435,8 +435,35 @@ const CARDS = [
     title: 'CONTROL —  PERFORMANCE',
     sub: ' Engineered   sport meets sculpture.',
     accent: '#FF2D00',
-    img: '/assets/images/muller.png',
+    img: '/assets/images/muller.webp',
     tag: 'ART DROP VI',
   },
 ];
-export { navbarLinks, AllBoots, reviews, products, CARDS };
+const socials = [
+  {
+    name: 'IG',
+    label: 'Instagram',
+    href: '#',
+    path: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z',
+  },
+  {
+    name: 'X',
+    label: 'Twitter / X',
+    href: '#',
+    path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z',
+  },
+  {
+    name: 'YT',
+    label: 'YouTube',
+    href: '#',
+    path: 'M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z',
+  },
+  {
+    name: 'TK',
+    label: 'TikTok',
+    href: '#',
+    path: 'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z',
+  },
+];
+
+export { navbarLinks, AllBoots, reviews, products, CARDS, socials };

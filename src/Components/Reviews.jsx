@@ -71,6 +71,7 @@ const ReviewCard = ({ review, onClick, isActive }) => {
         >
           {/* Avatar */}
           <Image
+            priority
             src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(review.name)}`}
             width={40}
             height={40}
@@ -104,7 +105,7 @@ const ReviewCard = ({ review, onClick, isActive }) => {
         </div>
 
         {/* Boot chip */}
-        <Image src={review.bootImage} alt={review.name} width={40} height={40} />
+        <Image priority src={review.bootImage} alt={review.name} width={40} height={40} />
       </div>
 
       {/* Stars + country */}

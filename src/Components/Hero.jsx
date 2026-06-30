@@ -5,8 +5,8 @@ import { ScrollTrigger, SplitText } from 'gsap/all';
 import { useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Image from 'next/image';
-import HeroLeft from '../../public/assets/images/hero-left.png';
-import HeroRight from '../../public/assets/images/hero-right.png';
+import HeroLeft from '../../public/assets/images/hero-left.webp';
+import HeroRight from '../../public/assets/images/hero-right.webp';
 
 gsap.registerPlugin(ScrollTrigger, SplitText); // ✅ register both
 
@@ -132,20 +132,22 @@ const Hero = () => {
     <>
       <section id="hero" className="  ">
         <Image
+          priority
           src={HeroLeft}
           className="absolute w-[170px] md:w-[350px]  h-auto left-[-100px] md:left-[-122px] md:bottom-[272px] hero-left-boot"
           width={1000}
           height={500}
           alt="hero-left"
-          priority
+          
         />
         <Image
+          priority
           src={HeroRight}
           className="absolute w-[170px] md:w-[350px] h-auto right-[-100px] md:right-[-122px] md:bottom-[102px] hero-right-boot"
           width={1000}
           height={500}
           alt="hero-right"
-          priority
+
         />
 
         <div className="body  mx-auto max-w-6xl">
@@ -169,7 +171,7 @@ const Hero = () => {
           muted
           playsInline
           preload="auto"
-          src="/assets/video/output.mp4"
+          src="/assets/video/output.webm"
           className="w-full h-full object-cover !top-0  "
         />
       </div>

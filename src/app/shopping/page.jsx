@@ -933,7 +933,6 @@ const ProductCard = ({ product, onQuickView, onAddToWishlist, isWishlisted, view
             style={{
               background: '#',
               border: 'none',
-        
             }}
           />
         </div>
@@ -1536,107 +1535,6 @@ export default function ShopPage() {
   return (
     <section id="Shop">
       <div style={{ minHeight: '100vh', background: '#070707' }}>
-        {/* ── TOP NAV ──────────────────────────────────── */}
-        <nav
-          style={{
-            position: 'sticky',
-            top: 0,
-            zIndex: 100,
-            background: 'rgba(7,7,7,0.95)',
-            backdropFilter: 'blur(20px)',
-            borderBottom: '1px solid rgba(255,255,255,0.06)',
-            padding: '0 1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            height: 60,
-          }}
-        >
-          {/* Logo */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <Link
-              href={'/'}
-              style={{
-                fontFamily: 'var(--font-bebas)',
-                fontSize: '1.3rem',
-                letterSpacing: '0.2em',
-                color: '#fff',
-              }}
-            >
-              Back
-            </Link>
-          </div>
-
-          {/* Right actions */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <button
-              suppressHydrationWarning
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: wishlist.length ? '#FF2D00' : 'rgba(255,255,255,0.4)',
-                fontSize: 16,
-                position: 'relative',
-                padding: 6,
-              }}
-            >
-              ♥
-              {wishlist.length > 0 && (
-                <span
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    right: 0,
-                    background: '#FF2D00',
-                    color: '#fff',
-                    borderRadius: '50%',
-                    width: 14,
-                    height: 14,
-                    fontSize: 8,
-                    fontWeight: 700,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {wishlist.length}
-                </span>
-              )}
-            </button>
-
-            <button
-              suppressHydrationWarning
-              onClick={() => setCartOpen(true)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 7,
-                background: cartCount > 0 ? '#FF2D00' : 'rgba(255,255,255,0.06)',
-                border: `1px solid ${cartCount > 0 ? '#FF2D00' : 'rgba(255,255,255,0.1)'}`,
-                borderRadius: 10,
-                padding: '7px 14px',
-                cursor: 'pointer',
-                color: '#fff',
-                transition: 'all 0.3s',
-              }}
-            >
-              <span style={{ fontSize: 13 }}>🛒</span>
-              {cartCount > 0 && (
-                <span
-                  style={{
-                    fontFamily: 'var(--font-bebas)',
-                    fontSize: '0.85rem',
-                    letterSpacing: '0.1em',
-                  }}
-                >
-                  {cartCount}
-                </span>
-              )}
-            </button>
-          </div>
-        </nav>
-
         {/* ── PAGE HEADER ──────────────────────────────── */}
         <div
           style={{
@@ -1736,7 +1634,74 @@ export default function ShopPage() {
                 >
                   ✕
                 </button>
-              )}
+              )}{' '}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <button
+                  suppressHydrationWarning
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: wishlist.length ? '#FF2D00' : 'rgba(255,255,255,0.4)',
+                    fontSize: 16,
+                    position: 'relative',
+                    padding: 6,
+                  }}
+                >
+                  ♥
+                  {wishlist.length > 0 && (
+                    <span
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        background: '#FF2D00',
+                        color: '#fff',
+                        borderRadius: '50%',
+                        width: 14,
+                        height: 14,
+                        fontSize: 8,
+                        fontWeight: 700,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {wishlist.length}
+                    </span>
+                  )}
+                </button>
+
+                <button
+                  suppressHydrationWarning
+                  onClick={() => setCartOpen(true)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 7,
+                    background: cartCount > 0 ? '#FF2D00' : 'rgba(255,255,255,0.06)',
+                    border: `1px solid ${cartCount > 0 ? '#FF2D00' : 'rgba(255,255,255,0.1)'}`,
+                    borderRadius: 10,
+                    padding: '7px 14px',
+                    cursor: 'pointer',
+                    color: '#fff',
+                    transition: 'all 0.3s',
+                  }}
+                >
+                  <span style={{ fontSize: 13 }}>🛒</span>
+                  {cartCount > 0 && (
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-bebas)',
+                        fontSize: '0.85rem',
+                        letterSpacing: '0.1em',
+                      }}
+                    >
+                      {cartCount}
+                    </span>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1893,6 +1858,7 @@ export default function ShopPage() {
             ))}
 
             {/* View toggle */}
+
             <div style={{ marginLeft: 'auto', display: 'flex', gap: 4 }}>
               {['grid', 'list'].map(v => (
                 <button
